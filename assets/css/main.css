@@ -86,6 +86,113 @@ h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
+/* From Uiverse.io by ElSombrero2 */ 
+.card2 {
+  width: auto;
+  height: auto;
+  max-width: calc(100% - 20px);
+  max-height: calc(100% - 20px);
+  padding: 4px;
+  box-sizing: border-box;
+  background: #171717;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 0px 3px 1px #00000088;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.card2 .content2 {
+  border-radius: 5px;
+  background: #171717;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content2::before {
+  opacity: 0;
+  transition: opacity 300ms;
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: blur(50px);
+  overflow: hidden;
+}
+
+.card2:hover .content2::before {
+  opacity: 1;
+}
+
+.card2::before {
+  opacity: 0;
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#ff2288, #387ef0);
+  transition: opacity 300ms;
+  animation: rotation_9018 8000ms infinite linear;
+  animation-play-state: paused;
+}
+
+.card2:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+.card2::after {
+  position: absolute;
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #17171733;
+  backdrop-filter: blur(0px);
+}
+
+.card2 h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  position: relative;
+}
+
+.card2 h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: var(--accent-color);
+  margin: 10px auto 0;
+}
+
+@keyframes rotation_9018 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 /* PHP Email Form Messages
 ------------------------------*/
