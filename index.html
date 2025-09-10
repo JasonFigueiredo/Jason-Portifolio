@@ -1,11 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Jason Figueiredo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jason Figueiredo - Portfólio</title>
+    <meta name="description" content="Portfólio pessoal de Jason Figueiredo - Desenvolvedor e Designer">
+    <meta name="keywords" content="portfólio, desenvolvedor, designer, Jason Figueiredo">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
- 
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Jason Figueiredo</div>
+            <ul class="links-navegacao">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="botao-tema" onclick="alternarTema()" title="Alternar tema">
+                <span class="icone-tema">🌙</span>
+                <span class="texto-tema">Escuro</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Seção de Apresentação -->
+    <section id="inicio" class="apresentacao">
+        <div class="container">
+            <h1>Olá, eu sou Jason Figueiredo</h1>
+            <p>Desenvolvedor e Designer apaixonado por criar experiências digitais incríveis</p>
+            <a href="#projetos" class="botao">Ver Meus Projetos</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="container">
+        <h2>Sobre Mim</h2>
+        <div class="cartao">
+            <p>Conte um pouco sobre você, suas habilidades e experiências aqui.</p>
+        </div>
+    </section>
+
+    <!-- Seção Projetos -->
+    <section id="projetos" class="container">
+        <h2>Meus Projetos</h2>
+        <div class="cartao">
+            <p>Adicione seus projetos aqui.</p>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="container">
+        <h2>Entre em Contato</h2>
+        <div class="cartao">
+            <form onsubmit="enviarFormularioContato(event)">
+                <input type="text" name="nome" placeholder="Seu Nome" required>
+                <input type="email" name="email" placeholder="Seu Email" required>
+                <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
+                <button type="submit" class="botao">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Jason Figueiredo. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>

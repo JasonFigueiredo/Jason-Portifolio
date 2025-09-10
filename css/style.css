@@ -1,0 +1,388 @@
+/* Estilos do Portfólio - Jason Figueiredo */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis CSS - Tema Claro (Padrão) */
+:root {
+    /* Cores principais */
+    --cor-primaria: #2c3e50;
+    --cor-secundaria: #3498db;
+    --cor-destaque: #e74c3c;
+    --cor-sucesso: #27ae60;
+    --cor-aviso: #f39c12;
+    --cor-erro: #e74c3c;
+    
+    /* Cores de texto */
+    --cor-texto-principal: #2c3e50;
+    --cor-texto-secundario: #7f8c8d;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-escuro: #2c3e50;
+    
+    /* Cores de fundo */
+    --cor-fundo-principal: #ffffff;
+    --cor-fundo-secundario: #f8f9fa;
+    --cor-fundo-terciario: #ecf0f1;
+    --cor-fundo-escuro: #2c3e50;
+    
+    /* Cores de borda */
+    --cor-borda: #bdc3c7;
+    --cor-borda-clara: #ecf0f1;
+    --cor-borda-escura: #34495e;
+    
+    /* Sombras */
+    --sombra-leve: 0 2px 4px rgba(0,0,0,0.1);
+    --sombra-media: 0 4px 8px rgba(0,0,0,0.15);
+    --sombra-forte: 0 8px 16px rgba(0,0,0,0.2);
+    
+    /* Transições */
+    --transicao-rapida: 0.2s ease;
+    --transicao-media: 0.3s ease;
+    --transicao-lenta: 0.5s ease;
+}
+
+/* Tema Escuro */
+[data-tema="escuro"] {
+    /* Cores principais */
+    --cor-primaria: #1a1a1a;
+    --cor-secundaria: #4a90e2;
+    --cor-destaque: #ff6b6b;
+    --cor-sucesso: #4ecdc4;
+    --cor-aviso: #ffd93d;
+    --cor-erro: #ff6b6b;
+    
+    /* Cores de texto */
+    --cor-texto-principal: #e0e0e0;
+    --cor-texto-secundario: #a0a0a0;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-escuro: #1a1a1a;
+    
+    /* Cores de fundo */
+    --cor-fundo-principal: #1a1a1a;
+    --cor-fundo-secundario: #2d2d2d;
+    --cor-fundo-terciario: #3a3a3a;
+    --cor-fundo-escuro: #0f0f0f;
+    
+    /* Cores de borda */
+    --cor-borda: #404040;
+    --cor-borda-clara: #2d2d2d;
+    --cor-borda-escura: #1a1a1a;
+    
+    /* Sombras */
+    --sombra-leve: 0 2px 4px rgba(0,0,0,0.3);
+    --sombra-media: 0 4px 8px rgba(0,0,0,0.4);
+    --sombra-forte: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+/* Estilos gerais */
+body {
+    font-family: 'Inter', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-secundario);
+    transition: background-color var(--transicao-media), color var(--transicao-media);
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho */
+header {
+    background: var(--cor-fundo-principal);
+    box-shadow: var(--sombra-leve);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color var(--transicao-media), box-shadow var(--transicao-media);
+    border-bottom: 1px solid var(--cor-borda-clara);
+}
+
+/* Navegação */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--cor-texto-principal);
+    transition: color var(--transicao-media);
+}
+
+.links-navegacao {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.links-navegacao a {
+    text-decoration: none;
+    color: var(--cor-texto-principal);
+    transition: color var(--transicao-media);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.links-navegacao a:hover {
+    color: var(--cor-secundaria);
+    background-color: var(--cor-fundo-terciario);
+}
+
+/* Seções */
+section {
+    padding: 4rem 0;
+}
+
+/* Seção de Apresentação */
+.apresentacao {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 8rem 0 4rem;
+    transition: background var(--transicao-lenta);
+}
+
+.apresentacao h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.apresentacao p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Botões */
+.botao {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--cor-destaque);
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all var(--transicao-media);
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: var(--sombra-leve);
+}
+
+.botao:hover {
+    background: var(--cor-erro);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+}
+
+/* Cartões */
+.cartao {
+    background: var(--cor-fundo-principal);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--sombra-leve);
+    margin-bottom: 2rem;
+    border: 1px solid var(--cor-borda-clara);
+    transition: all var(--transicao-media);
+}
+
+/* Rodapé */
+footer {
+    background: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 2rem 0;
+    transition: background-color var(--transicao-media);
+    border-top: 1px solid var(--cor-borda-escura);
+}
+
+/* Animações */
+.animar-entrada {
+    animation: entradaSuave 0.6s ease-out;
+}
+
+@keyframes entradaSuave {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botão de Alternância de Tema */
+.botao-tema {
+    background: var(--cor-fundo-terciario);
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-principal);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transicao-media);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.botao-tema:hover {
+    background: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    transform: translateY(-1px);
+    box-shadow: var(--sombra-leve);
+}
+
+.botao-tema:active {
+    transform: translateY(0);
+}
+
+/* Ícone do tema */
+.icone-tema {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transicao-media);
+}
+
+.botao-tema:hover .icone-tema {
+    transform: rotate(180deg);
+}
+
+/* Formulário de contato */
+input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: var(--cor-fundo-principal);
+    color: var(--cor-texto-principal);
+    transition: all var(--transicao-media);
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 3px rgba(52, 144, 226, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--cor-texto-secundario);
+}
+
+/* Efeitos visuais extras */
+.cartao:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+}
+
+.links-navegacao a {
+    position: relative;
+    overflow: hidden;
+}
+
+.links-navegacao a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cor-secundaria);
+    transition: width var(--transicao-media);
+}
+
+.links-navegacao a:hover::before {
+    width: 100%;
+}
+
+/* Transições suaves para todos os elementos */
+* {
+    transition: background-color var(--transicao-media), 
+                color var(--transicao-media), 
+                border-color var(--transicao-media),
+                box-shadow var(--transicao-media);
+}
+
+/* Melhorias no botão de tema */
+.botao-tema {
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-tema::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.botao-tema:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .links-navegacao {
+        display: none;
+    }
+    
+    .apresentacao h1 {
+        font-size: 2rem;
+    }
+    
+    .apresentacao p {
+        font-size: 1rem;
+    }
+    
+    .botao-tema {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .texto-tema {
+        display: none;
+    }
+    
+    .icone-tema {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .apresentacao {
+        padding: 6rem 0 3rem;
+    }
+    
+    .apresentacao h1 {
+        font-size: 1.8rem;
+    }
+    
+    .cartao {
+        padding: 1.5rem;
+    }
+}
