@@ -1433,3 +1433,125 @@ input::placeholder, textarea::placeholder {
         height: 12px;
     }
 }
+
+/* Botão de Like na Navegação */
+.nav-like-container {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.Btn {
+    width: 120px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.2s ease;
+}
+
+.leftContainer {
+    width: 60%;
+    height: 100%;
+    background-color: rgb(238, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.leftContainer .like {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.likeCount {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(238, 0, 0);
+    font-weight: 600;
+    position: relative;
+    background-color: white;
+    font-size: 0.9rem;
+}
+
+.likeCount::before {
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    content: "";
+    background-color: rgb(255, 255, 255);
+    transform: rotate(45deg);
+    left: -4px;
+}
+
+.Btn:active {
+    transform: scale(0.95);
+}
+
+.Btn:active .leftContainer svg {
+    transform: scale(1.1);
+    transform-origin: center;
+}
+
+.Btn.liked .leftContainer {
+    background-color: rgb(0, 150, 0);
+}
+
+.Btn.liked .likeCount {
+    color: rgb(0, 150, 0);
+}
+
+/* Responsividade do botão de like na navegação */
+@media (max-width: 768px) {
+    .nav-like-container {
+        margin-right: 0.5rem;
+    }
+    
+    .Btn {
+        width: 100px;
+        height: 28px;
+    }
+    
+    .leftContainer .like {
+        font-size: 0.8rem;
+    }
+    
+    .likeCount {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-like-container {
+        margin-right: 0.25rem;
+    }
+    
+    .Btn {
+        width: 80px;
+        height: 26px;
+    }
+    
+    .leftContainer .like {
+        font-size: 0.7rem;
+    }
+    
+    .likeCount {
+        font-size: 0.7rem;
+    }
+    
+    .leftContainer {
+        gap: 4px;
+    }
+}
