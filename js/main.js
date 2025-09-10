@@ -147,20 +147,11 @@ function carregarTemaSalvo() {
 
 // Atualiza a interface do botão de tema
 function atualizarInterfaceTema() {
-    const botaoTema = document.querySelector('.botao-tema');
-    const iconeTema = document.querySelector('.icone-tema');
-    const textoTema = document.querySelector('.texto-tema');
+    const checkboxTema = document.getElementById('checkbox-tema');
     
-    if (botaoTema && iconeTema && textoTema) {
-        if (temaAtual === 'escuro') {
-            iconeTema.textContent = '☀️';
-            textoTema.textContent = 'Claro';
-            botaoTema.title = 'Alternar para tema claro';
-        } else {
-            iconeTema.textContent = '🌙';
-            textoTema.textContent = 'Escuro';
-            botaoTema.title = 'Alternar para tema escuro';
-        }
+    if (checkboxTema) {
+        // Sincroniza o estado do checkbox com o tema atual
+        checkboxTema.checked = temaAtual === 'escuro';
     }
 }
 

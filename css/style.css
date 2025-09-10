@@ -222,41 +222,108 @@ footer {
     }
 }
 
-/* Botão de Alternância de Tema */
-.botao-tema {
-    background: var(--cor-fundo-terciario);
-    border: 1px solid var(--cor-borda);
-    color: var(--cor-texto-principal);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+/* Botão de Alternância de Tema - Design Moderno */
+.alternador-tema {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 4em;
+    height: 2.2em;
+    border-radius: 30px;
+    box-shadow: var(--sombra-leve);
     cursor: pointer;
     transition: all var(--transicao-media);
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }
 
-.botao-tema:hover {
-    background: var(--cor-secundaria);
-    color: var(--cor-texto-claro);
-    transform: translateY(-1px);
-    box-shadow: var(--sombra-leve);
+.alternador-tema:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
 }
 
-.botao-tema:active {
-    transform: translateY(0);
+/* Esconde o checkbox padrão */
+.alternador-tema input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-/* Ícone do tema */
-.icone-tema {
-    width: 16px;
-    height: 16px;
-    transition: transform var(--transicao-media);
+/* O deslizador */
+.deslizador {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--cor-fundo-escuro);
+    transition: 0.4s;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
-.botao-tema:hover .icone-tema {
-    transform: rotate(180deg);
+.deslizador:before {
+    position: absolute;
+    content: "";
+    height: 1.2em;
+    width: 1.2em;
+    border-radius: 20px;
+    left: 0.5em;
+    bottom: 0.5em;
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+    box-shadow: inset 8px -4px 0px 0px var(--cor-texto-claro);
+}
+
+.alternador-tema input:checked + .deslizador {
+    background-color: var(--cor-secundaria);
+}
+
+.alternador-tema input:checked + .deslizador:before {
+    transform: translateX(1.8em);
+    box-shadow: inset 15px -4px 0px 15px #ffcf48;
+}
+
+/* Estrelas */
+.estrela {
+    background-color: var(--cor-texto-claro);
+    border-radius: 50%;
+    position: absolute;
+    width: 5px;
+    transition: all 0.4s;
+    height: 5px;
+}
+
+.estrela_1 {
+    left: 2.5em;
+    top: 0.5em;
+}
+
+.estrela_2 {
+    left: 2.2em;
+    top: 1.2em;
+}
+
+.estrela_3 {
+    left: 3em;
+    top: 0.9em;
+}
+
+.alternador-tema input:checked ~ .deslizador .estrela {
+    opacity: 0;
+}
+
+/* Nuvem */
+.nuvem {
+    width: 3.5em;
+    position: absolute;
+    bottom: -1.4em;
+    left: -1.1em;
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.alternador-tema input:checked ~ .deslizador .nuvem {
+    opacity: 1;
 }
 
 /* Formulário de contato */
@@ -316,28 +383,9 @@ input::placeholder, textarea::placeholder {
                 box-shadow var(--transicao-media);
 }
 
-/* Melhorias no botão de tema */
-.botao-tema {
-    position: relative;
-    overflow: hidden;
-}
-
-.botao-tema::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.botao-tema:active::before {
-    width: 300px;
-    height: 300px;
+/* Efeito de clique no alternador de tema */
+.alternador-tema:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 /* Responsividade */
@@ -354,18 +402,41 @@ input::placeholder, textarea::placeholder {
         font-size: 1rem;
     }
     
-    .botao-tema {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+    .alternador-tema {
+        font-size: 14px;
+        width: 3.5em;
+        height: 2em;
     }
     
-    .texto-tema {
-        display: none;
+    .deslizador:before {
+        height: 1em;
+        width: 1em;
+        left: 0.4em;
+        bottom: 0.4em;
     }
     
-    .icone-tema {
-        width: 20px;
-        height: 20px;
+    .alternador-tema input:checked + .deslizador:before {
+        transform: translateX(1.5em);
+    }
+    
+    .estrela {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .estrela_1 {
+        left: 2.2em;
+        top: 0.4em;
+    }
+    
+    .estrela_2 {
+        left: 1.9em;
+        top: 1em;
+    }
+    
+    .estrela_3 {
+        left: 2.7em;
+        top: 0.7em;
     }
 }
 
