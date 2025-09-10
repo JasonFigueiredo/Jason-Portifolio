@@ -308,110 +308,201 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Global Header
+# Fixed Top Navigation
 --------------------------------------------------------------*/
-.header {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding: 0 15px;
-  width: 300px;
-  transition: all ease-in-out 0.3s;
-  overflow-y: auto;
-  z-index: 997;
-  border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+.navbar {
+  background: var(--surface-color);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 20px var(--shadow-color);
+  transition: var(--theme-transition);
+  padding: 0.5rem 0;
 }
 
-.header .profile-img img {
-  margin: 15px auto;
-  display: block;
-  width: 120px;
-  border: 8px solid color-mix(in srgb, var(--default-color), transparent 85%);
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
 }
 
-.header .logo {
-  line-height: 1;
-  margin-bottom: 15px;
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(26, 26, 26, 0.95);
 }
 
-.header .logo img {
-  max-height: 32px;
-  margin-right: 8px;
-}
-
-.header .logo h1 {
-  font-size: 24px;
-  margin: 0;
-  font-weight: 700;
-  color: var(--heading-color);
-}
-
-.header .social-links {
-  margin: 0 0 20px 0;
-}
-
-.header .social-links a {
-  font-size: 16px;
-  display: inline-flex;
+.navbar-brand {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  background: color-mix(in srgb, var(--default-color), transparent 90%);
-  color: var(--default-color);
-  margin: 0 2px;
-  border-radius: 50%;
-  text-align: center;
+  text-decoration: none;
+  color: var(--heading-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: var(--theme-transition);
+}
+
+.navbar-brand:hover {
+  color: var(--accent-color);
+}
+
+.brand-img {
   width: 40px;
   height: 40px;
-  transition: 0.3s;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--accent-color);
 }
 
-.header .social-links a:hover {
-  color: var(--contrast-color);
+.brand-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+  color: var(--default-color);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  border-radius: 25px;
+  transition: var(--theme-transition);
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
   background: var(--accent-color);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-@media (min-width: 1200px) {
-
-  .header~main,
-  .header~#footer {
-    margin-left: 300px;
-  }
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
 }
 
-@media (max-width: 1199px) {
-  .header {
-    left: -100%;
-  }
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.header.header-show {
-  left: 0;
+.social-links {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.header .header-toggle {
-  color: var(--contrast-color);
-  background-color: var(--accent-color);
-  font-size: 22px;
+.social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
   border-radius: 50%;
-  cursor: pointer;
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 9999;
-  transition: background-color 0.3s;
+  text-decoration: none;
+  transition: var(--theme-transition);
 }
 
-.header .header-toggle:hover {
+.social-link:hover {
+  background: var(--accent-color);
   color: var(--contrast-color);
-  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
+  transform: translateY(-2px);
+}
+
+.theme-toggle {
+  position: relative;
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--theme-transition);
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Mobile Navigation */
+@media (max-width: 991px) {
+  .navbar-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .navbar-collapse {
+    background: var(--surface-color);
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 1rem;
+    box-shadow: 0 5px 15px var(--shadow-color);
+  }
+}
+
+/* Full width main content */
+.main.full-width {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Portfolio Tech Tags */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.tech-tag {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /*--------------------------------------------------------------
