@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     atualizarInterfaceTema();
     
     // Simula tempo de carregamento e oculta a tela
-    setTimeout(ocultarTelaCarregamento, 2000);
+    setTimeout(ocultarTelaCarregamento, 3500);
+    
+    // Carrega estatísticas do GitHub
+    carregarEstatisticasGitHub();
 });
 
 // Função para ocultar a tela de carregamento
@@ -188,3 +191,151 @@ function detectarMudancaSistema() {
 
 // Inicializa detecção de mudanças do sistema
 detectarMudancaSistema();
+
+// Carregar estatísticas do GitHub
+async function carregarEstatisticasGitHub() {
+    try {
+        // Buscar dados das linguagens mais usadas
+        const response = await fetch('https://api.github.com/users/JasonFigueiredo/repos?per_page=100');
+        const repos = await response.json();
+        
+        if (!response.ok) {
+            throw new Error('Erro ao carregar repositórios');
+        }
+        
+        // Calcular estatísticas das linguagens
+        const linguagens = calcularEstatisticasLinguagens(repos);
+        
+        // Renderizar as estatísticas
+        renderizarEstatisticas(linguagens);
+        
+    } catch (error) {
+        console.error('Erro ao carregar estatísticas do GitHub:', error);
+        mostrarErroCarregamento();
+    }
+}
+
+// Calcular estatísticas das linguagens
+function calcularEstatisticasLinguagens(repos) {
+    const linguagens = {};
+    
+    // Mapear cores das linguagens (baseado no perfil real)
+    const coresLinguagens = {
+        'JavaScript': '#f7df1e',
+        'CSS': '#1572b6',
+        'HTML': '#e34f26',
+        'PHP': '#777bb4',
+        'Kotlin': '#7f52ff',
+        'Java': '#ed8b00',
+        'MySQL': '#4479a1'
+    };
+    
+    // CORREÇÃO: Inicializar TODAS as linguagens fixas (mesmo com 0 repositórios)
+    const linguagensFixas = ['JavaScript', 'HTML', 'CSS', 'PHP', 'Kotlin', 'Java', 'MySQL'];
+    
+    linguagensFixas.forEach(lang => {
+        linguagens[lang] = {
+            repos: 0,           // Começa com 0
+            stars: 0,           // Começa com 0
+            color: coresLinguagens[lang] || '#6c757d'
+        };
+    });
+    
+    // Processar repositórios do GitHub (atualiza os números reais)
+    repos.forEach(repo => {
+        if (repo.language && linguagens[repo.language]) {
+            linguagens[repo.language].repos++;
+            linguagens[repo.language].stars += repo.stargazers_count || 0;
+        }
+    });
+    
+    // Calcular total de repositórios
+    const totalRepos = Object.values(linguagens).reduce((sum, lang) => sum + lang.repos, 0);
+    
+    // Converter para array e calcular porcentagens
+    const linguagensArray = Object.entries(linguagens).map(([nome, dados]) => ({
+        nome,
+        repos: dados.repos,
+        stars: dados.stars,
+        porcentagem: totalRepos > 0 ? ((dados.repos / totalRepos) * 100).toFixed(1) : '0.0',
+        cor: dados.color
+    }));
+    
+    // CORREÇÃO: Retornar TODAS as linguagens (sem slice)
+    return linguagensArray.sort((a, b) => b.repos - a.repos);
+}
+
+// Renderizar estatísticas no card
+function renderizarEstatisticas(linguagens) {
+    const container = document.getElementById('github-stats');
+    
+    if (linguagens.length === 0) {
+        container.innerHTML = `
+            <div class="loading-stats">
+                <p>Nenhuma linguagem encontrada</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Criar HTML das estatísticas com efeito hover
+    const statsHTML = linguagens.map(lang => `
+        <div class="stat-item" data-lang="${lang.nome.toLowerCase()}">
+            <div class="front-content">
+                <div class="stat-icon ${lang.nome.toLowerCase()}">${obterIconeLinguagem(lang.nome)}</div>
+                <p class="stat-label">${lang.nome}</p>
+                <p class="stat-value">${lang.porcentagem}%</p>
+                <span class="stat-change">${lang.repos} repo${lang.repos > 1 ? 's' : ''}</span>
+            </div>
+            <div class="content">
+                <p class="heading">${lang.nome}</p>
+                <p class="repos-list">${obterRepositoriosPorLinguagem(lang.nome)}</p>
+            </div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = statsHTML;
+}
+
+// Função para obter ícones das linguagens usando skillicons.dev
+function obterIconeLinguagem(linguagem) {
+    const icones = {
+        'JavaScript': `<img src="https://skillicons.dev/icons?i=js" alt="JavaScript" width="24" height="24" />`,
+        'HTML': `<img src="https://skillicons.dev/icons?i=html" alt="HTML" width="24" height="24" />`,
+        'CSS': `<img src="https://skillicons.dev/icons?i=css" alt="CSS" width="24" height="24" />`,
+        'PHP': `<img src="https://skillicons.dev/icons?i=php" alt="PHP" width="24" height="24" />`,
+        'Kotlin': `<img src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" width="24" height="24" />`,
+        'Java': `<img src="https://skillicons.dev/icons?i=java" alt="Java" width="24" height="24" />`,
+        'MySQL': `<img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" width="24" height="24" />`
+    };
+    
+    return icones[linguagem] || `<div class="stat-color" style="background-color: #6c757d; width: 24px; height: 24px; border-radius: 50%;"></div>`;
+}
+
+// Função para obter repositórios por linguagem
+function obterRepositoriosPorLinguagem(linguagem) {
+    const repositorios = {
+        'JavaScript': 'Easy-Bank, Projeto-API, ControleFinanceiro',
+        'HTML': 'Jason-Portifolio, Portfolio Pessoal',
+        'CSS': 'Portfolio, Estilos e Layouts',
+        'PHP': 'Desenvolvimento WEB, Sistemas Backend',
+        'Kotlin': 'Apps Android, Desenvolvimento Mobile',
+        'Java': 'Sistemas Enterprise, Aplicações Backend',
+        'MySQL': 'Bancos de Dados, Sistemas de Gestão'
+    };
+    
+    return repositorios[linguagem] || 'Projetos em desenvolvimento';
+}
+
+// Mostrar erro de carregamento
+function mostrarErroCarregamento() {
+    const container = document.getElementById('github-stats');
+    container.innerHTML = `
+        <div class="loading-stats">
+            <p>Erro ao carregar estatísticas do GitHub</p>
+            <button onclick="carregarEstatisticasGitHub()" class="analytics-button" style="margin-top: 1rem;">
+                Tentar Novamente
+            </button>
+        </div>
+    `;
+}
