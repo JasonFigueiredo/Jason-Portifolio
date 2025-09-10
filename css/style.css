@@ -90,7 +90,7 @@ body {
 /* Container principal */
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px;
     padding: 0 20px;
 }
 
@@ -224,11 +224,11 @@ footer {
 
 /* Botão de Alternância de Tema - Design Moderno */
 .alternador-tema {
-    font-size: 17px;
+    font-size: 12px;
     position: relative;
     display: inline-block;
     width: 4em;
-    height: 2.2em;
+    height: 2em;
     border-radius: 30px;
     box-shadow: var(--sombra-leve);
     cursor: pointer;
@@ -388,6 +388,208 @@ input::placeholder, textarea::placeholder {
     transform: translateY(-1px) scale(0.98);
 }
 
+/* Tela de Carregamento */
+.tela-carregamento {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cor-fundo-secundario);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity var(--transicao-lenta), visibility var(--transicao-lenta);
+}
+
+.tela-carregamento.ocultar {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Carregador de Páginas */
+.carregador {
+    --fundo: linear-gradient(135deg, var(--cor-secundaria), var(--cor-primaria));
+    --sombra: rgba(39, 94, 254, 0.28);
+    --texto: var(--cor-texto-secundario);
+    --pagina: rgba(255, 255, 255, 0.36);
+    --pagina-dobra: rgba(255, 255, 255, 0.52);
+    --duracao: 3s;
+    width: 200px;
+    height: 140px;
+    position: relative;
+}
+
+.carregador:before, .carregador:after {
+    --r: -6deg;
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    width: 120px;
+    top: 80%;
+    box-shadow: 0 16px 12px var(--sombra);
+    transform: rotate(var(--r));
+}
+
+.carregador:before {
+    left: 4px;
+}
+
+.carregador:after {
+    --r: 6deg;
+    right: 4px;
+}
+
+.carregador div {
+    width: 100%;
+    height: 100%;
+    border-radius: 13px;
+    position: relative;
+    z-index: 1;
+    perspective: 600px;
+    box-shadow: 0 4px 6px var(--sombra);
+    background-image: var(--fundo);
+}
+
+.carregador div ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+.carregador div ul li {
+    --r: 180deg;
+    --o: 0;
+    --c: var(--pagina);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform-origin: 100% 50%;
+    color: var(--c);
+    opacity: var(--o);
+    transform: rotateY(var(--r));
+    -webkit-animation: var(--duracao) ease infinite;
+    animation: var(--duracao) ease infinite;
+}
+
+.carregador div ul li:nth-child(2) {
+    --c: var(--pagina-dobra);
+    -webkit-animation-name: pagina-2;
+    animation-name: pagina-2;
+}
+
+.carregador div ul li:nth-child(3) {
+    --c: var(--pagina-dobra);
+    -webkit-animation-name: pagina-3;
+    animation-name: pagina-3;
+}
+
+.carregador div ul li:nth-child(4) {
+    --c: var(--pagina-dobra);
+    -webkit-animation-name: pagina-4;
+    animation-name: pagina-4;
+}
+
+.carregador div ul li:nth-child(5) {
+    --c: var(--pagina-dobra);
+    -webkit-animation-name: pagina-5;
+    animation-name: pagina-5;
+}
+
+.carregador div ul li svg {
+    width: 90px;
+    height: 120px;
+    display: block;
+}
+
+.carregador div ul li:first-child {
+    --r: 0deg;
+    --o: 1;
+}
+
+.carregador div ul li:last-child {
+    --o: 1;
+}
+
+.carregador span {
+    display: block;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 20px;
+    text-align: center;
+    color: var(--texto);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Animações das páginas */
+@keyframes pagina-2 {
+    0% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    35%, 100% {
+        opacity: 0;
+    }
+    50%, 100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes pagina-3 {
+    15% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    35% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+    65%, 100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes pagina-4 {
+    30% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    65%, 100% {
+        opacity: 0;
+    }
+    80%, 100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes pagina-5 {
+    45% {
+        transform: rotateY(180deg);
+        opacity: 0;
+    }
+    65% {
+        opacity: 1;
+    }
+    80%, 100% {
+        opacity: 0;
+    }
+    95%, 100% {
+        transform: rotateY(0deg);
+    }
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .links-navegacao {
@@ -437,6 +639,20 @@ input::placeholder, textarea::placeholder {
     .estrela_3 {
         left: 2.7em;
         top: 0.7em;
+    }
+    
+    .carregador {
+        width: 150px;
+        height: 105px;
+    }
+    
+    .carregador div ul li svg {
+        width: 68px;
+        height: 90px;
+    }
+    
+    .carregador span {
+        font-size: 1rem;
     }
 }
 

@@ -10,7 +10,24 @@ document.addEventListener('DOMContentLoaded', function() {
     inicializarAnimacoes();
     carregarTemaSalvo();
     atualizarInterfaceTema();
+    
+    // Simula tempo de carregamento e oculta a tela
+    setTimeout(ocultarTelaCarregamento, 2000);
 });
+
+// Função para ocultar a tela de carregamento
+function ocultarTelaCarregamento() {
+    const telaCarregamento = document.getElementById('tela-carregamento');
+    
+    if (telaCarregamento) {
+        telaCarregamento.classList.add('ocultar');
+        
+        // Remove a tela do DOM após a animação
+        setTimeout(() => {
+            telaCarregamento.remove();
+        }, 500);
+    }
+}
 
 // Scroll suave para links de navegação
 function inicializarScrollSuave() {
