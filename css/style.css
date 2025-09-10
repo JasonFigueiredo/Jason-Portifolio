@@ -376,14 +376,14 @@ input::placeholder, textarea::placeholder {
 .conteudo-icone .dica {
     position: absolute;
     left: 50%;
-    top: -50px;
+    top: -30px;
     transform: translateX(-50%);
     color: var(--cor-texto-claro);
-    padding: 6px 10px;
-    border-radius: 5px;
+    padding: 4px 8px;
+    border-radius: 4px;
     opacity: 0;
     visibility: hidden;
-    font-size: 14px;
+    font-size: 12px;
     transition: all var(--transicao-media);
     white-space: nowrap;
     margin-left: 0;
@@ -467,6 +467,11 @@ input::placeholder, textarea::placeholder {
 .conteudo-icone a[data-social="youtube"] .preenchido,
 .conteudo-icone a[data-social="youtube"] ~ .dica {
     background-color: #ff0000;
+}
+
+.conteudo-icone a[data-social="whatsapp"] .preenchido,
+.conteudo-icone a[data-social="whatsapp"] ~ .dica {
+    background-color: #25d366;
 }
 
 /* Efeitos visuais extras */
@@ -787,6 +792,12 @@ input::placeholder, textarea::placeholder {
     .conteudo-icone a svg {
         width: 25px;
         height: 25px;
+    }
+    
+    .conteudo-icone .dica {
+        top: -30px;
+        font-size: 11px;
+        padding: 3px 6px;
     }
 }
 
