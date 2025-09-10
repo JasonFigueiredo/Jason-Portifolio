@@ -90,7 +90,7 @@ body {
 /* Container principal */
 .container {
     max-width: 1200px;
-    margin: 20px;
+    margin: 10px auto;
     padding: 0 20px;
 }
 
@@ -111,7 +111,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 5rem 0;
 }
 
 .logo {
