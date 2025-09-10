@@ -348,23 +348,73 @@ let likeCount = 0;
 let userLiked = false;
 let userIP = '';
 
-// Inicializar sistema de like
+// Inicializar sistema de like online
 function inicializarSistemaLike() {
-    // Carregar contador salvo
-    const savedCount = localStorage.getItem('portfolioLikeCount');
-    if (savedCount) {
-        likeCount = parseInt(savedCount);
-    }
-    
     // Detectar IP do usuário (simulado)
     userIP = gerarIPSimulado();
     
-    // Verificar se usuário já deu like
+    // Carregar contador online
+    carregarLikesOnline();
+    
+    // Verificar se usuário já deu like (usando localStorage local)
     const likedIPs = JSON.parse(localStorage.getItem('portfolioLikedIPs') || '[]');
     userLiked = likedIPs.includes(userIP);
     
     // Atualizar interface
     atualizarInterfaceLike();
+    
+    // Atualizar contador automaticamente a cada 30 segundos
+    setInterval(() => {
+        carregarLikesOnline();
+    }, 30000); // 30 segundos
+}
+
+// Carregar likes do servidor online
+async function carregarLikesOnline() {
+    try {
+        // Usar CountAPI - API gratuita para contadores
+        const response = await fetch('https://api.countapi.xyz/get/jason-portfolio/likes');
+        
+        if (response.ok) {
+            const data = await response.json();
+            likeCount = data.value || 0;
+            console.log('Likes carregados online:', likeCount);
+        } else {
+            // Fallback para localStorage se API falhar
+            const savedCount = localStorage.getItem('portfolioLikeCount');
+            likeCount = savedCount ? parseInt(savedCount) : 0;
+            console.log('Usando contador local como fallback');
+        }
+    } catch (error) {
+        console.log('Usando contador local como fallback');
+        // Fallback para localStorage se API não estiver disponível
+        const savedCount = localStorage.getItem('portfolioLikeCount');
+        likeCount = savedCount ? parseInt(savedCount) : 0;
+    }
+    
+    atualizarInterfaceLike();
+}
+
+// Salvar likes no servidor online
+async function salvarLikesOnline() {
+    try {
+        // Usar CountAPI para incrementar contador
+        const response = await fetch('https://api.countapi.xyz/hit/jason-portfolio/likes');
+        
+        if (response.ok) {
+            const data = await response.json();
+            likeCount = data.value;
+            console.log('Like salvo online! Total:', likeCount);
+        } else {
+            // Fallback para localStorage
+            localStorage.setItem('portfolioLikeCount', likeCount.toString());
+            console.log('Salvando localmente como fallback');
+        }
+    } catch (error) {
+        console.log('Salvando localmente como fallback');
+        // Fallback para localStorage
+        localStorage.setItem('portfolioLikeCount', likeCount.toString());
+    }
 }
 
 // Gerar IP simulado (em produção, usar serviço real)
@@ -380,8 +430,8 @@ function gerarIPSimulado() {
     return ip;
 }
 
-// Toggle do like
-function toggleLike() {
+// Toggle do like - Sistema Online
+async function toggleLike() {
     if (userLiked) {
         // Usuário já deu like, não pode desfazer
         mostrarMensagemLike('Você já deu like! ❤️');
@@ -392,12 +442,13 @@ function toggleLike() {
     likeCount++;
     userLiked = true;
     
-    // Salvar no localStorage
-    localStorage.setItem('portfolioLikeCount', likeCount.toString());
-    
+    // Salvar localmente (para controle de IP)
     const likedIPs = JSON.parse(localStorage.getItem('portfolioLikedIPs') || '[]');
     likedIPs.push(userIP);
     localStorage.setItem('portfolioLikedIPs', JSON.stringify(likedIPs));
+    
+    // Salvar online
+    await salvarLikesOnline();
     
     // Atualizar interface
     atualizarInterfaceLike();
@@ -408,6 +459,24 @@ function toggleLike() {
     // Animação de confete
     criarAnimacaoConfete();
 }
+
+// // Toggle do like - VERSÃO MÚLTIPLOS LIKES
+// function toggleLike() {
+//     // Sempre adicionar like (sem verificação de IP)
+//     likeCount++;
+    
+//     // Salvar no localStorage
+//     localStorage.setItem('portfolioLikeCount', likeCount.toString());
+    
+//     // Atualizar interface
+//     atualizarInterfaceLike();
+    
+//     // Mostrar confirmação
+//     mostrarMensagemLike('Obrigado pelo like! 🎉');
+    
+//     // Animação de confete
+//     criarAnimacaoConfete();
+// }
 
 // Atualizar interface do like
 function atualizarInterfaceLike() {
@@ -422,6 +491,54 @@ function atualizarInterfaceLike() {
         } else {
             likeBtn.classList.remove('liked');
         }
+    }
+    
+    // Adicionar indicador de sincronização online
+    mostrarIndicadorOnline();
+}
+
+// Mostrar indicador de sincronização online
+function mostrarIndicadorOnline() {
+    let indicador = document.getElementById('online-indicator');
+    
+    if (!indicador) {
+        indicador = document.createElement('div');
+        indicador.id = 'online-indicator';
+        indicador.style.cssText = `
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        `;
+        document.body.appendChild(indicador);
+    }
+    
+    indicador.innerHTML = `
+        <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite;"></div>
+        Online: ${likeCount} likes
+    `;
+    
+    // Adicionar animação de pulso
+    if (!document.getElementById('pulse-animation')) {
+        const style = document.createElement('style');
+        style.id = 'pulse-animation';
+        style.textContent = `
+            @keyframes pulse {
+                0% { opacity: 1; }
+                50% { opacity: 0.5; }
+                100% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     }
 }
 
