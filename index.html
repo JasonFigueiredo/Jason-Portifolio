@@ -29,43 +29,63 @@
 
 <body class="index-page">
 
-  <header id="header" class="header dark-background d-flex flex-column">
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+  <!-- Fixed Top Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <!-- Logo/Brand -->
+      <a class="navbar-brand" href="#hero">
+        <img src="assets/img/jason.jpg" alt="Jason Figueiredo" class="brand-img">
+        <span class="brand-text">Jason Figueiredo</span>
+      </a>
 
-    <div class="profile-img">
-      <img src="assets/img/jason.jpg" alt="" class="img-fluid rounded-circle">
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navigation Menu -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#hero">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#resume">Currículo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#portfolio">Portfólio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Serviços</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contato</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Links & Theme Toggle -->
+      <div class="navbar-actions">
+        <div class="social-links">
+          <a href="https://www.instagram.com/jason_loopes" class="social-link" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/jasonfigueiredo99" class="social-link" target="_blank"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/jasonfigueiredo" class="social-link" target="_blank"><i class="bi bi-github"></i></a>
+          <a href="mailto:jasonlopes132@gmail.com" class="social-link"><i class="bi bi-envelope"></i></a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+          <i class="bi bi-moon-fill" id="theme-icon"></i>
+        </button>
+      </div>
     </div>
+  </nav>
 
-    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
-      <!-- Uncomment the line below if you also wish to use an image logo -->
-      <!-- <img src="assets/img/logo.png" alt=""> -->
-      <h1 class="sitename">Jason Figueiredo</h1>
-    </a>
-
-    <div class="social-links text-center">
-      <a href="https://www.instagram.com/jason_loopes" class="instagram"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.linkedin.com/in/jasonfigueiredo99" class="linkedin"><i class="bi bi-linkedin"></i></a>
-      <a href="https://github.com/jasonfigueiredo" class="github"><i class="bi bi-github"></i></a>
-      <a href="mailto:jasonlopes132@gmail.com" class="gmail"><i class="bi bi-envelope"></i></a>
-    </div>
-
-    <nav id="navmenu" class="navmenu">
-      <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Início</a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i> Sobre</a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Currículo</a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfólio</a></li>
-        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Serviços</a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contato</a></li>
-      </ul>
-    </nav>
-
-  </header>
-
-  <main class="main">
+  <main class="main full-width">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <section id="hero" class="hero section dark-background" style="padding-top: 100px;">
       <div class="hero-background">
         <img src="assets/img/jason2.jpg" alt="Jason Figueiredo" data-aos="fade-in">
         <div class="hero-overlay"></div>
@@ -346,50 +366,49 @@
     </section><!-- /Resume Section -->
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
+    <section id="portfolio" class="portfolio section light-background">
       <div class="container">
         <!-- Section Title -->
         <div class="section-title" data-aos="fade-up">
           <h2>Meus Projetos</h2>
-          <p>Alguns dos projetos que desenvolvi durante minha jornada de aprendizado</p>
+          <p>Projetos desenvolvidos durante minha jornada de aprendizado e experiência profissional</p>
         </div><!-- End Section Title -->
 
-      <div class="container">
+        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">Todos</li>
-            <li data-filter=".filter-web">Web</li>
-            <li data-filter=".filter-finance">Fintech</li>
-            <li data-filter=".filter-dashboard">Dashboards</li>
-            <li data-filter=".filter-learning">Estudos</li>
-          </ul><!-- End Portfolio Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-finance">
+            <div class="col-lg-4 col-md-6 portfolio-item">
               <div class="portfolio-content h-100">
                 <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="Sistema de Controle Financeiro">
                 <div class="portfolio-info">
                   <h4>Sistema de Controle Financeiro</h4>
-                  <p>Projeto fintech para gerenciamento de finanças pessoais</p>
-                  <a href="assets/img/portfolio/app-1.jpg" title="Sistema de Controle Financeiro" data-gallery="portfolio-gallery-finance"
+                  <p>Projeto fintech completo para gerenciamento de finanças pessoais</p>
+                  <div class="tech-tags">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Bootstrap</span>
+                  </div>
+                  <a href="assets/img/portfolio/app-1.jpg" title="Sistema de Controle Financeiro" data-gallery="portfolio-gallery"
                     class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="Mais Detalhes" class="details-link"><i
-                      class="bi bi-link-45deg"></i></a>
+                  <a href="https://github.com/jasonfigueiredo" title="Ver no GitHub" class="details-link" target="_blank"><i
+                      class="bi bi-github"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-dashboard">
+            <div class="col-lg-4 col-md-6 portfolio-item">
               <div class="portfolio-content h-100">
                 <img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="Dashboard Power BI">
                 <div class="portfolio-info">
                   <h4>Dashboard Power BI</h4>
-                  <p>Análise de dados e visualizações interativas</p>
+                  <p>Análise de dados e visualizações interativas para gestão empresarial</p>
+                  <div class="tech-tags">
+                    <span class="tech-tag">Power BI</span>
+                    <span class="tech-tag">Excel</span>
+                    <span class="tech-tag">SQL</span>
+                  </div>
                   <a href="assets/img/portfolio/product-1.jpg" title="Dashboard Power BI"
-                    data-gallery="portfolio-gallery-dashboard" class="glightbox preview-link"><i
+                    data-gallery="portfolio-gallery" class="glightbox preview-link"><i
                       class="bi bi-zoom-in"></i></a>
                   <a href="portfolio-details.html" title="Mais Detalhes" class="details-link"><i
                       class="bi bi-link-45deg"></i></a>
@@ -397,31 +416,43 @@
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web">
+            <div class="col-lg-4 col-md-6 portfolio-item">
               <div class="portfolio-content h-100">
                 <img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="Portfólio Pessoal">
                 <div class="portfolio-info">
                   <h4>Portfólio Pessoal</h4>
-                  <p>Website responsivo desenvolvido com Bootstrap</p>
+                  <p>Website responsivo e moderno desenvolvido com tecnologias atuais</p>
+                  <div class="tech-tags">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Bootstrap</span>
+                  </div>
                   <a href="assets/img/portfolio/branding-1.jpg" title="Portfólio Pessoal"
-                    data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i
+                    data-gallery="portfolio-gallery" class="glightbox preview-link"><i
                       class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="Mais Detalhes" class="details-link"><i
-                      class="bi bi-link-45deg"></i></a>
+                  <a href="https://github.com/jasonfigueiredo" title="Ver no GitHub" class="details-link" target="_blank"><i
+                      class="bi bi-github"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-learning">
+            <div class="col-lg-4 col-md-6 portfolio-item">
               <div class="portfolio-content h-100">
-                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="Projetos de Estudo">
+                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="Projetos Acadêmicos">
                 <div class="portfolio-info">
-                  <h4>Projetos de Estudo</h4>
-                  <p>Exercícios práticos e projetos acadêmicos</p>
-                  <a href="assets/img/portfolio/books-1.jpg" title="Projetos de Estudo" data-gallery="portfolio-gallery-learning"
+                  <h4>Projetos Acadêmicos</h4>
+                  <p>Exercícios práticos e projetos desenvolvidos durante a graduação</p>
+                  <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">React</span>
+                  </div>
+                  <a href="assets/img/portfolio/books-1.jpg" title="Projetos Acadêmicos" data-gallery="portfolio-gallery"
                     class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="portfolio-details.html" title="Mais Detalhes" class="details-link"><i
-                      class="bi bi-link-45deg"></i></a>
+                  <a href="https://github.com/jasonfigueiredo" title="Ver no GitHub" class="details-link" target="_blank"><i
+                      class="bi bi-github"></i></a>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -611,122 +642,6 @@
       </div>
     </section><!-- /Services Section -->
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Depoimentos</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-        {
-          "loop": true,
-          "speed": 600,
-          "autoplay": {
-            "delay": 5000
-          },
-          "slidesPerView": "auto",
-          "pagination": {
-            "el": ".swiper-pagination",
-            "type": "bullets",
-            "clickable": true
-          },
-          "breakpoints": {
-            "320": {
-          "slidesPerView": 1,
-          "spaceBetween": 40
-            },
-            "1200": {
-          "slidesPerView": 3,
-          "spaceBetween": 1
-            }
-          }
-        }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
-                    Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Fundador</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid malis quorum
-                    velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
-                    minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Dona de Loja</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat dolor enim
-                    duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bi bi-quote quote-icon-left"></i>
-                  <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam sunt
-                    culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                  <i class="bi bi-quote quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Empreendedor</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
@@ -845,6 +760,41 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to light theme
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', currentTheme);
+    
+    // Update icon based on current theme
+    if (currentTheme === 'dark') {
+      themeIcon.className = 'bi bi-sun-fill';
+    } else {
+      themeIcon.className = 'bi bi-moon-fill';
+    }
+
+    // Theme toggle event listener
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Update icon
+      if (newTheme === 'dark') {
+        themeIcon.className = 'bi bi-sun-fill';
+      } else {
+        themeIcon.className = 'bi bi-moon-fill';
+      }
+    });
+  </script>
 
 </body>
 
