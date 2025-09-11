@@ -781,18 +781,26 @@ input::placeholder, textarea::placeholder {
     box-shadow: var(--sombra-forte);
     transition: all 0.3s ease;
     margin: 0 auto;
+    border: 2px solid transparent;
+}
+
+/* Tema claro - fundo branco com bordas azuis */
+[data-tema="claro"] .analytics-card-full {
+    background: #ffffff;
+    border: 2px solid #3b82f6;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
 }
 
 .analytics-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
 }
 
 .analytics-gradient {
     position: absolute;
     inset: 0;
     border-radius: 12px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
     opacity: 0.2;
     filter: blur(4px);
     transition: opacity 0.3s ease;
@@ -807,6 +815,11 @@ input::placeholder, textarea::placeholder {
     inset: 1px;
     border-radius: 11px;
     background: var(--cor-fundo-escuro);
+}
+
+/* Tema claro - fundo branco interno */
+[data-tema="claro"] .analytics-bg {
+    background: #ffffff;
 }
 
 .analytics-content {
@@ -834,19 +847,33 @@ input::placeholder, textarea::placeholder {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
 }
 
 .analytics-icon-svg {
     height: 16px;
     width: 16px;
-    color: var(--cor-texto-claro);
+    color: #ffffff;
+}
+
+/* Tema claro - ícone analytics com fundo azul */
+[data-tema="claro"] .analytics-icon {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+}
+
+[data-tema="claro"] .analytics-icon-svg {
+    color: #ffffff;
 }
 
 .analytics-title {
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--cor-texto-claro);
+}
+
+/* Tema claro - título escuro */
+[data-tema="claro"] .analytics-title {
+    color: #2c3e50;
 }
 
 .analytics-status {
@@ -889,6 +916,14 @@ input::placeholder, textarea::placeholder {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    border: 1px solid transparent;
+}
+
+/* Tema claro - cards com fundo branco e bordas azuis */
+[data-tema="claro"] .stat-item {
+    background: #ffffff;
+    border: 1px solid #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
 .stat-item .front-content {
@@ -927,11 +962,21 @@ input::placeholder, textarea::placeholder {
     margin: 0 0 0.25rem 0;
 }
 
+/* Tema claro - texto escuro nos cards */
+[data-tema="claro"] .stat-item .front-content .stat-label {
+    color: #64748b;
+}
+
 .stat-item .front-content .stat-value {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--cor-texto-claro);
     margin: 0 0 0.25rem 0;
+}
+
+/* Tema claro - valor escuro nos cards */
+[data-tema="claro"] .stat-item .front-content .stat-value {
+    color: #1e293b;
 }
 
 .stat-item .front-content .stat-change {
@@ -952,8 +997,8 @@ input::placeholder, textarea::placeholder {
     justify-content: center;
     text-align: center;
     gap: 8px;
-    background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
-    color: #e8e8e8;
+    background: linear-gradient(-45deg, #3b82f6 0%, #60a5fa 100%);
+    color: #ffffff;
     padding: 15px;
     line-height: 1.4;
     border-radius: 8px;
@@ -969,18 +1014,46 @@ input::placeholder, textarea::placeholder {
     margin: 0;
 }
 
+/* Tema claro - texto do hover escuro */
+[data-tema="claro"] .stat-item .content .heading {
+    color: #1e293b;
+}
+
 .stat-item .content .repos-list {
     font-size: 0.7rem;
     margin: 0;
     line-height: 1.3;
 }
 
+/* Tema claro - lista de repositórios escura */
+[data-tema="claro"] .stat-item .content .repos-list {
+    color: #64748b;
+}
+
 .stat-item:hover .content {
     transform: translateY(0);
 }
 
+/* Hover geral com azul/azul claro para ambos os temas */
+.stat-item:hover {
+    border-color: #60a5fa !important;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3) !important;
+}
+
 .stat-item:hover .front-content {
     transform: translateY(-30%);
+}
+
+/* Tema claro - hover com borda azul claro */
+[data-tema="claro"] .stat-item:hover {
+    border-color: #60a5fa !important;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3) !important;
+}
+
+/* Forçar hover azul claro em todos os casos */
+.analytics-stats .stat-item:hover {
+    border-color: #60a5fa !important;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3) !important;
 }
 
 .stat-item:hover .front-content .stat-icon {
@@ -1064,6 +1137,22 @@ input::placeholder, textarea::placeholder {
     margin: 0;
 }
 
+/* Tema claro - texto do loading escuro */
+[data-tema="claro"] .loading-stats p {
+    color: #64748b;
+}
+
+/* Tema claro - garantir visibilidade de todos os textos das estatísticas */
+[data-tema="claro"] .analytics-content * {
+    color: inherit;
+}
+
+[data-tema="claro"] .analytics-content p,
+[data-tema="claro"] .analytics-content span,
+[data-tema="claro"] .analytics-content div {
+    color: #1e293b !important;
+}
+
 /* Seções do Card */
 .github-section {
     margin-bottom: 1rem;
@@ -1099,54 +1188,6 @@ input::placeholder, textarea::placeholder {
 }
 
 
-.analytics-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.analytics-period {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.period-text {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--cor-texto-secundario);
-}
-
-.period-icon {
-    height: 16px;
-    width: 16px;
-    color: var(--cor-texto-secundario);
-}
-
-.analytics-button {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--cor-texto-claro);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.analytics-button:hover {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    transform: translateY(-1px);
-}
-
-.button-icon {
-    height: 12px;
-    width: 12px;
-}
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -1379,7 +1420,7 @@ input::placeholder, textarea::placeholder {
 
 /* Botão de Atualização */
 .analytics-refresh-btn {
-    background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+    background: linear-gradient(-45deg, #3b82f6 0%, #60a5fa 100%);
     border: none;
     border-radius: 8px;
     padding: 0.5rem;
@@ -1388,12 +1429,12 @@ input::placeholder, textarea::placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(248, 155, 41, 0.3);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .analytics-refresh-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(248, 155, 41, 0.4);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 .analytics-refresh-btn:active {
@@ -1403,7 +1444,7 @@ input::placeholder, textarea::placeholder {
 .refresh-icon {
     width: 16px;
     height: 16px;
-    color: white;
+    color: #3b82f6;
     transition: transform 0.3s ease;
 }
 
@@ -1434,124 +1475,3 @@ input::placeholder, textarea::placeholder {
     }
 }
 
-/* Botão de Like na Navegação */
-.nav-like-container {
-    display: flex;
-    align-items: center;
-    margin-right: 1rem;
-}
-
-.Btn {
-    width: 120px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border: none;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    background-color: transparent;
-    transition: transform 0.2s ease;
-}
-
-.leftContainer {
-    width: 60%;
-    height: 100%;
-    background-color: rgb(238, 0, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-}
-
-.leftContainer .like {
-    color: white;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.likeCount {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(238, 0, 0);
-    font-weight: 600;
-    position: relative;
-    background-color: white;
-    font-size: 0.9rem;
-}
-
-.likeCount::before {
-    height: 8px;
-    width: 8px;
-    position: absolute;
-    content: "";
-    background-color: rgb(255, 255, 255);
-    transform: rotate(45deg);
-    left: -4px;
-}
-
-.Btn:active {
-    transform: scale(0.95);
-}
-
-.Btn:active .leftContainer svg {
-    transform: scale(1.1);
-    transform-origin: center;
-}
-
-.Btn.liked .leftContainer {
-    background-color: rgb(0, 150, 0);
-}
-
-.Btn.liked .likeCount {
-    color: rgb(0, 150, 0);
-}
-
-/* Responsividade do botão de like na navegação */
-@media (max-width: 768px) {
-    .nav-like-container {
-        margin-right: 0.5rem;
-    }
-    
-    .Btn {
-        width: 100px;
-        height: 28px;
-    }
-    
-    .leftContainer .like {
-        font-size: 0.8rem;
-    }
-    
-    .likeCount {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-like-container {
-        margin-right: 0.25rem;
-    }
-    
-    .Btn {
-        width: 80px;
-        height: 26px;
-    }
-    
-    .leftContainer .like {
-        font-size: 0.7rem;
-    }
-    
-    .likeCount {
-        font-size: 0.7rem;
-    }
-    
-    .leftContainer {
-        gap: 4px;
-    }
-}
