@@ -307,7 +307,25 @@ function obterIconeLinguagem(linguagem) {
         'PHP': `<img src="https://skillicons.dev/icons?i=php" alt="PHP" width="24" height="24" />`,
         'Kotlin': `<img src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" width="24" height="24" />`,
         'Java': `<img src="https://skillicons.dev/icons?i=java" alt="Java" width="24" height="24" />`,
-        'MySQL': `<img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" width="24" height="24" />`
+        'MySQL': `<img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" width="24" height="24" />`,
+        'React': `<img src="https://skillicons.dev/icons?i=react" alt="React" width="24" height="24" />`,
+        'Node.js': `<img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" width="24" height="24" />`,
+        'Python': `<img src="https://skillicons.dev/icons?i=python" alt="Python" width="24" height="24" />`,
+        'TypeScript': `<img src="https://skillicons.dev/icons?i=ts" alt="TypeScript" width="24" height="24" />`,
+        'Git': `<img src="https://skillicons.dev/icons?i=git" alt="Git" width="24" height="24" />`,
+        'GitHub': `<img src="https://skillicons.dev/icons?i=github" alt="GitHub" width="24" height="24" />`,
+        'VS Code': `<img src="https://skillicons.dev/icons?i=vscode" alt="VS Code" width="24" height="24" />`,
+        'Bootstrap': `<img src="https://skillicons.dev/icons?i=bootstrap" alt="Bootstrap" width="24" height="24" />`,
+        'jQuery': `<img src="https://skillicons.dev/icons?i=jquery" alt="jQuery" width="24" height="24" />`,
+        'Sass': `<img src="https://skillicons.dev/icons?i=sass" alt="Sass" width="24" height="24" />`,
+        'MongoDB': `<img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB" width="24" height="24" />`,
+        'PostgreSQL': `<img src="https://skillicons.dev/icons?i=postgresql" alt="PostgreSQL" width="24" height="24" />`,
+        'Docker': `<img src="https://skillicons.dev/icons?i=docker" alt="Docker" width="24" height="24" />`,
+        'Linux': `<img src="https://skillicons.dev/icons?i=linux" alt="Linux" width="24" height="24" />`,
+        'Windows': `<img src="https://skillicons.dev/icons?i=windows" alt="Windows" width="24" height="24" />`,
+        'Figma': `<img src="https://skillicons.dev/icons?i=figma" alt="Figma" width="24" height="24" />`,
+        'Photoshop': `<img src="https://skillicons.dev/icons?i=ps" alt="Photoshop" width="24" height="24" />`,
+        'Illustrator': `<img src="https://skillicons.dev/icons?i=ai" alt="Illustrator" width="24" height="24" />`
     };
     
     return icones[linguagem] || `<div class="stat-color" style="background-color: #6c757d; width: 24px; height: 24px; border-radius: 50%;"></div>`;
