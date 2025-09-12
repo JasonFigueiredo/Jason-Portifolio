@@ -210,204 +210,199 @@ section {
     margin-bottom: 2rem;
 }
 
-/* Animação de Scroll Horizontal Infinito */
-.infinite-scroll-container {
-    width: 80%;
-    max-width: 800px;
-    overflow: hidden;
-    margin: 2rem auto;
+/* Animação 3D Circular com Ícones das Tecnologias */
+.tech-3d-container {
+    width: 100%;
+    height: 600px;
     position: relative;
-    background: transparent;
-    border-radius: 0;
-    padding: 1rem 0;
-    backdrop-filter: none;
-    border: none;
-}
-
-
-.infinite-scroll-content {
+    text-align: center;
     display: flex;
-    animation: scroll 20s linear infinite;
-    gap: 2rem;
     align-items: center;
+    justify-content: center;
+    overflow: visible;
+    margin: 3rem 0;
+    padding: 80px 0;
 }
 
-.scroll-item {
+.tech-3d-inner {
+    --w: 160px;
+    --h: 240px;
+    --translateZ: calc((var(--w) + var(--h)) + 100px);
+    --rotateX: -8deg;
+    --perspective: 1500px;
+    position: absolute;
+    width: var(--w);
+    height: var(--h);
+    top: 25%;
+    left: calc(50% - (var(--w) / 2) - 2.5px);
+    z-index: 2;
+    transform-style: preserve-3d;
+    transform: perspective(var(--perspective));
+    animation: rotating 25s linear infinite;
+}
+
+@keyframes rotating {
+    from {
+        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+    }
+    to {
+        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+    }
+}
+
+.tech-card {
+    position: absolute;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    inset: 0;
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+    background: rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.tech-card:hover {
+    border-color: rgba(59, 130, 246, 0.8);
+    background: rgba(59, 130, 246, 0.2);
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ)) scale(1.1);
+}
+
+.tech-card-content {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 80px;
-    flex-shrink: 0;
+    justify-content: center;
     padding: 0.5rem;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    transition: transform 0.3s ease;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1));
 }
 
-.scroll-item img {
-    background: transparent;
-}
-
-/* Tema claro - ícones com fundo transparente */
-[data-tema="claro"] .scroll-item img {
-    background: transparent;
-}
-
-/* Tema claro - cards da animação de scroll */
-[data-tema="claro"] .scroll-item {
-    background: transparent;
-    border: none;
-}
-
-/* Tema claro - hover dos cards da animação de scroll */
-[data-tema="claro"] .scroll-item:hover {
-    background: transparent;
-}
-
-/* Tema claro - container da animação de scroll */
-[data-tema="claro"] .infinite-scroll-container {
-    background: transparent;
-    border: none;
-}
-
-
-/* Tema claro - texto dos cards da animação de scroll */
-[data-tema="claro"] .scroll-item span {
-    color: var(--cor-texto-escuro);
-}
-
-/* Tema claro - hover dos cards da animação de scroll */
-[data-tema="claro"] .scroll-item:hover {
-    background: transparent;
-}
-
-.scroll-item:hover {
-    transform: scale(1.1);
-    background: transparent;
-}
-
-.scroll-item img {
-    width: 32px;
-    height: 32px;
+.tech-card img {
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    background: transparent;
-    /* Removido filter para mostrar ícones coloridos */
+    margin-bottom: 1rem;
 }
 
-.scroll-item span {
-    font-size: 0.8rem;
-    font-weight: 500;
+.tech-card span {
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--cor-texto-claro);
     text-align: center;
     white-space: nowrap;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+/* Tema claro - animação 3D */
+[data-tema="claro"] .tech-card {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.05);
 }
 
-
-/* Duplicar o conteúdo para scroll infinito */
-.infinite-scroll-content::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
+[data-tema="claro"] .tech-card:hover {
+    border-color: rgba(59, 130, 246, 0.8);
+    background: rgba(59, 130, 246, 0.15);
 }
 
-/* Responsividade da animação de scroll */
+[data-tema="claro"] .tech-card-content {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(96, 165, 250, 0.05));
+}
+
+[data-tema="claro"] .tech-card span {
+    color: var(--cor-texto-escuro);
+}
+
+/* Responsividade da animação 3D */
 @media (max-width: 1024px) {
-    .infinite-scroll-container {
-        width: 85%;
-        max-width: 700px;
-        margin: 1.5rem auto;
+    .tech-3d-container {
+        height: 500px;
+        padding: 60px 0;
+    }
+    
+    .tech-3d-inner {
+        --w: 140px;
+        --h: 200px;
+        --translateZ: calc((var(--w) + var(--h)) + 80px);
+        top: 28%;
+    }
+    
+    .tech-card img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .tech-card span {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .infinite-scroll-container {
-        width: 90%;
-        max-width: 600px;
-        margin: 1.5rem auto;
-        padding: 0.8rem 0;
+    .tech-3d-container {
+        height: 400px;
+        padding: 50px 0;
     }
     
-    .scroll-item {
-        min-width: 70px;
-        padding: 0.4rem;
+    .tech-3d-inner {
+        --w: 120px;
+        --h: 160px;
+        --translateZ: calc((var(--w) + var(--h)) + 60px);
+        top: 32%;
     }
     
-    .scroll-item img {
-        width: 28px;
-        height: 28px;
+    .tech-card img {
+        width: 50px;
+        height: 50px;
     }
     
-    .scroll-item span {
-        font-size: 0.7rem;
-    }
-    
-    .infinite-scroll-content {
-        gap: 1.5rem;
+    .tech-card span {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
-    .infinite-scroll-container {
-        width: 95%;
-        max-width: 400px;
-        margin: 1rem auto;
-        padding: 0.6rem 0;
+    .tech-3d-container {
+        height: 350px;
+        padding: 40px 0;
     }
     
-    .scroll-item {
-        min-width: 60px;
-        padding: 0.3rem;
+    .tech-3d-inner {
+        --w: 100px;
+        --h: 130px;
+        --translateZ: calc((var(--w) + var(--h)) + 40px);
+        top: 35%;
     }
     
-    .scroll-item img {
-        width: 24px;
-        height: 24px;
+    .tech-card img {
+        width: 40px;
+        height: 40px;
     }
     
-    .scroll-item span {
-        font-size: 0.6rem;
-    }
-    
-    .infinite-scroll-content {
-        gap: 1rem;
+    .tech-card span {
+        font-size: 0.8rem;
     }
 }
 
-/* Responsividade para telas muito pequenas */
 @media (max-width: 360px) {
-    .infinite-scroll-container {
-        width: 98%;
-        max-width: 320px;
+    .tech-3d-container {
+        height: 300px;
+        padding: 30px 0;
     }
     
-    .scroll-item {
-        min-width: 50px;
-        padding: 0.2rem;
+    .tech-3d-inner {
+        --w: 80px;
+        --h: 110px;
+        --translateZ: calc((var(--w) + var(--h)) + 30px);
+        top: 38%;
     }
     
-    .scroll-item img {
-        width: 20px;
-        height: 20px;
+    .tech-card img {
+        width: 35px;
+        height: 35px;
     }
     
-    .scroll-item span {
-        font-size: 0.5rem;
-    }
-    
-    .infinite-scroll-content {
-        gap: 0.8rem;
+    .tech-card span {
+        font-size: 0.7rem;
     }
 }
 
