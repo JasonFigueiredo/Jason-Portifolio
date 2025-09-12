@@ -1,388 +1,400 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Jason Figueiredo</title>
-    <meta name="description" content="Portfólio pessoal de Jason Figueiredo - Desenvolvedor e Designer">
-    <meta name="keywords" content="portfólio, desenvolvedor, designer, Jason Figueiredo">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+  rel="stylesheet">
+ <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <!-- Tela de Carregamento - Terminal -->
-    <div id="tela-carregamento" class="tela-carregamento">
-        <div class="terminal-card">
-            <div class="terminal-wrap">
-                <div class="terminal">
-                    <hgroup class="terminal-head">
-                        <p class="terminal-title">
-                            <svg
-                                width="16px"
-                                height="16px"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                stroke-width="2"
-                                stroke="currentColor"
-                                fill="none"
-                            >
-                                <path
-                                    d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
-                                ></path>
-                            </svg>
-                            Terminal
-                        </p>
-                        <button class="terminal-copy" tabindex="-1" type="button">
-                            <svg
-                                width="16px"
-                                height="16px"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                stroke-width="2"
-                                stroke="currentColor"
-                                fill="none"
-                            >
-                                <path
-                                    d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
-                                ></path>
-                                <path
-                                    d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
-                                ></path>
-                            </svg>
-                        </button>
-                    </hgroup>
-                    <div class="terminal-body">
-                        <div class="terminal-lines">
-                            <div class="terminal-line">
-                                <code class="terminal-prompt">$</code>
-                                <code class="terminal-cmd" data-cmd="npm start portfolio"></code>
-                            </div>
-                            <div class="terminal-line">
-                                <code class="terminal-output">Aplicando temas e estilos...</code>
-                            </div>
-                            <div class="terminal-line">
-                                <code class="terminal-output">Portfólio carregado com sucesso! ✅</code>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+ <div class="container">
+  <!-- Sidebar de Navegação -->
+  <nav class="sidebar">
+   <div class="sidebar-content">
+    <button class="theme-toggle" id="theme-toggle">
+     <i class="fas fa-moon"></i>
+    </button>
+    <ul class="nav-menu">
+     <li class="nav-item active">
+      <a href="#home" class="nav-link">
+       <i class="fas fa-home"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#profile" class="nav-link">
+       <i class="fas fa-user"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#projects" class="nav-link">
+       <i class="fas fa-briefcase"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#resume" class="nav-link">
+       <i class="fas fa-file-alt"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#settings" class="nav-link">
+       <i class="fas fa-cog"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#favorites" class="nav-link">
+       <i class="fas fa-heart"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#ideas" class="nav-link">
+       <i class="fas fa-lightbulb"></i>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="#messages" class="nav-link">
+       <i class="fas fa-envelope"></i>
+      </a>
+     </li>
+    </ul>
+   </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+   <!-- Seção Hero -->
+   <section id="home" class="hero-section">
+    <div class="hero-content">
+     <h1 class="hero-title">Jason Figueiredo</h1>
+     <p class="hero-subtitle">Estudande em ADS - Análise e Desenvolvimento de Sistemas - FIAP</p>
+
+     <div class="hero-info">
+      <div class="info-item">
+       <span class="material-symbols-outlined">work</span>
+       <span>Previously worked at Motorola Solutions, top Korean journalism company, and start-ups</span>
+      </div>
+      <div class="info-item">
+       <span class="material-symbols-outlined">location_on</span>
+       <span>Anapolis, Goias</span>
+      </div>
+     </div>
+
+     <div class="hero-buttons">
+      <a href="#" class="btn btn-primary">
+       <span>Resume</span>
+       <i class="fas fa-arrow-right"></i>
+      </a>
+      <a href="#" class="btn btn-secondary">
+       <span>5-minute Guide</span>
+       <i class="fas fa-arrow-right"></i>
+      </a>
+     </div>
+
+     <div class="interactive-prompt">
+      <span class="handwriting">Interaja, clique e explore meus projetos</span>
+      <div class="arrow-down">↓</div>
+     </div>
+    </div>
+   </section>
+
+   <!-- Seção de Projetos -->
+   <section id="projects" class="projects-section">
+    <!-- Categoria: PRODUCT DESIGN -->
+    <div class="project-category">
+     <h3 class="category-title">PRODUCT DESIGN</h3>
+
+     <div class="project-grid">
+      <article class="project-card">
+       <div class="project-content">
+        <div class="project-text">
+         <h4 class="project-title">Continuous Intelligence</h4>
+         <p class="project-description">SAP's self-learning analytics tool, monitoring anomalies in real-time.</p>
+         <div class="project-tags">
+          <span class="tag">SAP</span>
+          <span class="tag">B2B</span>
+          <span class="tag">UXR</span>
+          <span class="tag">UXD</span>
+         </div>
         </div>
+        <div class="project-image">
+         <div class="image-placeholder continuous-intelligence-img">
+          <div class="dashboard-preview">
+           <div class="chart-container">
+            <div class="chart-bar" style="height: 60%"></div>
+            <div class="chart-bar" style="height: 80%"></div>
+            <div class="chart-bar" style="height: 45%"></div>
+            <div class="chart-bar" style="height: 90%"></div>
+           </div>
+           <div class="data-points">
+            <span class="data-value">66.42M</span>
+            <span class="data-value">30.17M</span>
+            <span class="data-value">5.25M</span>
+           </div>
+          </div>
+         </div>
+         <a href="#" class="external-link">
+          <i class="fas fa-external-link-alt"></i>
+         </a>
+        </div>
+       </div>
+      </article>
+
+      <article class="project-card">
+       <div class="project-content reverse">
+        <div class="project-text">
+         <h4 class="project-title">Gen-AI Prompt Builder</h4>
+         <p class="project-description">Node-based Gen-AI prompt building platform.</p>
+         <div class="project-tags">
+          <span class="tag">SAP</span>
+          <span class="tag">B2B</span>
+          <span class="tag">UXR</span>
+          <span class="tag">UXD</span>
+         </div>
+        </div>
+        <div class="project-image">
+         <div class="image-placeholder gen-ai-img">
+          <div class="prompt-cards">
+           <div class="prompt-card green">
+            <div class="card-header">Domain</div>
+            <div class="card-title">SAP Finance</div>
+            <div class="card-desc">Focus on SAP Finance</div>
+           </div>
+           <div class="prompt-card pink">
+            <div class="card-header">Domains Package</div>
+            <div class="card-title">SAP-FIN-AR-ICN-CI-COHERE...</div>
+            <div class="card-desc">Contains specific models to support Domain Package</div>
+           </div>
+          </div>
+         </div>
+         <a href="#" class="external-link">
+          <i class="fas fa-external-link-alt"></i>
+         </a>
+        </div>
+       </div>
+      </article>
+
+      <article class="project-card">
+       <div class="project-content">
+        <div class="project-text">
+         <h4 class="project-title">Sanwha: The Fallen</h4>
+         <p class="project-description">An award-winning interactive article about firefighters in Korea.</p>
+         <div class="project-tags">
+          <span class="tag">PUBLISHED</span>
+          <span class="tag">INTERACTIVE ARTICLE</span>
+          <span class="tag">UXD</span>
+         </div>
+        </div>
+        <div class="project-image">
+         <div class="image-placeholder sanwha-img">
+          <div class="firefighter-silhouette">
+           <div class="helmet"></div>
+           <div class="body"></div>
+           <div class="platform"></div>
+          </div>
+         </div>
+         <a href="#" class="external-link">
+          <i class="fas fa-external-link-alt"></i>
+         </a>
+        </div>
+       </div>
+      </article>
+     </div>
     </div>
 
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">Jason Figueiredo</div>
-            <ul class="links-navegacao">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-            
-            <!-- Botão de alternância de tema -->
-            <label class="alternador-tema">
-                <input checked="true" id="checkbox-tema" type="checkbox" onchange="alternarTema()" />
-                <span class="deslizador">
-                    <div class="estrela estrela_1"></div>
-                    <div class="estrela estrela_2"></div>
-                    <div class="estrela estrela_3"></div>
-                    <svg viewBox="0 0 16 16" class="nuvem_1 nuvem">
-                        <path
-                            transform="matrix(.77976 0 0 .78395-299.99-418.63)"
-                            fill="#fff"
-                            d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925"
-                        ></path>
-                    </svg>
-                </span>
-            </label>
-        </nav>
-    </header>
+    <!-- Categoria: ETC -->
+    <div class="project-category">
+     <h3 class="category-title">ETC</h3>
 
-    <!-- Seção de Apresentação -->
-    <section id="inicio" class="apresentacao">
-        <div class="container">
-            <h1>Olá, eu sou Jason Figueiredo</h1>
-            <p>Desenvolvedor apaixonado por criar experiências digitais incríveis</p>
-            
-            <!-- Animação 3D Circular com Ícones das Tecnologias -->
-            <div class="tech-3d-container">
-                <div class="tech-3d-inner" style="--quantity: 12;">
-                    <div class="tech-card" style="--index: 0;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" />
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 1;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=html" alt="HTML" />
-                            <span>HTML</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 2;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=css" alt="CSS" />
-                            <span>CSS</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 3;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=php" alt="PHP" />
-                            <span>PHP</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 4;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=kotlin" alt="Kotlin" />
-                            <span>Kotlin</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 5;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=java" alt="Java" />
-                            <span>Java</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 6;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" />
-                            <span>MySQL</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 7;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=react" alt="React" />
-                            <span>React</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 8;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" />
-                            <span>Node.js</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 9;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=git" alt="Git" />
-                            <span>Git</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 10;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=github" alt="GitHub" />
-                            <span>GitHub</span>
-                        </div>
-                    </div>
-                    <div class="tech-card" style="--index: 11;">
-                        <div class="tech-card-content">
-                            <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code" />
-                            <span>VS Code</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+     <div class="project-grid">
+      <article class="project-card">
+       <div class="project-content reverse">
+        <div class="project-text">
+         <h4 class="project-title">James Webb Telescope</h4>
+         <p class="project-description">A science interactive article that got 20k+ views in 2 days.</p>
+         <div class="project-tags">
+          <span class="tag">PUBLISHED</span>
+          <span class="tag">INTERACTIVE ARTICLE</span>
+          <span class="tag">UXD</span>
+         </div>
         </div>
-    </section>
-
-    <!-- Seção Sobre -->
-    <section id="sobre" class="container">
-        <h2>Sobre Mim</h2>
-        <div class="cartao">
-            <p>Conte um pouco sobre você, suas habilidades e experiências aqui.</p>
+        <div class="project-image">
+         <div class="image-placeholder webb-telescope-img">
+          <div class="telescope">
+           <div class="mirror-segment"></div>
+           <div class="mirror-segment"></div>
+           <div class="mirror-segment"></div>
+           <div class="mirror-segment"></div>
+           <div class="mirror-segment"></div>
+           <div class="mirror-segment"></div>
+          </div>
+         </div>
+         <a href="#" class="external-link">
+          <i class="fas fa-external-link-alt"></i>
+         </a>
         </div>
-    </section>
+       </div>
+      </article>
+     </div>
+    </div>
 
-    <!-- Seção Projetos -->
-    <section id="projetos" class="container">
-        <h2>Meus Projetos</h2>
-        
-        <!-- Card de Análise de Performance -->
-        <div class="analytics-card-full">
-            <div class="analytics-gradient"></div>
-            <div class="analytics-bg"></div>
-            
-            <div class="analytics-content">
-                <div class="analytics-header">
-                    <div class="analytics-title-section">
-                        <div class="analytics-icon">
-                            <svg class="analytics-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                        </div>
-                        <h3 class="analytics-title">Tecnologias e Linguagens</h3>
-                    </div>
-                    
-                    <button class="analytics-refresh-btn" onclick="carregarEstatisticasGitHub()" title="Atualizar Estatísticas">
-                        <svg class="refresh-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                        </svg>
-                    </button>
-                </div>
+    <!-- Categoria: VISUAL DESIGN -->
+    <div class="project-category">
+     <h3 class="category-title">VISUAL DESIGN</h3>
 
-                <!-- Estatísticas do GitHub -->
-                <div class="github-section">
-                    <h4 class="section-title">Estatísticas do GitHub</h4>
-                    <div class="analytics-stats" id="github-stats">
-                        <!-- Loading state -->
-                        <div class="loading-stats">
-                            <div class="loading-spinner"></div>
-                            <p>Carregando estatísticas do GitHub...</p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+     <div class="project-grid">
+      <article class="project-card">
+       <div class="project-content">
+        <div class="project-text">
+         <h4 class="project-title">Visual Design Journey</h4>
+         <p class="project-description">Posters, animations, and more.</p>
+         <div class="project-tags">
+          <span class="tag">VISUAL DESIGN</span>
+         </div>
         </div>
-    </section>
-
-    <!-- Seção Contato -->
-    <section id="contato" class="container">
-        <h2>Entre em Contato</h2>
-        <div class="cartao">
-            <!-- Redes Sociais -->
-            <div class="redes-sociais">
-                <ul class="lista-redes-sociais">
-                    <li class="conteudo-icone">
-                        <a
-                            href="https://linkedin.com/"
-                            aria-label="LinkedIn"
-                            data-social="linkedin"
-                        >
-                            <div class="preenchido"></div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                class="bi bi-linkedin"
-                                viewBox="0 0 16 16"
-                                xml:space="preserve"
-                            >
-                                <path
-                                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
-                                    fill="currentColor"
-                                ></path>
-                            </svg>
-                        </a>
-                        <div class="dica">LinkedIn</div>
-                    </li>
-                    <li class="conteudo-icone">
-                        <a href="https://github.com/JasonFigueiredo" aria-label="GitHub" data-social="github">
-                            <div class="preenchido"></div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                class="bi bi-github"
-                                viewBox="0 0 16 16"
-                                xml:space="preserve"
-                            >
-                                <path
-                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
-                                    fill="currentColor"
-                                ></path>
-                            </svg>
-                        </a>
-                        <div class="dica">GitHub</div>
-                    </li>
-                    <li class="conteudo-icone">
-                        <a
-                            href="https://www.instagram.com/jason_loopes/"
-                            aria-label="Instagram"
-                            data-social="instagram"
-                        >
-                            <div class="preenchido"></div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                class="bi bi-instagram"
-                                viewBox="0 0 16 16"
-                                xml:space="preserve"
-                            >
-                                <path
-                                    d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
-                                    fill="currentColor"
-                                ></path>
-                            </svg>
-                        </a>
-                        <div class="dica">Instagram</div>
-                    </li>
-                    <li class="conteudo-icone">
-                        <a href="https://youtube.com/" aria-label="Youtube" data-social="youtube">
-                            <div class="preenchido"></div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                class="bi bi-youtube"
-                                viewBox="0 0 16 16"
-                                xml:space="preserve"
-                            >
-                                <path
-                                    d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
-                                    fill="currentColor"
-                                ></path>
-                            </svg>
-                        </a>
-                        <div class="dica">Youtube</div>
-                    </li>
-                    <li class="conteudo-icone">
-                        <a href="https://wa.me/5511999999999" aria-label="WhatsApp" data-social="whatsapp">
-                            <div class="preenchido"></div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M18.403 5.633A8.919 8.919 0 0 0 12.053 3c-4.948 0-8.976 4.027-8.978 8.977 0 1.582.413 3.126 1.198 4.488L3 21.116l4.759-1.249a8.981 8.981 0 0 0 4.29 1.093h.004c4.947 0 8.975-4.027 8.977-8.977a8.926 8.926 0 0 0-2.627-6.35m-6.35 13.812h-.003a7.446 7.446 0 0 1-3.798-1.041l-.272-.162-2.824.741.753-2.753-.177-.282a7.448 7.448 0 0 1-1.141-3.971c.002-4.114 3.349-7.461 7.465-7.461a7.413 7.413 0 0 1 5.275 2.188 7.42 7.42 0 0 1 2.183 5.279c-.002 4.114-3.349 7.462-7.461 7.462m4.093-5.589c-.225-.113-1.327-.655-1.533-.73-.205-.075-.354-.112-.504.112s-.58.729-.711.879-.262.168-.486.056-.947-.349-1.804-1.113c-.667-.595-1.117-1.329-1.248-1.554s-.014-.346.099-.458c.101-.1.224-.262.336-.393.112-.131.149-.224.224-.374s.038-.281-.019-.393c-.056-.113-.505-1.217-.692-1.666-.181-.435-.366-.377-.504-.383a9.65 9.65 0 0 0-.429-.008.826.826 0 0 0-.599.28c-.206.225-.785.767-.785 1.871s.804 2.171.916 2.321c.112.15 1.582 2.415 3.832 3.387.536.231.954.369 1.279.473.537.171 1.026.146 1.413.089.431-.064 1.327-.542 1.514-1.066.187-.524.187-.973.131-1.067-.056-.094-.207-.151-.43-.263"
-                                ></path>
-                            </svg>
-                        </a>
-                        <div class="dica">WhatsApp</div>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Formulário de Contato -->
-            <form onsubmit="enviarFormularioContato(event)">
-                <input type="text" name="nome" placeholder="Seu Nome" required>
-                <input type="email" name="email" placeholder="Seu Email" required>
-                <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
-                <button type="submit" class="botao">Enviar Mensagem</button>
-            </form>
+        <div class="project-image">
+         <div class="image-placeholder visual-design-img">
+          <div class="design-collage">
+           <div class="design-element blue-target"></div>
+           <div class="design-element calculator"></div>
+           <div class="design-element hand-screen"></div>
+           <div class="design-element brain-circuit"></div>
+           <div class="winter-poster">WINTER SHOW 2023</div>
+           <div class="ladder-person"></div>
+          </div>
+         </div>
+         <a href="#" class="external-link">
+          <i class="fas fa-external-link-alt"></i>
+         </a>
         </div>
-    </section>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
 
-    <!-- Rodapé -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Jason Figueiredo. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+   <!-- Seção About Me -->
+   <section id="about" class="about-section">
+    <div class="section-header">
+     <h2 class="section-title">ABOUT ME</h2>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
+    <div class="about-content">
+     <div class="about-text">
+      <h3 class="about-title">Tech Stacks</h3>
+      <p class="about-description">...and learning more everyday!</p>
+
+      <div class="tech-stack">
+       <div class="tech-item">
+        <span class="tech-logo">Ps</span>
+        <span>Adobe Photoshop</span>
+       </div>
+       <div class="tech-item">
+        <i class="fab fa-figma"></i>
+        <span>Figma</span>
+       </div>
+       <div class="tech-item">
+        <i class="fab fa-python"></i>
+        <span>Python</span>
+       </div>
+       <div class="tech-item">
+        <i class="fab fa-aws"></i>
+        <span>AWS</span>
+       </div>
+       <div class="tech-item">
+        <i class="fab fa-react"></i>
+        <span>React</span>
+       </div>
+       <div class="tech-item">
+        <span class="tech-logo">JS</span>
+        <span>JavaScript</span>
+       </div>
+       <div class="tech-item">
+        <span class="tech-logo">p5</span>
+        <span>p5.js</span>
+       </div>
+       <div class="tech-item">
+        <span class="tech-logo">Pr</span>
+        <span>Adobe Premiere Pro</span>
+       </div>
+       <div class="tech-item">
+        <span class="tech-logo">T</span>
+        <span>Tableau</span>
+       </div>
+      </div>
+
+      <a href="#" class="btn btn-outline">
+       <span>Read resume</span>
+       <i class="fas fa-arrow-right"></i>
+      </a>
+     </div>
+    </div>
+   </section>
+
+   <!-- Seção Contato -->
+   <section id="contact" class="contact-section">
+    <div class="contact-content">
+     <div class="contact-cta">
+      <div class="cta-icon">
+       <i class="fas fa-plus"></i>
+      </div>
+      <h3 class="cta-title">This can be our project</h3>
+      <p class="cta-question">Want to build a project together?</p>
+
+      <div class="cta-buttons">
+       <a href="#" class="btn btn-primary">
+        <span>Message me</span>
+        <i class="fas fa-arrow-right"></i>
+       </a>
+       <a href="#" class="btn btn-secondary">
+        <span>Meet me via Calendly</span>
+        <i class="fas fa-arrow-right"></i>
+       </a>
+      </div>
+     </div>
+
+     <div class="contact-info">
+      <div class="info-section">
+       <h4>EXPERIENCE</h4>
+       <ul>
+        <li>UX Visual Designer (SAP, 2024.05-Current)</li>
+        <li>UX Design Co-Op (Motorola Solutions, 2024.02-2024.05)</li>
+        <li>Design Technologist Intern (SAP, 2023.05-2024.02)</li>
+        <li>...and more</li>
+       </ul>
+      </div>
+
+      <div class="info-section">
+       <h4>GET IN TOUCH</h4>
+       <p>I'm happy to collaborate! Please reach out via <a href="#" class="linkedin-link">Linkedin</a>.</p>
+      </div>
+
+      <div class="info-section">
+       <h4>EDUCATION</h4>
+       <ul>
+        <li>New York University, Tisch School of the Arts</li>
+        <li>BFA Interactive Media Arts, Game Design (2018-2024)</li>
+       </ul>
+      </div>
+     </div>
+
+     <div class="footer">
+      <p class="copyright">JASON FIGUEIREDO @2025</p>
+     </div>
+    </div>
+   </section>
+  </main>
+ </div>
+
+ <script src="js/main.js"></script>
 </body>
+
 </html>
