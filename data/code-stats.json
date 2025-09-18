@@ -1,0 +1,86 @@
+{
+  "lastUpdated": "2025-09-18",
+  "totalLines": 419077,
+  "languages": {
+    "php": {
+      "lines": 6377,
+      "files": 87,
+      "repos": 2,
+      "projects": [
+        "Easy-Bank",
+        "Projeto-API"
+      ],
+      "percentage": 2,
+      "experience": "1 ano",
+      "level": 70
+    },
+    "css": {
+      "lines": 47547,
+      "files": 303,
+      "repos": 3,
+      "projects": [
+        "Easy-Bank",
+        "Jason-Portifolio",
+        "Projeto-API"
+      ],
+      "percentage": 11,
+      "experience": "3 anos",
+      "level": 85
+    },
+    "html": {
+      "lines": 5745,
+      "files": 43,
+      "repos": 3,
+      "projects": [
+        "Easy-Bank",
+        "Jason-Portifolio",
+        "Projeto-API"
+      ],
+      "percentage": 1,
+      "experience": "3 anos",
+      "level": 90
+    },
+    "javascript": {
+      "lines": 343424,
+      "files": 930,
+      "repos": 3,
+      "projects": [
+        "Easy-Bank",
+        "Jason-Portifolio",
+        "Projeto-API"
+      ],
+      "percentage": 82,
+      "experience": "3 anos",
+      "level": 85
+    },
+    "kotlin": {
+      "lines": 14613,
+      "files": 46,
+      "repos": 1,
+      "projects": [
+        "EcoTrack-Android"
+      ],
+      "percentage": 3,
+      "experience": "1 ano",
+      "level": 75
+    },
+    "java": {
+      "lines": 1371,
+      "files": 32,
+      "repos": 2,
+      "projects": [
+        "FIAP-heranca_polimorfismo",
+        "Projeto_Fintech"
+      ],
+      "percentage": 0,
+      "experience": "2 anos",
+      "level": 80
+    }
+  },
+  "notes": {
+    "methodology": "Contagem realizada com análise Node.js customizada",
+    "excludes": "node_modules, build files, generated code, comments, blank lines",
+    "includes": "Apenas código fonte executável escrito manualmente",
+    "precision": "95% preciso - análise linha por linha com filtros"
+  }
+}
