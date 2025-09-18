@@ -50,7 +50,7 @@ Editar o arquivo `data/code-stats.json` com os dados reais:
 ### **Quando Criar Novo Projeto:**
 1. ✅ Executar `cloc .` no projeto
 2. ✅ Somar às estatísticas existentes
-3. ✅ Atualizar `data/code-stats.json`
+3. ✅ Atualizar `node scripts/auto-update-portfolio.js`
 4. ✅ Fazer commit do JSON atualizado
 
 ### **Automação Futura (Opcional):**

@@ -61,9 +61,9 @@ async function autoUpdatePortfolio() {
     console.log('🤖 Iniciando atualização automática do portfólio...');
     
     try {
-        // 1. Analisar repositórios
-        console.log('📊 Analisando repositórios...');
-        execSync('node scripts/count-lines.js', { stdio: 'inherit' });
+        // 1. Analisar repositórios com CLOC avançado
+        console.log('📊 Executando CLOC Avançado...');
+        execSync('node scripts/cloc-advanced.js', { stdio: 'inherit' });
         
         // 2. Ler dados atualizados
         const statsData = JSON.parse(fs.readFileSync('./data/code-stats.json', 'utf8'));

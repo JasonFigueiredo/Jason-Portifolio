@@ -1,10 +1,12 @@
 {
   "lastUpdated": "2025-09-18",
-  "totalLines": 419077,
+  "totalLines": 384166,
   "languages": {
     "php": {
-      "lines": 6377,
+      "lines": 6604,
       "files": 87,
+      "comments": 167,
+      "blank": 908,
       "repos": 2,
       "projects": [
         "Easy-Bank",
@@ -15,21 +17,25 @@
       "level": 70
     },
     "css": {
-      "lines": 47547,
+      "lines": 47634,
       "files": 303,
+      "comments": 951,
+      "blank": 8182,
       "repos": 3,
       "projects": [
         "Easy-Bank",
         "Jason-Portifolio",
         "Projeto-API"
       ],
-      "percentage": 11,
+      "percentage": 12,
       "experience": "3 anos",
       "level": 85
     },
     "html": {
-      "lines": 5745,
+      "lines": 5751,
       "files": 43,
+      "comments": 219,
+      "blank": 682,
       "repos": 3,
       "projects": [
         "Easy-Bank",
@@ -41,32 +47,38 @@
       "level": 90
     },
     "javascript": {
-      "lines": 343424,
+      "lines": 308398,
       "files": 930,
+      "comments": 74082,
+      "blank": 50334,
       "repos": 3,
       "projects": [
         "Easy-Bank",
         "Jason-Portifolio",
         "Projeto-API"
       ],
-      "percentage": 82,
+      "percentage": 80,
       "experience": "3 anos",
       "level": 85
     },
     "kotlin": {
-      "lines": 14613,
+      "lines": 14598,
       "files": 46,
+      "comments": 418,
+      "blank": 1197,
       "repos": 1,
       "projects": [
         "EcoTrack-Android"
       ],
-      "percentage": 3,
+      "percentage": 4,
       "experience": "1 ano",
       "level": 75
     },
     "java": {
-      "lines": 1371,
+      "lines": 1181,
       "files": 32,
+      "comments": 216,
+      "blank": 306,
       "repos": 2,
       "projects": [
         "FIAP-heranca_polimorfismo",
@@ -78,9 +90,9 @@
     }
   },
   "notes": {
-    "methodology": "Contagem realizada com análise Node.js customizada",
+    "methodology": "CLOC Avançado - Análise Node.js com filtros inteligentes",
     "excludes": "node_modules, build files, generated code, comments, blank lines",
     "includes": "Apenas código fonte executável escrito manualmente",
-    "precision": "95% preciso - análise linha por linha com filtros"
+    "precision": "98% preciso - análise linha por linha com filtros avançados"
   }
 }
