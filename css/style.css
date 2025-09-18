@@ -9,7 +9,8 @@
     /* Tema Escuro (Padrão) */
     --background: #111111;
     --foreground: #F5F5F5;
-    --card: #1A1A1A;
+    --card: #1a1a1a;
+    --card-rgb: 26, 26, 26;
     --muted-foreground: #A3A3A3;
     --primary: #FFFFFF;
     --secondary: #27272A;
@@ -25,6 +26,7 @@
     --background: #FFFFFF;
     --foreground: #1A1A1A;
     --card: #F8F9FA;
+    --card-rgb: 248, 249, 250;
     --muted-foreground: #6B7280;
     --primary: #1A1A1A;
     --secondary: #E5E7EB;
@@ -1139,7 +1141,59 @@ body::before {
     }
 }
 
+/* Botão flutuante de tema para mobile */
+.mobile-theme-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: rgba(var(--card-rgb), 0.0);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-theme-toggle i {
+    font-size: 0.9rem;
+    color: var(--primary);
+    transition: all 1.5s ease;
+}
+
+/* Animação de rotação ao trocar tema */
+.mobile-theme-toggle.rotating {
+    animation: themeRotate 0.7s ease-in-out;
+}
+
+@keyframes themeRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
 @media (max-width: 480px) {
+    /* Mostrar botão flutuante apenas em mobile */
+    .mobile-theme-toggle {
+        display: flex;
+    }
+    
+    /* Ocultar toggle original em mobile */
+    .theme-toggle {
+        display: none !important;
+    }
     .sidebar {
         transform: translateX(-100%);
     }
@@ -1458,12 +1512,23 @@ body::before {
 @media (max-width: 768px) {
     .half-width-section {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
         padding-right: 1.5rem;
+    }
+    
+    /* Card sempre no topo */
+    .left-card-container {
+        order: 1;
+    }
+    
+    .right-content-container {
+        order: 2;
+        padding: 0;
     }
     
     .left-card-container .card {
         min-height: 250px;
+        margin-bottom: 1rem;
     }
     
     .left-card-container .project-content {
@@ -1482,12 +1547,9 @@ body::before {
         order: initial;
     }
     
-    .right-content-container {
-        padding: 1.5rem 0 0 0.75rem;
-    }
-    
     .info-content {
         padding: 0;
+        text-align: left;
     }
     
     .info-title {
@@ -1576,17 +1638,24 @@ body::before {
 @media (max-width: 768px) {
     .reverse-layout {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+    }
+    
+    /* Em mobile: card sempre primeiro, texto sempre segundo */
+    .right-card-container {
+        order: 1;
     }
     
     .left-text-container {
-        padding: 1.5rem 0.75rem 0 0;
-        justify-content: flex-end;
-        text-align: right;
+        order: 2;
+        padding: 0;
+        justify-content: flex-start;
+        text-align: left;
     }
     
     .right-card-container .card {
         min-height: 250px;
+        margin-bottom: 1rem;
     }
     
     .right-card-container .project-content {
@@ -1607,19 +1676,117 @@ body::before {
 }
 
 @media (max-width: 480px) {
-    .left-text-container {
-        padding: 1rem 0.5rem 0 0;
-        justify-content: flex-end;
-        text-align: right;
+    /* Layout mobile: sempre card em cima, texto embaixo */
+    .half-width-section,
+    .reverse-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-right: 1rem;
     }
     
+    /* Forçar ordem: card sempre primeiro */
+    .left-card-container,
+    .right-card-container {
+        order: 1 !important;
+        width: 100%;
+    }
+    
+    /* Texto sempre segundo */
+    .right-content-container,
+    .left-text-container {
+        order: 2 !important;
+        width: 100%;
+        padding: 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+    
+    /* Ajustes dos cards */
+    .left-card-container .card,
+    .right-card-container .card {
+        min-height: 200px;
+        margin-bottom: 0;
+    }
+    
+    .left-card-container .project-content,
     .right-card-container .project-content {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 0.5rem 0;
     }
     
+    .left-card-container .project-image,
     .right-card-container .project-image {
         height: 120px;
+        order: 1;
+    }
+    
+    .left-card-container .project-text,
+    .right-card-container .project-text {
+        order: 2;
+    }
+    
+    /* Ajustes do texto - sempre à esquerda em mobile */
+    .info-title {
+        font-size: 1.4rem;
+        text-align: left !important;
+    }
+    
+    .info-description {
+        font-size: 0.9rem;
+        text-align: left !important;
+    }
+    
+    .info-highlights {
+        text-align: left !important;
+    }
+    
+    .info-highlights li {
+        text-align: left !important;
+        padding-left: 1.5rem !important;
+        padding-right: 0 !important;
+    }
+    
+    .info-highlights li::before {
+        content: '▶' !important;
+        left: 0 !important;
+        right: auto !important;
+    }
+    
+    /* Botões sempre com seta à direita em mobile */
+    .info-button {
+        align-self: flex-start !important;
+        flex-direction: row !important;
+    }
+    
+    .info-button i {
+        order: 2 !important;
+        margin-left: 0.5rem !important;
+        margin-right: 0 !important;
+    }
+    
+    .info-button span {
+        order: 1 !important;
+    }
+    
+    /* Sobrescrever setas esquerdas em mobile */
+    .left-arrow {
+        flex-direction: row !important;
+    }
+    
+    .left-arrow i {
+        order: 2 !important;
+        margin-left: 0.5rem !important;
+        margin-right: 0 !important;
+    }
+    
+    .left-arrow i::before {
+        content: '\f061' !important; /* fa-arrow-right */
+    }
+    
+    .left-arrow span {
+        order: 1 !important;
     }
 }
 
@@ -1634,6 +1801,60 @@ body::before {
     }
     100% {
         box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+}
+
+@media (max-width: 360px) {
+    /* Dispositivos Android pequenos */
+    .half-width-section,
+    .reverse-layout {
+        gap: 1rem;
+        padding-right: 0.5rem;
+    }
+    
+    .card {
+        min-height: 180px !important;
+    }
+    
+    .project-content {
+        padding: 0.25rem 0 !important;
+    }
+    
+    .project-image {
+        height: 100px !important;
+    }
+    
+    .info-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .info-description {
+        font-size: 0.85rem !important;
+        line-height: 1.4;
+    }
+    
+    .info-button {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.8rem !important;
+        flex-direction: row !important;
+    }
+    
+    /* Garantir setas à direita em telas muito pequenas */
+    .info-button i,
+    .left-arrow i {
+        order: 2 !important;
+        margin-left: 0.25rem !important;
+        margin-right: 0 !important;
+    }
+    
+    .info-button span,
+    .left-arrow span {
+        order: 1 !important;
+    }
+    
+    /* Forçar seta direita */
+    .left-arrow i::before {
+        content: '\f061' !important;
     }
 }
 

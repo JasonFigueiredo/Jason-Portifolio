@@ -140,6 +140,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carregar estatísticas (apenas uma vez)
     loadCodeStats();
     
+    // Botão flutuante de tema para mobile
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', function() {
+            // Adicionar animação de rotação
+            this.classList.add('rotating');
+            
+            // Alternar tema
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Atualizar ícones
+            const mobileIcon = this.querySelector('i');
+            const sidebarIcon = themeToggle ? themeToggle.querySelector('i') : null;
+            
+            if (newTheme === 'light') {
+                mobileIcon.className = 'fas fa-sun';
+                if (sidebarIcon) sidebarIcon.className = 'fas fa-sun';
+            } else {
+                mobileIcon.className = 'fas fa-moon';
+                if (sidebarIcon) sidebarIcon.className = 'fas fa-moon';
+            }
+            
+            // Remover animação após completar
+            setTimeout(() => {
+                this.classList.remove('rotating');
+            }, 600);
+        });
+    }
+    
     // Console log personalizado
     console.log('%c🚀 Portfólio Jason Figueiredo', 'color: #4facfe; font-size: 20px; font-weight: bold;');
     console.log('%cDesenvolvido com ❤️ e muito café ☕', 'color: #a3a3a3; font-size: 14px;');
