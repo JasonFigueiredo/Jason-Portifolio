@@ -1,88 +1,74 @@
 {
-  "lastUpdated": "2025-09-18",
-  "totalLines": 384166,
+  "lastUpdated": "2025-09-25",
+  "totalLines": 424531,
   "languages": {
-    "php": {
-      "lines": 6604,
-      "files": 87,
-      "comments": 167,
-      "blank": 908,
-      "repos": 2,
-      "projects": [
-        "Easy-Bank",
-        "Projeto-API"
-      ],
-      "percentage": 2,
-      "experience": "1 ano",
-      "level": 70
-    },
     "css": {
-      "lines": 47634,
-      "files": 303,
-      "comments": 951,
-      "blank": 8182,
+      "lines": 80010,
+      "files": 276,
+      "comments": 972,
+      "blank": 9893,
       "repos": 3,
       "projects": [
-        "Easy-Bank",
         "Jason-Portifolio",
-        "Projeto-API"
+        "LetsSing_FrontEnd_FIAP",
+        "ProjetoFintech"
       ],
-      "percentage": 12,
+      "percentage": 19,
       "experience": "3 anos",
       "level": 85
     },
     "html": {
-      "lines": 5751,
-      "files": 43,
-      "comments": 219,
-      "blank": 682,
+      "lines": 45032,
+      "files": 83,
+      "comments": 3149,
+      "blank": 1579,
       "repos": 3,
       "projects": [
-        "Easy-Bank",
         "Jason-Portifolio",
-        "Projeto-API"
+        "LetsSing_FrontEnd_FIAP",
+        "ProjetoFintech"
       ],
-      "percentage": 1,
+      "percentage": 11,
       "experience": "3 anos",
       "level": 90
     },
     "javascript": {
-      "lines": 308398,
-      "files": 930,
-      "comments": 74082,
-      "blank": 50334,
+      "lines": 296172,
+      "files": 857,
+      "comments": 65424,
+      "blank": 46482,
       "repos": 3,
       "projects": [
-        "Easy-Bank",
         "Jason-Portifolio",
-        "Projeto-API"
+        "LetsSing_FrontEnd_FIAP",
+        "ProjetoFintech"
       ],
-      "percentage": 80,
+      "percentage": 70,
       "experience": "3 anos",
       "level": 85
     },
-    "kotlin": {
-      "lines": 14598,
-      "files": 46,
-      "comments": 418,
-      "blank": 1197,
+    "php": {
+      "lines": 1778,
+      "files": 22,
+      "comments": 0,
+      "blank": 117,
       "repos": 1,
       "projects": [
-        "EcoTrack-Android"
+        "financeiro"
       ],
-      "percentage": 4,
+      "percentage": 0,
       "experience": "1 ano",
-      "level": 75
+      "level": 70
     },
     "java": {
-      "lines": 1181,
-      "files": 32,
-      "comments": 216,
-      "blank": 306,
+      "lines": 1539,
+      "files": 33,
+      "comments": 16,
+      "blank": 354,
       "repos": 2,
       "projects": [
         "FIAP-heranca_polimorfismo",
-        "Projeto_Fintech"
+        "cap-11-fiap"
       ],
       "percentage": 0,
       "experience": "2 anos",
@@ -90,9 +76,9 @@
     }
   },
   "notes": {
-    "methodology": "CLOC Avançado - Análise Node.js com filtros inteligentes",
+    "methodology": "Análise Node.js personalizada com filtros inteligentes",
     "excludes": "node_modules, build files, generated code, comments, blank lines",
     "includes": "Apenas código fonte executável escrito manualmente",
-    "precision": "98% preciso - análise linha por linha com filtros avançados"
+    "precision": "99% preciso - análise linha por linha com filtros avançados"
   }
 }
