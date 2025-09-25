@@ -183,7 +183,11 @@ async function analyzeAllProjects() {
         { name: 'FIAP-heranca_polimorfismo', path: '../FIAP-heranca_polimorfismo' },
         { name: 'LetsSing_FrontEnd_FIAP', path: '../LetsSing_FrontEnd_FIAP' },
         { name: 'ProjetoFintech', path: '../ProjetoFintech' },
-        { name: 'cap-11-fiap', path: '../cap-11-fiap' }
+        { name: 'cap-11-fiap', path: '../cap-11-fiap' },
+        // Projetos Android/Kotlin - adicione os caminhos corretos aqui
+        { name: 'EcoTrack-Android', path: '../EcoTrack-Android' },
+        { name: 'Android-Projeto', path: '../Android-Projeto' },
+        { name: 'Kotlin-App', path: '../Kotlin-App' }
     ];
     
     const globalStats = {};

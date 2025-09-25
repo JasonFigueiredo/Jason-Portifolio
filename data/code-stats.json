@@ -1,6 +1,6 @@
 {
   "lastUpdated": "2025-09-25",
-  "totalLines": 424531,
+  "totalLines": 439105,
   "languages": {
     "css": {
       "lines": 80010,
@@ -13,14 +13,14 @@
         "LetsSing_FrontEnd_FIAP",
         "ProjetoFintech"
       ],
-      "percentage": 19,
+      "percentage": 18,
       "experience": "3 anos",
       "level": 85
     },
     "html": {
-      "lines": 45032,
+      "lines": 45005,
       "files": 83,
-      "comments": 3149,
+      "comments": 3148,
       "blank": 1579,
       "repos": 3,
       "projects": [
@@ -28,14 +28,14 @@
         "LetsSing_FrontEnd_FIAP",
         "ProjetoFintech"
       ],
-      "percentage": 11,
+      "percentage": 10,
       "experience": "3 anos",
       "level": 90
     },
     "javascript": {
-      "lines": 296172,
+      "lines": 296175,
       "files": 857,
-      "comments": 65424,
+      "comments": 65425,
       "blank": 46482,
       "repos": 3,
       "projects": [
@@ -43,7 +43,7 @@
         "LetsSing_FrontEnd_FIAP",
         "ProjetoFintech"
       ],
-      "percentage": 70,
+      "percentage": 67,
       "experience": "3 anos",
       "level": 85
     },
@@ -73,6 +73,19 @@
       "percentage": 0,
       "experience": "2 anos",
       "level": 80
+    },
+    "kotlin": {
+      "lines": 14598,
+      "files": 46,
+      "comments": 418,
+      "blank": 1197,
+      "repos": 1,
+      "projects": [
+        "EcoTrack-Android"
+      ],
+      "percentage": 3,
+      "experience": "1 ano",
+      "level": 75
     }
   },
   "notes": {
