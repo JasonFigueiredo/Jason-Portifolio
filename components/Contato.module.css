@@ -1,0 +1,155 @@
+.secao {
+  padding: 5rem 0 3rem;
+}
+
+.tituloSecao {
+  margin-bottom: 3rem;
+}
+
+.tituloSecao h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.tituloSecao p {
+  color: var(--texto-suave);
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.chamada {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.chamada > div:last-child {
+  align-items: center;
+  justify-content: center;
+}
+
+.icone {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--superficie-2);
+  color: var(--destaque);
+  display: grid;
+  place-items: center;
+  margin: 1rem auto 1.5rem;
+}
+
+.chamada h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.chamada p {
+  color: var(--texto-suave);
+  margin-bottom: 2rem;
+}
+
+.botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.primario,
+.secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: var(--raio);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform var(--transicao), background var(--transicao), color var(--transicao);
+}
+
+.primario {
+  background: var(--destaque);
+  color: var(--fundo);
+}
+
+.secundario {
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.primario:hover,
+.secundario:hover {
+  transform: translateY(-2px);
+}
+
+.secundario:hover {
+  background: var(--hover);
+  color: var(--destaque);
+}
+
+.informacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.informacoes h4 {
+  font-family: var(--font-corpo), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 0.85rem;
+}
+
+.informacoes li {
+  color: var(--texto-suave);
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.informacoes li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--destaque);
+}
+
+.link {
+  color: var(--destaque);
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .grade {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

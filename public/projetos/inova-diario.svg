@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 640" role="img" aria-label="Diário de bordo offline no celular">
+  <rect width="380" height="640" rx="28" fill="#0f1115" stroke="#2a2f3a" stroke-width="2"/>
+  <rect x="140" y="14" width="100" height="8" rx="4" fill="#2a2f3a"/>
+  <!-- aviso offline -->
+  <rect x="24" y="44" width="332" height="34" rx="8" fill="#241a12" stroke="#f5a524"/>
+  <circle cx="46" cy="61" r="6" fill="#f5a524"/>
+  <text x="62" y="66" fill="#f5a524" font-family="sans-serif" font-size="12">Sem rede — salvando no aparelho</text>
+  <text x="24" y="112" fill="#e5e7eb" font-family="sans-serif" font-size="17" font-weight="600">Diário de bordo</text>
+  <text x="24" y="134" fill="#6b7280" font-family="sans-serif" font-size="12">Traço 03 · turno da manhã</text>
+  <!-- campos -->
+  <g font-family="sans-serif">
+    <rect x="24" y="158" width="332" height="62" rx="8" fill="#171a21" stroke="#2a2f3a"/>
+    <text x="40" y="182" fill="#6b7280" font-size="11">PRODUZIDO</text>
+    <text x="40" y="206" fill="#e5e7eb" font-size="18">1.240 peças</text>
+    <rect x="24" y="234" width="332" height="62" rx="8" fill="#171a21" stroke="#2a2f3a"/>
+    <text x="40" y="258" fill="#6b7280" font-size="11">DESFORMADO</text>
+    <text x="40" y="282" fill="#e5e7eb" font-size="18">980 peças</text>
+    <rect x="24" y="310" width="332" height="62" rx="8" fill="#171a21" stroke="#2a2f3a"/>
+    <text x="40" y="334" fill="#6b7280" font-size="11">DANIFICADO</text>
+    <text x="40" y="358" fill="#e5e7eb" font-size="18">12 peças</text>
+  </g>
+  <!-- estoque a vista -->
+  <rect x="24" y="392" width="332" height="86" rx="8" fill="#12211a" stroke="#3ecf8e"/>
+  <text x="40" y="418" fill="#3ecf8e" font-family="sans-serif" font-size="11" letter-spacing="1">ESTOQUE APÓS ESTE TRAÇO</text>
+  <text x="40" y="452" fill="#e5e7eb" font-family="sans-serif" font-size="24" font-weight="600">13.448</text>
+  <text x="150" y="452" fill="#3ecf8e" font-family="sans-serif" font-size="12">cobre a fila</text>
+  <!-- fila de sincronizacao -->
+  <text x="24" y="512" fill="#6b7280" font-family="sans-serif" font-size="12">3 registros aguardando envio</text>
+  <rect x="24" y="524" width="332" height="6" rx="3" fill="#262b36"/>
+  <rect x="24" y="524" width="212" height="6" rx="3" fill="#f5a524"/>
+  <rect x="24" y="556" width="332" height="52" rx="26" fill="#f5a524"/>
+  <text x="132" y="588" fill="#0f1115" font-family="sans-serif" font-size="15" font-weight="600">Registrar</text>
+</svg>

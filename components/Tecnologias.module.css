@@ -1,0 +1,237 @@
+.secao {
+  padding: 5rem 0;
+}
+
+.tituloSecao {
+  margin-bottom: 3rem;
+}
+
+.tituloSecao h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.tituloSecao p {
+  color: var(--texto-suave);
+  max-width: 62ch;
+}
+
+.grupo {
+  margin-bottom: 2.5rem;
+}
+
+.rotuloGrupo {
+  font-family: var(--font-corpo), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 1rem;
+}
+
+/* auto-fill mantém os cards do mesmo tamanho quando sobra espaço,
+   em vez de esticar dois cards por uma linha inteira. */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 1rem;
+}
+
+.cartao {
+  position: relative;
+  min-height: 190px;
+  overflow: hidden;
+}
+
+.frente {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 100%;
+  text-align: center;
+  transition: transform var(--transicao), opacity var(--transicao);
+}
+
+.icone {
+  border-radius: 12px;
+}
+
+.nome {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--destaque);
+}
+
+.contagem {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+/* Painel de detalhe: escondido embaixo, sobe no hover. */
+.detalhe {
+  position: absolute;
+  inset: auto 0 0 0;
+  background: var(--superficie);
+  border-top: 1px solid var(--borda);
+  padding: 0.85rem 1rem 1rem;
+  transform: translateY(101%);
+  transition: transform 0.4s ease;
+}
+
+.cartao:hover .detalhe,
+.cartao:focus-within .detalhe {
+  transform: translateY(0);
+}
+
+.cartao:hover .frente,
+.cartao:focus-within .frente {
+  transform: translateY(-14px);
+  opacity: 0.25;
+}
+
+.linhaTopo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.nomeDetalhe {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--destaque);
+}
+
+.percentual {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--verde);
+}
+
+.linhas {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.45rem;
+}
+
+.barra {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--superficie-2);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--destaque);
+}
+
+.usadoEm {
+  font-size: 0.7rem;
+  color: var(--texto-suave);
+  line-height: 1.4;
+}
+
+/* Sem mouse não há hover: o detalhe fica aberto e o card cresce para caber. */
+@media (hover: none) {
+  .cartao {
+    min-height: 0;
+  }
+
+  .detalhe {
+    position: static;
+    transform: none;
+    padding: 0.85rem 0 0;
+    background: transparent;
+    margin-top: 0.85rem;
+  }
+
+  .cartao:hover .frente {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .grade {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+/* Fecha a seção levando quem leu as tecnologias para onde elas foram usadas. */
+.chamada {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--borda);
+}
+
+.chamada p {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.acoes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.primario,
+.secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--raio);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: transform var(--transicao), background var(--transicao), color var(--transicao), gap var(--transicao);
+}
+
+.primario {
+  background: var(--destaque);
+  color: var(--fundo);
+}
+
+.primario:hover {
+  transform: translateY(-2px);
+  gap: 0.75rem;
+}
+
+.secundario {
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.secundario:hover {
+  background: var(--hover);
+  color: var(--destaque);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .chamada {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .acoes a {
+    flex: 1;
+    justify-content: center;
+  }
+}

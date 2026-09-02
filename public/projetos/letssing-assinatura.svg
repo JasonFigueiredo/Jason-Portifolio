@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Captura de assinatura em canvas do LetsSing">
+  <rect width="800" height="500" fill="#0f1115"/>
+  <rect x="0" y="0" width="800" height="56" fill="#16181f"/>
+  <rect x="28" y="20" width="96" height="14" rx="4" fill="#8b5cf6"/>
+  <!-- passos -->
+  <g font-family="sans-serif" font-size="11">
+    <circle cx="240" cy="28" r="11" fill="#8b5cf6"/><text x="236" y="32" fill="#0f1115">1</text>
+    <rect x="256" y="27" width="52" height="2" fill="#8b5cf6"/>
+    <circle cx="322" cy="28" r="11" fill="#8b5cf6"/><text x="318" y="32" fill="#0f1115">2</text>
+    <rect x="338" y="27" width="52" height="2" fill="#2a2f3a"/>
+    <circle cx="404" cy="28" r="11" fill="#2a2f3a"/><text x="400" y="32" fill="#6b7280">3</text>
+  </g>
+  <!-- documento -->
+  <rect x="40" y="88" width="330" height="374" rx="8" fill="#f6f7f9"/>
+  <rect x="70" y="120" width="150" height="10" rx="4" fill="#c9ced8"/>
+  <g fill="#dfe3ea">
+    <rect x="70" y="150" width="270" height="7" rx="3"/><rect x="70" y="168" width="250" height="7" rx="3"/>
+    <rect x="70" y="186" width="264" height="7" rx="3"/><rect x="70" y="204" width="180" height="7" rx="3"/>
+    <rect x="70" y="238" width="270" height="7" rx="3"/><rect x="70" y="256" width="230" height="7" rx="3"/>
+    <rect x="70" y="274" width="258" height="7" rx="3"/>
+  </g>
+  <rect x="70" y="380" width="180" height="1" fill="#c9ced8"/>
+  <text x="70" y="398" fill="#9aa3b0" font-family="sans-serif" font-size="10">Assinatura do contratante</text>
+  <path d="M84 372 q18 -26 34 -4 t30 -12 t26 8" fill="none" stroke="#1a1d24" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- canvas de assinatura -->
+  <rect x="410" y="88" width="350" height="240" rx="8" fill="#171a21" stroke="#8b5cf6" stroke-dasharray="6 5"/>
+  <text x="430" y="118" fill="#8b5cf6" font-family="sans-serif" font-size="12">Desenhe sua assinatura</text>
+  <path d="M450 250 q40 -70 78 -12 t66 -34 t74 22" fill="none" stroke="#e5e7eb" stroke-width="3.5" stroke-linecap="round"/>
+  <rect x="430" y="286" width="120" height="30" rx="15" fill="#262b36"/>
+  <text x="452" y="306" fill="#9ca3af" font-family="sans-serif" font-size="12">Limpar</text>
+  <!-- progresso -->
+  <rect x="410" y="356" width="350" height="106" rx="8" fill="#171a21" stroke="#2a2f3a"/>
+  <text x="430" y="382" fill="#9ca3af" font-family="sans-serif" font-size="12">Progresso do documento</text>
+  <rect x="430" y="398" width="310" height="8" rx="4" fill="#262b36"/>
+  <rect x="430" y="398" width="206" height="8" rx="4" fill="#8b5cf6"/>
+  <text x="430" y="432" fill="#3a4150" font-family="sans-serif" font-size="11">2 de 3 assinaturas coletadas</text>
+</svg>

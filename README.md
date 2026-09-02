@@ -1,58 +1,42 @@
-# Portfólio Pessoal – Jason Figueiredo
+# Portfólio — Jason Figueiredo
 
-Bem-vindo ao repositório do meu portfólio pessoal! Aqui você encontra a central de informações sobre meus projetos, experiências, habilidades e como este portfólio foi pensado para ser dinâmico, atualizado automaticamente e servir como uma vitrine interativa dos meus conhecimentos.
+Portfólio pessoal em **Next.js 16 + React + TypeScript**, publicado na Vercel.
 
----
 
-## 🚀 Sobre o Portfólio
+## Como o conteúdo é mantido
 
-Este portfólio foi criado para apresentar meus projetos, habilidades e trajetória profissional de forma organizada, visual e interativa. Ele é totalmente responsivo, de fácil navegação e pensado para destacar o que há de mais relevante no meu perfil como desenvolvedor.
+Não se edita marcação para adicionar conteúdo. Tudo vive em dois arquivos:
 
----
+| Arquivo | O que guarda |
+|---|---|
+| `data/projetos.ts` | Cada projeto: resumo, descrição, destaques, tecnologias, situação |
+| `data/tecnologias.ts` | Cada tecnologia: ícone, categoria, linhas de código, projetos |
 
-## ⚡ Funcionalidades Dinâmicas
+Acrescentar um projeto ou uma tecnologia é acrescentar **um objeto** ao array.
+A página se remonta sozinha, na ordem do array.
 
-- **Atualizações Automáticas:** O portfólio busca atualizações dos meus principais repositórios do GitHub e exibe as informações mais recentes sobre projetos, contribuições e tecnologias usadas, sem necessidade de edição manual.
-- **Seções Interativas:** Projetos destacados, experiências, contato e resumo profissional organizados em abas ou cards dinâmicos. O usuário pode navegar facilmente entre as seções.
-- **Design Responsivo:** Interface adaptada para desktop, tablet e smartphone.
-- **Integração com Redes Sociais:** Links rápidos para meu LinkedIn, GitHub e outras redes relevantes.
+### Atualizar as estatísticas de código
 
----
+```bash
+node scripts/contar-linhas.mjs /caminho/repo-1 /caminho/repo-2 .
+```
 
-## 🎯 Objetivo
+O script descarta dependências, saídas de build e bibliotecas de terceiros
+commitadas. Copie os números para `linhas` e `percentual` em `data/tecnologias.ts`.
 
-O objetivo deste portfólio é:
+## Estrutura
 
-- Facilitar o acesso aos meus projetos e experiências profissionais.
-- Automatizar a exibição de novos projetos e atualizações, sem necessidade de alteração manual dos dados.
-- Servir como cartão de visitas digital, centralizando informações de contato e redes.
-- Demonstrar meu domínio em tecnologias web (HTML, CSS, JavaScript) e automações.
+```
+app/
+  layout.tsx        fontes, metadados e o script que aplica o tema
+  page.tsx          monta as seções
+  globals.css       tokens de tema e base
+components/         um componente por peça, cada um com seu CSS Module
+data/               projetos e tecnologias
+scripts/            contagem de linhas
+```
 
----
+## Deploy
 
-## 🔄 Como Funciona a Automatização
-
-O portfólio utiliza scripts que consomem a API do GitHub para:
-
-- Buscar e exibir projetos mais recentes automaticamente.
-- Atualizar contadores de contribuições, linguagens utilizadas e estrelas recebidas nos repositórios.
-- Gerar seções dinâmicas sempre atualizadas, mantendo o conteúdo relevante.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-- **HTML5 e CSS3:** Estrutura e estilização das páginas.
-- **JavaScript:** Dinamismo, integração com APIs, navegação interativa.
-- **APIs do GitHub:** Para automação e atualização dos dados exibidos.
-
----
-
-## 📬 Contato
-
-- [LinkedIn](https://www.linkedin.com/in/jason-figueiredo/)
-- [GitHub](https://github.com/JasonFigueiredo)
-
----
-
-> Este portfólio é atualizado e melhorado constantemente para refletir minha evolução profissional e acompanhar as tendências do mercado de tecnologia.
+Importar o repositório na Vercel. O Next.js é detectado sozinho — nenhuma
+configuração necessária.

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Diagrama de herança entre classes em Java">
+  <rect width="800" height="500" fill="#0f1115"/>
+  <g font-family="monospace" font-size="13">
+    <!-- classe base -->
+    <rect x="300" y="50" width="200" height="90" rx="6" fill="#171a21" stroke="#e07b39"/>
+    <rect x="300" y="50" width="200" height="28" rx="6" fill="#e07b39"/>
+    <text x="336" y="69" fill="#0f1115" font-weight="700">Animal</text>
+    <text x="316" y="98" fill="#9ca3af">+ nome: String</text>
+    <text x="316" y="120" fill="#9ca3af">+ emitirSom()</text>
+    <!-- linhas -->
+    <path d="M400 140 V180 H180 V220" fill="none" stroke="#3a4150" stroke-width="2"/>
+    <path d="M400 140 V180 H400 V220" fill="none" stroke="#3a4150" stroke-width="2"/>
+    <path d="M400 140 V180 H620 V220" fill="none" stroke="#3a4150" stroke-width="2"/>
+    <!-- subclasses -->
+    <rect x="80" y="220" width="200" height="92" rx="6" fill="#171a21" stroke="#2a2f3a"/>
+    <rect x="80" y="220" width="200" height="26" rx="6" fill="#262b36"/>
+    <text x="130" y="238" fill="#e5e7eb">Cachorro</text>
+    <text x="96" y="268" fill="#6b7280">@Override</text>
+    <text x="96" y="290" fill="#9ca3af">emitirSom()</text>
+    <rect x="300" y="220" width="200" height="92" rx="6" fill="#171a21" stroke="#2a2f3a"/>
+    <rect x="300" y="220" width="200" height="26" rx="6" fill="#262b36"/>
+    <text x="368" y="238" fill="#e5e7eb">Gato</text>
+    <text x="316" y="268" fill="#6b7280">@Override</text>
+    <text x="316" y="290" fill="#9ca3af">emitirSom()</text>
+    <rect x="520" y="220" width="200" height="92" rx="6" fill="#171a21" stroke="#2a2f3a"/>
+    <rect x="520" y="220" width="200" height="26" rx="6" fill="#262b36"/>
+    <text x="582" y="238" fill="#e5e7eb">Ave</text>
+    <text x="536" y="268" fill="#6b7280">@Override</text>
+    <text x="536" y="290" fill="#9ca3af">emitirSom()</text>
+    <!-- sobrecarga -->
+    <rect x="180" y="368" width="440" height="96" rx="6" fill="#171a21" stroke="#2a2f3a"/>
+    <text x="204" y="396" fill="#e07b39">// sobrecarga: mesmo nome, parâmetros diferentes</text>
+    <text x="204" y="422" fill="#9ca3af">alimentar(Racao r)</text>
+    <text x="204" y="444" fill="#9ca3af">alimentar(Racao r, int porcoes)</text>
+  </g>
+</svg>

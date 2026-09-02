@@ -1,0 +1,265 @@
+.secao {
+  padding: 5rem 0;
+}
+
+.tituloSecao {
+  margin-bottom: 3.5rem;
+}
+
+.tituloSecao h2 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.tituloSecao p {
+  color: var(--texto-suave);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Card de um lado, texto do outro. A cada projeto os lados trocam. */
+.bloco {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.invertido .cartao { order: 2; }
+.invertido .detalhe { order: 1; }
+
+.cartao {
+  min-height: 260px;
+}
+
+.clicavel {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Prévia da tela do projeto, no topo do card. */
+.capa {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  margin-bottom: 1.1rem;
+  display: grid;
+  place-items: center;
+}
+
+.capa img {
+  width: 100%;
+  transition: transform 0.4s ease;
+}
+
+.capa.tela img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Telas de celular não podem ser cortadas: cabem inteiras, centralizadas. */
+.capa.celular {
+  padding: 0.75rem 0;
+}
+
+.capa.celular img {
+  width: auto;
+  height: 190px;
+}
+
+.clicavel:hover .capa img {
+  transform: scale(1.03);
+}
+
+.lupa {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  opacity: 0;
+  transition: opacity var(--transicao);
+}
+
+.clicavel:hover .lupa {
+  opacity: 1;
+}
+
+.detalhes {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--destaque);
+  transition: gap var(--transicao);
+}
+
+.detalhes:hover {
+  gap: 0.7rem;
+}
+
+.cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.titulo {
+  font-size: 1.6rem;
+}
+
+.situacao {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+
+.producao  { color: var(--verde); }
+.ativo     { color: #4facfe; }
+.concluido { color: var(--texto-suave); }
+
+.resumo {
+  color: var(--texto-suave);
+  margin-bottom: 1.25rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: auto;
+}
+
+.tags li {
+  background: var(--superficie-2);
+  color: var(--destaque);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.privado,
+.repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.repo {
+  color: var(--destaque);
+  transition: opacity var(--transicao);
+}
+
+.repo:hover { opacity: 0.7; }
+
+.descricao {
+  color: var(--texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.destaques {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.destaques li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--texto-suave);
+  font-size: 0.92rem;
+}
+
+.destaques li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--destaque);
+}
+
+.pilha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pilha li {
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+  border: 1px solid var(--borda);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Uma coluna: o card vem primeiro, o texto embaixo — sempre nessa ordem,
+   independente do lado que ocupa no desktop. */
+@media (max-width: 900px) {
+  .bloco {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .invertido .cartao { order: 0; }
+  .invertido .detalhe { order: 0; }
+
+  .cartao { min-height: 0; }
+}
+
+/* Botão principal da coluna: leva ao projeto rodando de verdade. */
+.acessar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--raio);
+  background: var(--destaque);
+  color: var(--fundo);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: transform var(--transicao), gap var(--transicao);
+}
+
+.acessar:hover {
+  transform: translateY(-2px);
+  gap: 0.85rem;
+}
