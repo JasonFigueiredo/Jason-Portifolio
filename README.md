@@ -1,58 +1,40 @@
-# Portfólio Pessoal – Jason Figueiredo
+# Portfólio — Jason Figueiredo
 
-Bem-vindo ao repositório do meu portfólio pessoal! Aqui você encontra a central de informações sobre meus projetos, experiências, habilidades e como este portfólio foi pensado para ser dinâmico, atualizado automaticamente e servir como uma vitrine interativa dos meus conhecimentos.
+Site pessoal onde reúno os projetos que construí, as tecnologias que uso no dia a dia
+e o volume real de código que já escrevi em cada uma delas.
 
----
+## A ideia
 
-## 🚀 Sobre o Portfólio
+Currículo em PDF não mostra trabalho — mostra uma lista. Queria um lugar único para
+apontar quando alguém pergunta o que eu faço: cada projeto com o problema que resolve,
+as decisões técnicas por trás dele e as telas do que foi entregue.
 
-Este portfólio foi criado para apresentar meus projetos, habilidades e trajetória profissional de forma organizada, visual e interativa. Ele é totalmente responsivo, de fácil navegação e pensado para destacar o que há de mais relevante no meu perfil como desenvolvedor.
+Por isso o site é a vitrine e, ao mesmo tempo, um projeto em si: foi reescrito de
+HTML/CSS/JS puro para Next.js justamente para ser exemplo do que ele descreve.
 
----
+## Tecnologias
 
-## ⚡ Funcionalidades Dinâmicas
+| | |
+|---|---|
+| **Next.js 16** | App Router, Server Components e `next/font` |
+| **React 19** | componentes de interface |
+| **TypeScript** | tipos para os dados de projetos e tecnologias |
+| **CSS Modules** | estilo isolado por componente, sem framework de CSS |
+| **Vercel** | deploy contínuo a partir do repositório |
 
-- **Atualizações Automáticas:** O portfólio busca atualizações dos meus principais repositórios do GitHub e exibe as informações mais recentes sobre projetos, contribuições e tecnologias usadas, sem necessidade de edição manual.
-- **Seções Interativas:** Projetos destacados, experiências, contato e resumo profissional organizados em abas ou cards dinâmicos. O usuário pode navegar facilmente entre as seções.
-- **Design Responsivo:** Interface adaptada para desktop, tablet e smartphone.
-- **Integração com Redes Sociais:** Links rápidos para meu LinkedIn, GitHub e outras redes relevantes.
+Sem bibliotecas de UI, sem framework de CSS e sem ícones por CDN: os SVGs são inline
+e o layout é grid e flexbox. As três dependências do projeto são Next, React e ReactDOM.
 
----
+## Decisões que valem citar
 
-## 🎯 Objetivo
-
-O objetivo deste portfólio é:
-
-- Facilitar o acesso aos meus projetos e experiências profissionais.
-- Automatizar a exibição de novos projetos e atualizações, sem necessidade de alteração manual dos dados.
-- Servir como cartão de visitas digital, centralizando informações de contato e redes.
-- Demonstrar meu domínio em tecnologias web (HTML, CSS, JavaScript) e automações.
-
----
-
-## 🔄 Como Funciona a Automatização
-
-O portfólio utiliza scripts que consomem a API do GitHub para:
-
-- Buscar e exibir projetos mais recentes automaticamente.
-- Atualizar contadores de contribuições, linguagens utilizadas e estrelas recebidas nos repositórios.
-- Gerar seções dinâmicas sempre atualizadas, mantendo o conteúdo relevante.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-- **HTML5 e CSS3:** Estrutura e estilização das páginas.
-- **JavaScript:** Dinamismo, integração com APIs, navegação interativa.
-- **APIs do GitHub:** Para automação e atualização dos dados exibidos.
-
----
-
-## 📬 Contato
-
-- [LinkedIn](https://www.linkedin.com/in/jason-figueiredo/)
-- [GitHub](https://github.com/JasonFigueiredo)
-
----
-
-> Este portfólio é atualizado e melhorado constantemente para refletir minha evolução profissional e acompanhar as tendências do mercado de tecnologia.
+- **Conteúdo separado da marcação.** Projetos e tecnologias vivem em arquivos de dados
+  tipados; os componentes só desenham. Adicionar um projeto é adicionar um objeto —
+  a página se remonta sozinha.
+- **Tema claro e escuro** guiados por um único atributo no `<html>`, aplicado antes da
+  primeira pintura para não haver flash de tema errado.
+- **Uma página por projeto**, gerada estática no build: tem endereço para mandar a quem
+  interessar, volta pelo histórico e o Google lê. Como os repositórios são privados, é ela
+  que prova o trabalho — problema, decisões com a alternativa descartada, arquitetura e o
+  que deu errado.
+- **Números honestos.** As estatísticas de linhas de código são contadas por script que
+  descarta dependências e bibliotecas de terceiros commitadas.

@@ -1,0 +1,40 @@
+.janela {
+  background-color: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 4px 4px 12px var(--sombra);
+  overflow: hidden;
+  transition: transform var(--transicao), box-shadow var(--transicao);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.janela:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 8px 20px var(--sombra);
+}
+
+.barra {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.barra span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.vermelho { background-color: #ff605c; }
+.amarelo  { background-color: #ffbd44; }
+.verde    { background-color: #00ca4e; }
+
+.conteudo {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

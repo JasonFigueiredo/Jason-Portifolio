@@ -1,0 +1,76 @@
+.figura {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* No celular o diagrama não encolhe até ficar ilegível: rola dentro da própria caixa. */
+.rolagem {
+  overflow-x: auto;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.75rem;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caixa {
+  fill: var(--fundo);
+  stroke: var(--borda);
+  stroke-width: 1.2;
+}
+
+.forte {
+  stroke: var(--destaque);
+  stroke-width: 1.5;
+}
+
+.titulo {
+  fill: var(--destaque);
+  font: 600 13px var(--font-corpo), system-ui, sans-serif;
+}
+
+.nota {
+  fill: var(--texto-suave);
+  font: 400 11px var(--font-corpo), system-ui, sans-serif;
+}
+
+.ligacao {
+  fill: none;
+  stroke: var(--texto-suave);
+  stroke-width: 1.2;
+}
+
+.tracejada {
+  stroke-dasharray: 4 4;
+}
+
+.ponta {
+  fill: var(--texto-suave);
+}
+
+.rotulo {
+  fill: var(--texto-suave);
+  font: 500 10.5px var(--font-corpo), system-ui, sans-serif;
+}
+
+.legenda {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+/* Só aparece quando o diagrama é mais largo que a tela e passa a rolar. */
+.dica {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .dica {
+    display: inline;
+  }
+}

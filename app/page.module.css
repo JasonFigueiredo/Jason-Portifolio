@@ -1,0 +1,28 @@
+/* Abre espaço para o trilho fixo da lateral e centraliza o conteúdo. */
+.principal {
+  margin-left: var(--largura-lateral);
+  min-height: 100vh;
+}
+
+.limite {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+@media (max-width: 768px) {
+  /* No celular a lateral vira menu sobreposto: o conteúdo ocupa tudo. */
+  .principal {
+    margin-left: 0;
+  }
+
+  .limite {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .limite {
+    padding: 0 1rem;
+  }
+}

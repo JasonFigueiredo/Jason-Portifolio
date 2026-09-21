@@ -1,0 +1,494 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem 0 4rem;
+}
+
+/* ---------- Topo ---------- */
+
+.trilha {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.trilha a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transicao);
+}
+
+.trilha a:hover {
+  color: var(--destaque);
+}
+
+.voltar {
+  transform: rotate(180deg);
+}
+
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 62ch;
+}
+
+.olho {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+}
+
+.situacao {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+
+.producao  { color: var(--verde); }
+.ativo     { color: #4facfe; }
+.concluido { color: var(--texto-suave); }
+
+/* O mesmo desenho do nome no Hero: é a assinatura do site. */
+.titulo {
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--texto-suave);
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.primario,
+.secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--raio);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: transform var(--transicao), gap var(--transicao), background var(--transicao), color var(--transicao);
+}
+
+.primario {
+  background: var(--destaque);
+  color: var(--fundo);
+}
+
+.primario:hover {
+  transform: translateY(-2px);
+  gap: 0.75rem;
+}
+
+.secundario {
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.secundario:hover {
+  background: var(--hover);
+  color: var(--destaque);
+  transform: translateY(-2px);
+}
+
+.privado {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- Quadro-resumo ---------- */
+
+.quadro {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  overflow: hidden;
+}
+
+.fatos,
+.provas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.fatos div,
+.provas div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+}
+
+.fatos div + div,
+.provas div + div {
+  border-left: 1px solid var(--borda);
+}
+
+.provas {
+  border-top: 1px solid var(--borda);
+}
+
+.fatos dt {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.fatos dd {
+  font-size: 0.92rem;
+}
+
+.provas dt {
+  font-family: var(--font-titulo), Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--destaque);
+}
+
+.provas dd {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--texto-suave);
+}
+
+/* ---------- Telas ---------- */
+
+.capa {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.capa figcaption,
+.telas figcaption {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.moldura {
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--superficie-2);
+  display: grid;
+  place-items: center;
+}
+
+.moldura img {
+  width: 100%;
+}
+
+.moldura.tela img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Tela de celular não se corta: aparece inteira, centralizada. */
+.moldura.celular {
+  padding: 1.5rem 0;
+}
+
+.moldura.celular img {
+  width: auto;
+  height: 420px;
+}
+
+.telas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.telas figure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ---------- Blocos do estudo de caso ----------
+   Título à esquerda, conteúdo à direita: quem só lê os títulos entende a história. */
+
+.bloco {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--borda);
+}
+
+.bloco > h2 {
+  font-size: 1.5rem;
+}
+
+.bloco > h2 small {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-corpo), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--texto-suave);
+}
+
+.corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.corpo > p {
+  color: var(--texto-suave);
+  max-width: 66ch;
+}
+
+.restricoes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.restricoes li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--destaque);
+}
+
+.restricoes strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.restricoes span {
+  font-size: 0.84rem;
+  color: var(--texto-suave);
+}
+
+.decisao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+.decisao header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.decisao h3 {
+  font-size: 1.15rem;
+}
+
+.adr {
+  font-size: 0.74rem;
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.decisao dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.decisao dt {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 0.25rem;
+}
+
+.decisao dd {
+  font-size: 0.9rem;
+}
+
+.decisao dd.descartado {
+  color: var(--texto-suave);
+}
+
+.stack {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.stack th,
+.stack td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem 1rem 0.75rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.stack th {
+  width: 8rem;
+  padding-top: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.stack td {
+  color: var(--texto-suave);
+}
+
+.stack .ferramenta {
+  width: 15rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid var(--borda);
+}
+
+.proximo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  transition: opacity var(--transicao);
+}
+
+.proximo:hover {
+  opacity: 0.7;
+}
+
+.proximo span {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.proximo strong {
+  font-family: var(--font-titulo), Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--destaque);
+}
+
+@media (max-width: 900px) {
+  .bloco {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .restricoes {
+    grid-template-columns: 1fr;
+  }
+
+  .stack .ferramenta {
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* No celular a barra do topo é fixa: o conteúdo começa abaixo dela. */
+  .pagina {
+    padding-top: 5.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .fatos {
+    grid-template-columns: 1fr;
+  }
+
+  .fatos div + div {
+    border-left: 0;
+    border-top: 1px solid var(--borda);
+  }
+
+  .provas div {
+    padding: 0.9rem 0.8rem;
+  }
+
+  .provas dt {
+    font-size: 1.4rem;
+  }
+
+  .decisao dl {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  /* Tabela de três colunas não cabe: camada vira título, ferramenta e papel embaixo. */
+  .stack tr {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .stack th,
+  .stack td {
+    width: auto;
+    padding: 0.1rem 0;
+    border: 0;
+  }
+
+  .stack .ferramenta {
+    width: auto;
+  }
+
+  .moldura.celular img {
+    height: 340px;
+  }
+
+  .proximo {
+    align-items: flex-start;
+  }
+}

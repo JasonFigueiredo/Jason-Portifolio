@@ -1,0 +1,15 @@
+.botao {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--superficie-2);
+  color: var(--destaque);
+  transition: background var(--transicao), transform var(--transicao);
+}
+
+.botao:hover {
+  background: var(--hover);
+  transform: rotate(15deg);
+}

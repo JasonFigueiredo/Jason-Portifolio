@@ -1,0 +1,155 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 7rem 0 5rem;
+}
+
+/* Selo de disponibilidade, com o ponto pulsando. */
+.disponivel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  align-self: flex-start;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-bottom: 2rem;
+}
+
+.ponto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 0 0 rgba(0, 202, 78, 0.6);
+  animation: pulsar 2.4s infinite;
+}
+
+@keyframes pulsar {
+  70%  { box-shadow: 0 0 0 8px rgba(0, 202, 78, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 202, 78, 0); }
+}
+
+.titulo {
+  font-size: clamp(3rem, 11vw, 7rem);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.75rem;
+}
+
+.linha {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  color: var(--texto-suave);
+  max-width: 40ch;
+  line-height: 1.5;
+  margin-bottom: 2.75rem;
+}
+
+.linha strong {
+  color: var(--texto);
+  font-weight: 500;
+}
+
+/* Prova em números, no lugar de parágrafos sobre mim. */
+.numeros {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.75rem;
+}
+
+.numeros li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.numeros strong {
+  font-family: var(--font-titulo), Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: var(--destaque);
+  line-height: 1;
+}
+
+.numeros span {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.botoes {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.primario,
+.secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--raio);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: transform var(--transicao), background var(--transicao), color var(--transicao);
+}
+
+.primario {
+  background: var(--destaque);
+  color: var(--fundo);
+}
+
+.secundario {
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.primario:hover,
+.secundario:hover {
+  transform: translateY(-2px);
+}
+
+.secundario:hover {
+  background: var(--hover);
+  color: var(--destaque);
+}
+
+.rolar {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  color: var(--texto-suave);
+  animation: descer 2.2s infinite;
+}
+
+@keyframes descer {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%      { transform: translateY(8px); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 6.5rem 0 3.5rem;
+  }
+
+  .numeros {
+    gap: 2rem;
+  }
+
+  .botoes a {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .rolar {
+    display: none;
+  }
+}
