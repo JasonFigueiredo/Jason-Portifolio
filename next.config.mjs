@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // O site é todo estático — a home e uma página por projeto, geradas no build.
+  // Exportar HTML puro (em out/) deixa o Cloudflare servir só arquivos, sem
+  // Worker rodando a cada visita e sem adaptador de Next no meio.
+  output: 'export',
+
   // Em desenvolvimento, o Next bloqueia os recursos internos (HMR, fontes)
   // quando o pedido vem de um host que não seja localhost. O padrão é bom
   // para quem desenvolve na própria máquina e ruim aqui: este projeto roda

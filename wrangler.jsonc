@@ -1,0 +1,22 @@
+// Publicação no Cloudflare Workers como site estático.
+// Sem este arquivo o Wrangler não sabe o que enviar e o build do Cloudflare
+// falha com "Missing entry-point to Worker script or to assets directory".
+{
+  // Tem que bater com o nome do Worker no painel do Cloudflare.
+  "name": "jason-portifolio",
+  "compatibility_date": "2026-09-21",
+
+  // O próprio Wrangler gera o site antes de enviar, tanto no deploy de produção
+  // quanto no upload das branches de preview — não depende do comando de build
+  // configurado no painel.
+  "build": {
+    "command": "npm run build"
+  },
+
+  // Só arquivos: o `output: 'export'` do next.config.mjs escreve o site em out/.
+  "assets": {
+    "directory": "./out",
+    // Endereço que não existe recebe o 404 do próprio site, com status 404.
+    "not_found_handling": "404-page"
+  }
+}
