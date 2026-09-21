@@ -32,7 +32,9 @@ e o layout é grid e flexbox. As três dependências do projeto são Next, React
   a página se remonta sozinha.
 - **Tema claro e escuro** guiados por um único atributo no `<html>`, aplicado antes da
   primeira pintura para não haver flash de tema errado.
-- **Modal com `<dialog>` nativo**, que já entrega Esc, foco preso e página inerte sem
-  reimplementar acessibilidade.
+- **Uma página por projeto**, gerada estática no build: tem endereço para mandar a quem
+  interessar, volta pelo histórico e o Google lê. Como os repositórios são privados, é ela
+  que prova o trabalho — problema, decisões com a alternativa descartada, arquitetura e o
+  que deu errado.
 - **Números honestos.** As estatísticas de linhas de código são contadas por script que
   descarta dependências e bibliotecas de terceiros commitadas.

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { tecnologias, categorias, totalLinhas } from '@/data/tecnologias';
 import Icone from './Icone';
 import { projetos } from '@/data/projetos';
@@ -45,32 +46,31 @@ export default function Tecnologias() {
                       />
                       <span className={styles.nome}>{tec.nome}</span>
                       <span className={styles.contagem}>
-                        {tec.projetos.length} projeto{tec.projetos.length > 1 ? 's' : ''}
+                        {tec.projetos.length > 0
+                          ? `${tec.projetos.length} projeto${tec.projetos.length > 1 ? 's' : ''}`
+                          : `desde ${tec.desde}`}
                       </span>
                     </div>
 
-                    {/* Sobe ao passar o mouse; no toque, fica sempre visível. */}
+                    {/* Sobe ao passar o mouse ou ao receber foco; no toque, fica sempre visível.
+                        Sem barra de porcentagem: quem passa rápido a lê como nota de habilidade. */}
                     <div className={styles.detalhe}>
-                      <div className={styles.linhaTopo}>
-                        <span className={styles.nomeDetalhe}>{tec.nome}</span>
-                        {tec.percentual !== undefined && (
-                          <span className={styles.percentual}>{tec.percentual}%</span>
-                        )}
-                      </div>
+                      <span className={styles.nomeDetalhe}>{tec.nome}</span>
+                      <p className={styles.linhas}>
+                        {tec.linhas !== undefined
+                          ? `${formatar(tec.linhas)} linhas · desde ${tec.desde}`
+                          : `Desde ${tec.desde}`}
+                      </p>
 
-                      {tec.linhas !== undefined ? (
-                        <>
-                          <p className={styles.linhas}>{formatar(tec.linhas)} linhas</p>
-                          <div className={styles.barra}>
-                            <span style={{ width: `${tec.percentual}%` }} />
-                          </div>
-                        </>
-                      ) : (
-                        <p className={styles.linhas}>Desde {tec.desde}</p>
-                      )}
-
+                      {/* Cada tecnologia leva ao estudo de caso onde ela resolveu algo. */}
                       <p className={styles.usadoEm}>
-                        {tec.projetos.map((p) => tituloDoProjeto.get(p) ?? p).join(' · ')}
+                        {tec.projetos.map((id, i) => (
+                          <span key={id}>
+                            {i > 0 && ' · '}
+                            <Link href={`/projetos/${id}`}>{tituloDoProjeto.get(id) ?? id}</Link>
+                          </span>
+                        ))}
+                        {tec.tambem && `${tec.projetos.length > 0 ? ' · ' : ''}${tec.tambem}`}
                       </p>
                     </div>
                   </Janela>
@@ -82,7 +82,7 @@ export default function Tecnologias() {
       })}
 
       <div className={styles.chamada}>
-        <p>Tudo isso está aplicado nos projetos abaixo.</p>
+        <p>Cada tecnologia aponta para o projeto onde foi usada.</p>
         <div className={styles.acoes}>
           <a href="#projetos" className={styles.primario}>
             <span>Ver meus projetos</span>

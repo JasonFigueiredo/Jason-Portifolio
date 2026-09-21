@@ -64,4 +64,4 @@ for (const [linguagem, linhas] of Object.entries(total).sort((a, b) => b[1] - a[
   const pct = ((linhas / soma) * 100).toFixed(1);
   console.log(`  ${linguagem.padEnd(12)} ${String(linhas).padStart(7)}  ${pct.padStart(5)}%`);
 }
-console.log('\nAtualize linhas/percentual em data/tecnologias.ts com esses valores.\n');
+console.log('\nAtualize `linhas` em data/tecnologias.ts com esses valores.\n');

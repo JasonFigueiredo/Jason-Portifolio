@@ -14,8 +14,9 @@ const secoes: { id: string; rotulo: string; icone: NomeIcone }[] = [
   { id: 'contato', rotulo: 'Contato', icone: 'email' },
 ];
 
-export default function BarraLateral() {
-  const [ativa, setAtiva] = useState('inicio');
+// Fora da home não há seções para observar: `fixa` diz qual item fica marcado.
+export default function BarraLateral({ fixa }: { fixa?: string }) {
+  const [ativa, setAtiva] = useState(fixa ?? 'inicio');
   const [aberta, setAberta] = useState(false);
 
   // Marca a seção visível. O observador avisa sozinho quando ela muda,
@@ -72,7 +73,7 @@ export default function BarraLateral() {
           {secoes.map(({ id, rotulo, icone }) => (
             <li key={id}>
               <a
-                href={`#${id}`}
+                href={`/#${id}`}
                 className={`${styles.link} ${ativa === id ? styles.ativo : ''}`}
                 onClick={() => setAberta(false)}
                 aria-current={ativa === id ? 'true' : undefined}
