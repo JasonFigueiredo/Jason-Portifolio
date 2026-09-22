@@ -14,7 +14,7 @@ function pilha(projeto: Projeto) {
 // Vitrine: tela de um lado, provas do outro — sempre do mesmo lado.
 // O zigue-zague antigo obrigava o olho a trocar de coluna a cada projeto.
 function Destaque({ projeto }: { projeto: Projeto }) {
-  const capa = projeto.imagens[0];
+  const capa = projeto.vitrine ?? projeto.imagens[0];
   const endereco = `/projetos/${projeto.id}`;
 
   return (

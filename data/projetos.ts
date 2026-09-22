@@ -91,6 +91,8 @@ export type Projeto = {
   periodo: string;
   /** vai para a vitrine da home; os demais entram no índice abaixo dela */
   destaque?: boolean;
+  /** a imagem da vitrine, quando não é a capa do estudo de caso (imagens[0]) */
+  vitrine?: Imagem;
 
   provas: Prova[];
   /** a decisão que resume o projeto, em duas frases, para a home */
@@ -244,6 +246,12 @@ export const projetos: Projeto[] = [
     site: { url: 'https://orionlive.duckdns.org', rotulo: 'Acessar plataforma' },
     periodo: '2026',
     destaque: true,
+    // Na home, a marca: o nome é o que precisa ficar. As telas estão no estudo de caso.
+    vitrine: {
+      src: '/projetos/orion-marca.webp',
+      legenda: 'A marca do Orion: o símbolo, o nome e o mote “Conecte. Comunique.”',
+      formato: 'cartaz',
+    },
 
     provas: [
       { valor: '13', rotulo: 'decisões de arquitetura registradas' },
