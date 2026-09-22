@@ -195,6 +195,19 @@
   color: var(--texto-suave);
 }
 
+/* Peça de apresentação: ela já desenha as próprias janelas, então vai sem a
+   moldura — janela dentro de janela, com seis bolinhas, só confundiria. */
+.cartaz {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 4px 4px 12px var(--sombra);
+  overflow: hidden;
+}
+
+.cartaz img {
+  width: 100%;
+}
+
 .moldura {
   border-radius: 6px;
   overflow: hidden;
@@ -221,11 +234,26 @@
 .moldura.celular img {
   width: auto;
   height: 420px;
+  object-fit: contain;
 }
 
 .telas {
+  gap: 2rem;
+}
+
+.largas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1.25rem;
+}
+
+.inteira {
+  grid-column: 1 / -1;
+}
+
+.celulares {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.25rem;
 }
 
@@ -233,6 +261,23 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  min-width: 0;
+}
+
+.telas a.moldura {
+  cursor: zoom-in;
+}
+
+.telas figcaption {
+  line-height: 1.45;
+}
+
+.telas figcaption strong {
+  display: block;
+  margin-bottom: 0.1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--texto);
 }
 
 /* ---------- Blocos do estudo de caso ----------
@@ -292,6 +337,31 @@
 }
 
 .restricoes span {
+  font-size: 0.84rem;
+  color: var(--texto-suave);
+}
+
+.recursos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+/* O mesmo desenho das restrições, com o traço neutro: aqui não é limite. */
+.recursos li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--borda);
+}
+
+.recursos strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.recursos span {
   font-size: 0.84rem;
   color: var(--texto-suave);
 }
@@ -486,6 +556,26 @@
 
   .moldura.celular img {
     height: 340px;
+  }
+
+  .recursos,
+  .largas {
+    grid-template-columns: 1fr;
+  }
+
+  /* Três celulares lado a lado não cabem: viram uma fileira que se arrasta de
+     lado. Com um celular só, o 1fr faz ele ocupar a largura toda, como antes. */
+  .celulares {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(62%, 1fr);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+
+  .celulares figure {
+    scroll-snap-align: start;
   }
 
   .proximo {

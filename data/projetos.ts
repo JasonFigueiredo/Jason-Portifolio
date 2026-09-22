@@ -13,9 +13,18 @@ export type Situacao = 'producao' | 'ativo' | 'concluido';
 export type Imagem = {
   src: string;
   legenda: string;
-  /** 'tela' ocupa a largura toda; 'celular' aparece inteira, mais estreita */
-  formato: 'tela' | 'celular';
+  /**
+   * 'tela' ocupa a largura toda; 'celular' aparece inteira, mais estreita;
+   * 'cartaz' é peça de apresentação já composta — inteira e sem a moldura de
+   * janela, que ela já desenha por dentro
+   */
+  formato: 'tela' | 'celular' | 'cartaz';
+  /** o que a tela mostra, para quem não vai abrir a imagem; a legenda vira título */
+  texto?: string;
 };
+
+/** O que o produto faz, do ponto de vista de quem usa. */
+export type Recurso = { titulo: string; texto: string };
 
 /** Um número que qualquer um pode conferir. Os três primeiros vão para a home. */
 export type Prova = { valor: string; rotulo: string };
@@ -91,6 +100,7 @@ export type Projeto = {
 
   problema: string;
   restricoes: Restricao[];
+  recursos?: Recurso[];
   decisoes: Decisao[];
   /** quantas decisões o repositório registra ao todo, quando há ADRs */
   adrs?: number;
@@ -99,7 +109,10 @@ export type Projeto = {
   /** o problema mais difícil e como foi resolvido, em parágrafos */
   dificil: { titulo: string; texto: string[] };
   proximos?: string;
-  /** telas do projeto; os SVG em public/projetos são mockups provisórios */
+  /**
+   * a primeira é a capa; as demais vão para "Telas". Os SVG em public/projetos
+   * são mockups provisórios; os WebP, capturas reais
+   */
   imagens: Imagem[];
 };
 
@@ -253,6 +266,21 @@ export const projetos: Projeto[] = [
       { rotulo: 'Pouca gente para manter', nota: 'Cada peça a mais é uma peça a vigiar de madrugada.' },
       { rotulo: 'Celular pelo navegador', nota: 'No Android se entra pela web — por isso PWA desde a primeira versão.' },
     ],
+    recursos: [
+      { titulo: 'Tempo real', texto: 'Mensagens, presença e “digitando…” chegam por WebSocket no instante em que acontecem.' },
+      { titulo: 'Voz ponta a ponta', texto: 'O áudio vai direto entre os participantes, por WebRTC, sem servidor de mídia no caminho.' },
+      { titulo: 'Tela até 4K', texto: 'A tela inteira ou uma janela, de 720p a 4K, na qualidade que quem assiste escolher.' },
+      { titulo: 'Ruído fora', texto: 'Uma rede neural roda no próprio navegador e limpa o microfone antes de a voz sair.' },
+      { titulo: 'Conversas diretas', texto: 'Texto e chamada com uma pessoa só, fora dos canais do servidor.' },
+      {
+        titulo: 'Convite por link',
+        texto:
+          'Com validade e limite de usos. Quem chega diz só como quer ser chamado; a conta fica ' +
+          'para depois, criada de dentro.',
+      },
+      { titulo: 'Instalável, com avisos', texto: 'App no celular e no computador; avisa quando alguém chama ou menciona você.' },
+      { titulo: 'Cargos e auditoria', texto: 'Cada servidor tem cargos, permissões e o registro do que cada um mudou.' },
+    ],
     adrs: 13,
     decisoes: [
       {
@@ -340,8 +368,71 @@ export const projetos: Projeto[] = [
       'direta não aguenta; busca indexada quando a varredura passar de uns 300 ms. Nada entra ' +
       'antes de o número pedir.',
     imagens: [
-      { src: '/projetos/orion-chat.svg', legenda: 'Canais de texto e voz', formato: 'tela' },
-      { src: '/projetos/orion-voz.svg', legenda: 'Chamada com tela compartilhada', formato: 'tela' },
+      // Capturas reais do servidor de demonstração que o próprio Orion monta
+      // para a página de apresentação dele; a capa é o mosaico de abertura.
+      {
+        src: '/projetos/orion-capa.webp',
+        legenda:
+          'A apresentação do Orion, montada com capturas reais: o canal de texto ao centro, a sala ' +
+          'de voz, o celular, o tema claro e um servidor com a cor do cliente',
+        formato: 'cartaz',
+      },
+      {
+        src: '/projetos/orion-canal.webp',
+        legenda: 'Canal de texto',
+        texto:
+          'Um canal por assunto, com respostas, reações, anexos e busca. Mensagem nova, presença ' +
+          'e “digitando…” aparecem sem recarregar a página.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/orion-voz.webp',
+        legenda: 'Sala de voz',
+        texto:
+          'Quem está na sala e há quanto tempo. No rodapé, microfone, som, remoção de ruído, ' +
+          'compartilhamento de tela e a qualidade da imagem.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/orion-plano-de-fundo.webp',
+        legenda: 'A cor do cliente',
+        texto:
+          'O dono do servidor sobe uma imagem de fundo, e a interface inteira passa a usar a cor ' +
+          'dela — botões, avatares e destaques.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/orion-tema-claro.webp',
+        legenda: 'Tema claro',
+        texto: 'Claro, escuro ou o mesmo do sistema operacional.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/orion-novidades.webp',
+        legenda: 'Novidades',
+        texto:
+          'Na tela inicial, cada melhoria e correção com data e hora. Quando sai versão nova, a ' +
+          'marca avisa e o primeiro cartão traz o botão de atualizar.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/orion-celular-gaveta.webp',
+        legenda: 'Servidores e canais',
+        texto: 'No celular, tudo numa gaveta, a um toque do menu.',
+        formato: 'celular',
+      },
+      {
+        src: '/projetos/orion-celular-canal.webp',
+        legenda: 'A conversa',
+        texto: 'Mensagens, respostas e reações na tela toda.',
+        formato: 'celular',
+      },
+      {
+        src: '/projetos/orion-celular-voz.webp',
+        legenda: 'A chamada',
+        texto: 'Quem está na sala, e os controles ao alcance do polegar.',
+        formato: 'celular',
+      },
     ],
   },
   {

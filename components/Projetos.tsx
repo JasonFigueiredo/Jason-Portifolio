@@ -21,13 +21,20 @@ function Destaque({ projeto }: { projeto: Projeto }) {
     <article className={styles.destaque}>
       {/* A imagem é atalho de mouse; quem usa teclado chega pelo título e pelo botão. */}
       <Link href={endereco} className={styles.capa} tabIndex={-1} aria-hidden>
-        <Janela>
-          {capa && (
-            <div className={`${styles.moldura} ${styles[capa.formato]}`}>
-              <img src={capa.src} alt="" loading="lazy" />
-            </div>
-          )}
-        </Janela>
+        {/* O cartaz já desenha as próprias janelas: vai sem a moldura. */}
+        {capa?.formato === 'cartaz' ? (
+          <div className={styles.cartaz}>
+            <img src={capa.src} alt="" loading="lazy" />
+          </div>
+        ) : (
+          <Janela>
+            {capa && (
+              <div className={`${styles.moldura} ${styles[capa.formato]}`}>
+                <img src={capa.src} alt="" loading="lazy" />
+              </div>
+            )}
+          </Janela>
+        )}
       </Link>
 
       <div className={styles.texto}>

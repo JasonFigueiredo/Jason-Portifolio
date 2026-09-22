@@ -67,6 +67,29 @@
   transform: scale(1.03);
 }
 
+/* Sem a Janela, o cartaz leva a borda, a sombra e o salto dela. */
+.cartaz {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 4px 4px 12px var(--sombra);
+  overflow: hidden;
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.cartaz img {
+  width: 100%;
+  transition: transform 0.4s ease;
+}
+
+.capa:hover .cartaz {
+  transform: translateY(-4px);
+  box-shadow: 6px 8px 20px var(--sombra);
+}
+
+.capa:hover .cartaz img {
+  transform: scale(1.03);
+}
+
 .texto {
   display: flex;
   flex-direction: column;

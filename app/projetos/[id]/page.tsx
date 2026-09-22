@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projetos, rotuloSituacao } from '@/data/projetos';
+import { projetos, rotuloSituacao, type Imagem } from '@/data/projetos';
 import BarraLateral from '@/components/BarraLateral';
 import Janela from '@/components/Janela';
 import Icone from '@/components/Icone';
@@ -30,6 +30,27 @@ export async function generateMetadata(props: PageProps<'/projetos/[id]'>): Prom
   };
 }
 
+function Tela({ img, inteira }: { img: Imagem; inteira?: boolean }) {
+  return (
+    <figure className={inteira ? styles.inteira : undefined}>
+      {/* Reduzida, a captura não se lê: o clique abre no tamanho real. */}
+      <a href={img.src} target="_blank" rel="noreferrer" className={`${styles.moldura} ${styles[img.formato]}`}>
+        <img src={img.src} alt={img.legenda} loading="lazy" />
+      </a>
+      <figcaption>
+        {img.texto ? (
+          <>
+            <strong>{img.legenda}</strong>
+            {img.texto}
+          </>
+        ) : (
+          img.legenda
+        )}
+      </figcaption>
+    </figure>
+  );
+}
+
 export default async function PaginaProjeto(props: PageProps<'/projetos/[id]'>) {
   const { id } = await props.params;
   const indice = projetos.findIndex((p) => p.id === id);
@@ -38,6 +59,10 @@ export default async function PaginaProjeto(props: PageProps<'/projetos/[id]'>) 
   const projeto = projetos[indice];
   const proximo = projetos[(indice + 1) % projetos.length];
   const [capa, ...telas] = projeto.imagens;
+  // Computador numa grade, celulares noutra: misturados, uma linha teria uma
+  // tela deitada ao lado de uma em pé, cada uma de uma altura.
+  const largas = telas.filter((img) => img.formato !== 'celular');
+  const celulares = telas.filter((img) => img.formato === 'celular');
 
   return (
     <>
@@ -119,11 +144,17 @@ export default async function PaginaProjeto(props: PageProps<'/projetos/[id]'>) 
 
             {capa && (
               <figure className={styles.capa}>
-                <Janela>
-                  <div className={`${styles.moldura} ${styles[capa.formato]}`}>
+                {capa.formato === 'cartaz' ? (
+                  <div className={styles.cartaz}>
                     <img src={capa.src} alt={capa.legenda} />
                   </div>
-                </Janela>
+                ) : (
+                  <Janela>
+                    <div className={`${styles.moldura} ${styles[capa.formato]}`}>
+                      <img src={capa.src} alt={capa.legenda} />
+                    </div>
+                  </Janela>
+                )}
                 <figcaption>{capa.legenda}</figcaption>
               </figure>
             )}
@@ -142,6 +173,25 @@ export default async function PaginaProjeto(props: PageProps<'/projetos/[id]'>) 
                 </ul>
               </div>
             </section>
+
+            {projeto.recursos && (
+              <section className={styles.bloco}>
+                <h2>
+                  O que faz
+                  <small>Do ponto de vista de quem usa</small>
+                </h2>
+                <div className={styles.corpo}>
+                  <ul className={styles.recursos}>
+                    {projeto.recursos.map(({ titulo, texto }) => (
+                      <li key={titulo}>
+                        <strong>{titulo}</strong>
+                        <span>{texto}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            )}
 
             <section className={styles.bloco}>
               <h2>
@@ -205,14 +255,22 @@ export default async function PaginaProjeto(props: PageProps<'/projetos/[id]'>) 
               <section className={styles.bloco}>
                 <h2>Telas</h2>
                 <div className={`${styles.corpo} ${styles.telas}`}>
-                  {telas.map((img) => (
-                    <figure key={img.src}>
-                      <div className={`${styles.moldura} ${styles[img.formato]}`}>
-                        <img src={img.src} alt={img.legenda} loading="lazy" />
-                      </div>
-                      <figcaption>{img.legenda}</figcaption>
-                    </figure>
-                  ))}
+                  {largas.length > 0 && (
+                    <div className={styles.largas}>
+                      {largas.map((img, i) => (
+                        // Em duas colunas, uma quantidade ímpar deixaria um buraco no fim:
+                        // a primeira tela, que abre a galeria, ocupa a linha toda.
+                        <Tela key={img.src} img={img} inteira={i === 0 && largas.length % 2 === 1} />
+                      ))}
+                    </div>
+                  )}
+                  {celulares.length > 0 && (
+                    <div className={styles.celulares}>
+                      {celulares.map((img) => (
+                        <Tela key={img.src} img={img} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </section>
             )}
