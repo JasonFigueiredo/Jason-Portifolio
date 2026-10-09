@@ -18,7 +18,7 @@ const IGNORAR = [
 ];
 
 const LINGUAGENS = {
-  php: 'PHP', kt: 'Kotlin', kts: 'Kotlin', java: 'Java', vue: 'Vue',
+  php: 'PHP', kt: 'Kotlin', kts: 'Kotlin', java: 'Java', vue: 'Vue', rs: 'Rust',
   ts: 'TypeScript', tsx: 'TypeScript', js: 'JavaScript', jsx: 'JavaScript',
   mjs: 'JavaScript', css: 'CSS', scss: 'CSS', html: 'HTML',
 };

@@ -131,6 +131,7 @@ export const projetos: Projeto[] = [
     tecnologias: ['php', 'laravel', 'vue', 'javascript', 'tailwind', 'docker', 'mysql', 'redis', 'nginx'],
     situacao: 'producao',
     privado: true,
+    site: { url: 'https://inovablocos.duckdns.org/conheca', rotulo: 'Conhecer a plataforma' },
     periodo: '2026',
     destaque: true,
 
@@ -227,8 +228,35 @@ export const projetos: Projeto[] = [
       ],
     },
     imagens: [
-      { src: '/projetos/inova-painel.svg', legenda: 'Painel com estoque e linha de ruptura', formato: 'tela' },
-      { src: '/projetos/inova-diario.svg', legenda: 'Diário de bordo, que funciona sem rede', formato: 'celular' },
+      // Capturas da página de apresentação do próprio Inova (/conheca), que
+      // reproduz as telas do sistema com dados fictícios.
+      {
+        src: '/projetos/inova-capa.webp',
+        legenda: 'A página de apresentação do Inova Blocos, com o Painel em dados de exemplo',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/inova-painel.webp',
+        legenda: 'Painel',
+        texto:
+          'O dia da fábrica numa tela: entregas prometidas sem material, blocos prontos para ' +
+          'desforma, saldo por espessura e o resumo financeiro, que só o gestor vê.',
+        formato: 'cartaz',
+      },
+      {
+        src: '/projetos/inova-fila.webp',
+        legenda: 'Fila de entrega',
+        texto:
+          'Cada entrega confirmada contra o que existe no pátio. Onde o saldo projetado fica ' +
+          'negativo, a linha de ruptura mostra a OS e quantas peças faltam.',
+        formato: 'cartaz',
+      },
+      {
+        src: '/projetos/inova-diario.webp',
+        legenda: 'Diário de bordo',
+        texto: 'No celular do galpão, sem sinal: os lançamentos ficam no aparelho e sobem depois.',
+        formato: 'celular',
+      },
     ],
   },
   {
@@ -563,6 +591,345 @@ export const projetos: Projeto[] = [
       { src: '/projetos/minhas-senhas-demo.webp', legenda: 'A demonstração do site: o cofre com dados fictícios', formato: 'tela' },
       { src: '/projetos/minhas-senhas-site.webp', legenda: 'A página pública do projeto', formato: 'tela' },
     ],
+  },
+  {
+    id: 'qualipt',
+    titulo: 'QualiPT',
+    resumo:
+      'Inspeção visual do pré-tratamento de uma montadora, com foto, no celular — funciona sem ' +
+      'internet e abre sozinho a não conformidade quando algo está errado.',
+    papel: 'Tudo: banco, API, interface e servidor',
+    paraQuem: 'Operadores e supervisores da inspeção',
+    ondeRoda: 'Servidor próprio; o registro, no celular e no tablet da linha',
+    tecnologias: ['php', 'laravel', 'vue', 'typescript', 'tailwind', 'docker', 'mysql', 'nginx'],
+    situacao: 'ativo',
+    privado: true,
+    periodo: '2026',
+    destaque: true,
+
+    provas: [
+      { valor: '300+', rotulo: 'testes, no servidor e na interface' },
+      { valor: '13', rotulo: 'decisões de arquitetura registradas' },
+      { valor: '11', rotulo: 'tabelas guardadas por triggers contra alteração' },
+    ],
+    decisaoChave: {
+      adr: 'ADR-006',
+      texto:
+        'Registro de inspeção é evidência: depois de gravado, o próprio banco recusa alterá-lo. ' +
+        'Errou? O registro é anulado com motivo e continua visível, riscado.',
+    },
+
+    problema:
+      'A inspeção visual do pré-tratamento precisa de evidência que não muda depois: foto, ' +
+      'checklist, resultado e uma hora em que se possa confiar — e cada não conformidade ' +
+      'acompanhada até ser validada. O QualiPT põe isso num app de celular que registra sem ' +
+      'internet, abre a não conformidade sozinho e substitui também a planilha de medição dos banhos.',
+    restricoes: [
+      { rotulo: 'Perder registro é inaceitável', nota: 'A rede da fábrica é incerta, e o iPhone não sincroniza em segundo plano.' },
+      { rotulo: 'Um IP para a fábrica toda', nota: 'O firewall bane um IP por 4 horas: um ban tiraria todo mundo do ar.' },
+      { rotulo: 'Servidor modesto', nota: 'CPU fraca, sem armazenamento de objetos, e o proxy corta requisições acima de 60 s.' },
+    ],
+    recursos: [
+      { titulo: 'Registro em dois toques', texto: 'Tocar na etapa já abre a câmera; “Conforme” marca “Aparência normal” sozinho.' },
+      {
+        titulo: 'Sem internet',
+        texto:
+          'Registro e fotos ficam no aparelho e sobem quando a rede volta. O rascunho sobrevive até ' +
+          'ao app fechar com a câmera aberta.',
+      },
+      {
+        titulo: 'Não conformidade automática',
+        texto: '“Não conforme” abre a NC, e o supervisor a conduz até validada, com fotos da tratativa e linha do tempo.',
+      },
+      { titulo: 'Hora confiável', texto: 'Cada registro leva um selo — confirmado, offline ou divergente — calculado pelo servidor.' },
+      {
+        titulo: 'Painel do supervisor',
+        texto: 'NCs por etapa, Pareto por defeito e evolução diária. Tocar numa barra abre os registros; todo gráfico tem tabela.',
+      },
+      {
+        titulo: 'Análise do banho',
+        texto: 'Medições por horário contra a faixa de controle, com gráficos que exportam PNG e CSV.',
+      },
+      { titulo: 'Nada se apaga', texto: 'Registro errado é anulado com motivo e continua visível; toda mudança fica na trilha.' },
+      {
+        titulo: 'Configurável e bilíngue',
+        texto: 'O administrador ajusta etapas e checklists pelo próprio app, em português e inglês.',
+      },
+    ],
+    adrs: 13,
+    decisoes: [
+      {
+        titulo: 'Offline primeiro, sem repetir',
+        adr: 'ADR-002',
+        porque:
+          'Registro e foto vão para o IndexedDB e sobem um por requisição. O identificador nasce no ' +
+          'aparelho: reenviar devolve “já existia”, e o mesmo identificador com outro conteúdo é ' +
+          'recusado. Com a sessão vencida, a fila para em vez de insistir.',
+        descartado: 'Exigir conexão, ou depender do Background Sync, que o iPhone não tem.',
+      },
+      {
+        titulo: 'A hora oficial é do servidor',
+        adr: 'ADR-004',
+        porque:
+          'O relógio do celular não é confiável, e sem rede não há a quem perguntar. Cada resposta ' +
+          'traz a hora do servidor; o app guarda a diferença junto da captura, e o servidor calcula ' +
+          'a hora oficial e marca o registro como confirmado, offline ou divergente.',
+        descartado: 'Recusar o registro quando o relógio está errado — o selo fica para o supervisor ver.',
+      },
+      {
+        titulo: 'O banco recusa a alteração',
+        adr: 'ADR-006',
+        porque:
+          'Triggers do MySQL, gerados a partir das colunas reais, barram UPDATE e DELETE; um teste ' +
+          'confere que nenhuma tabela ficou de fora. A única mudança permitida é anular, uma vez. ' +
+          'Isso barra bug do próprio código e edição manual no banco — não quem tem a senha dele.',
+        descartado: 'Proteger só no código da aplicação, que não barra nem um bug nem uma edição direta.',
+      },
+      {
+        titulo: 'Uma API que não provoca o firewall',
+        adr: 'ADR-008',
+        porque:
+          'Uma rajada de erros 401, 403 ou 404 bane o IP da fábrica por 4 horas. A API foi desenhada ' +
+          'para não gerá-la: listas que já trazem o detalhe, busca vazia que responde 200 e uma ' +
+          'consulta leve que confirma a sessão antes de cada rodada de envio.',
+        descartado: 'Respostas REST “de manual”, que disparam o ban em uso normal.',
+      },
+    ],
+    arquitetura: {
+      legenda: 'Tracejado: o caminho quando a linha está sem rede',
+      caixas: [
+        { id: 'app', titulo: 'Celular e tablet', nota: 'Vue 3 · PWA', coluna: 0, linha: 0, forte: true },
+        { id: 'fila', titulo: 'Fila no aparelho', nota: 'Dexie · fotos em Blob', coluna: 0, linha: 1 },
+        { id: 'borda', titulo: 'Traefik + Nginx', nota: 'TLS · CrowdSec', coluna: 1, linha: 0 },
+        { id: 'laravel', titulo: 'Laravel 13', nota: 'API · Sanctum', coluna: 2, linha: 0, forte: true },
+        { id: 'fotos', titulo: 'Fotos em disco', nota: 'rota privada', coluna: 2, linha: 1 },
+        { id: 'mysql', titulo: 'MySQL 8.4', nota: 'triggers imutáveis', coluna: 3, linha: 0 },
+        { id: 'backup', titulo: 'Backups', nota: 'dump a cada 15 min', coluna: 3, linha: 1 },
+      ],
+      ligacoes: [
+        { de: 'app', para: 'borda', rotulo: 'HTTPS' },
+        { de: 'app', para: 'fila', rotulo: 'sem rede', tracejada: true },
+        { de: 'fila', para: 'borda', rotulo: 'quando a rede volta', tracejada: true, rota: 'hv' },
+        { de: 'borda', para: 'laravel', rotulo: 'API' },
+        { de: 'laravel', para: 'mysql' },
+        { de: 'laravel', para: 'fotos' },
+        { de: 'mysql', para: 'backup' },
+      ],
+    },
+    stack: [
+      { camada: 'Backend', ferramenta: 'Laravel 13 · PHP 8.4 · Sanctum', papel: 'API em módulos por domínio; sessão em cookie com CSRF' },
+      { camada: 'Interface', ferramenta: 'Vue 3 · TypeScript · Pinia · Tailwind', papel: '16 telas em português e inglês; os gráficos só carregam onde aparecem' },
+      { camada: 'Offline', ferramenta: 'Service Worker · Dexie', papel: 'Registro e fotos no aparelho; a foto é comprimida e tem o hash calculado ali mesmo' },
+      { camada: 'Dados', ferramenta: 'MySQL 8.4', papel: 'Triggers de imutabilidade, tudo em UTC; sessão e cache no próprio banco' },
+      { camada: 'Infra', ferramenta: 'Docker · Nginx · Traefik · CrowdSec', papel: 'Imagens de produção versionadas; backup conferido e espelho das fotos' },
+      { camada: 'Qualidade', ferramenta: 'Pest · Vitest · Puppeteer · Larastan', papel: 'Testes no mesmo MySQL da produção; 5 roteiros num Chrome de verdade' },
+    ],
+    dificil: {
+      titulo: 'A foto que o app aceitava e o servidor recusava',
+      texto: [
+        'O servidor exigia 480 px nos dois lados da foto e recusava uma imagem larga e baixa — um ' +
+          'print de planilha de 1081 × 423, por exemplo — que o app já tinha aceitado e guardado. ' +
+          'Num sistema que grava primeiro no aparelho, a recusa chega tarde: o registro ficava ' +
+          'parado no celular.',
+        'Agora vale qualquer proporção, só com um teto de 2560 px. Os registros recusados apenas ' +
+          'pela foto voltam sozinhos para a fila uma vez, quando o app atualiza; como a recusa guarda ' +
+          'a versão do app, não há laço de reenvio. O print de 1081 × 423 virou caso de teste.',
+      ],
+    },
+    proximos:
+      'A entrada em produção: ligar o domínio, testar a rede no Wi-Fi da fábrica e nos dados ' +
+      'móveis, instalar nos aparelhos e acompanhar o primeiro dia. Depois, uma cópia cifrada dos ' +
+      'backups fora da máquina.',
+    imagens: [
+      // Capturas reais, tiradas pelos roteiros de teste do próprio QualiPT com dados de
+      // demonstração: as fotos das peças são ruído sintético.
+      {
+        src: '/projetos/qualipt-graficos.webp',
+        legenda: 'Gráficos de controle do banho no tablet, com as faixas de mínimo e máximo',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/qualipt-painel.webp',
+        legenda: 'Painel do supervisor',
+        texto: 'Registros, conformes e NCs do período; as não conformidades por etapa e por tipo de defeito.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/qualipt-analise.webp',
+        legenda: 'Análise do banho',
+        texto:
+          'As medições do dia por horário, com a faixa de controle de cada parâmetro. O valor fora ' +
+          'dela aparece em vermelho, com a direção do desvio.',
+        formato: 'tela',
+      },
+      {
+        src: '/projetos/qualipt-registro.webp',
+        legenda: 'O registro',
+        texto: 'Foto, resultado e checklist da etapa.',
+        formato: 'celular',
+      },
+      {
+        src: '/projetos/qualipt-sem-rede.webp',
+        legenda: 'Salvo sem rede',
+        texto: 'A NC é aberta quando o registro chegar ao servidor.',
+        formato: 'celular',
+      },
+      {
+        src: '/projetos/qualipt-nc.webp',
+        legenda: 'A não conformidade',
+        texto: 'Da abertura à validação, com a linha do tempo da tratativa.',
+        formato: 'celular',
+      },
+    ],
+  },
+  {
+    id: 'ponte',
+    titulo: 'Ponte Tradutor',
+    resumo:
+      'Tradutor que mora na bandeja do Windows: traduz o que você seleciona ou copia, responde no ' +
+      'idioma da conversa, digita o que você fala e legenda uma chamada ao vivo.',
+    papel: 'Tudo: núcleo em Rust, interface e instalador',
+    paraQuem: 'Uso próprio, em conversas com gente de outros países',
+    ondeRoda: 'Windows 10 e 11, na bandeja; a voz é reconhecida no próprio PC',
+    tecnologias: ['rust', 'tauri', 'react', 'typescript', 'tailwind'],
+    situacao: 'ativo',
+    privado: true,
+    periodo: '2026',
+    // Sem capturas ainda: o app só roda no Windows. Vai para o índice até ter telas.
+    destaque: false,
+
+    provas: [
+      { valor: '160+', rotulo: 'testes automatizados no núcleo em Rust' },
+      { valor: '103', rotulo: 'decisões técnicas registradas' },
+      { valor: '8', rotulo: 'serviços de tradução e voz em fila — se um falha, o próximo assume' },
+    ],
+    decisaoChave: {
+      texto:
+        'Cinco tradutores e três motores de voz numa fila que o usuário ordena. Se um falha, esgota ' +
+        'a cota ou está sem chave, o próximo assume — e funciona até sem chave nenhuma.',
+    },
+
+    problema:
+      'Conversar com gente de outros países no WhatsApp, no Discord ou por e-mail costuma ser um ' +
+      'vaivém de copiar, colar num site de tradução e copiar de volta — e para de funcionar quando ' +
+      'a cota da API acaba. O Ponte faz isso de dentro de qualquer app, com um atalho, e troca de ' +
+      'serviço sozinho quando um deles falha.',
+    restricoes: [
+      { rotulo: 'As regras do Windows', nota: 'App em segundo plano não pode roubar o foco, e o sistema bloqueia teclas simuladas em apps de administrador.' },
+      { rotulo: 'Cotas gratuitas', nota: 'Cada API tem limite por dia ou por mês. Nenhuma chave pode ser obrigatória.' },
+      { rotulo: 'Não atrapalhar', nota: 'Não sujar a área de transferência nem o histórico do Win+V; nos logs, nada de texto nem de áudio.' },
+    ],
+    recursos: [
+      {
+        titulo: 'Traduzir a seleção',
+        texto: 'Um atalho, e a tradução aparece perto do cursor. A área de transferência volta como estava, até com imagem.',
+      },
+      {
+        titulo: 'Traduzir o que você copia',
+        texto: 'Ignora o que já está no seu idioma, links, números, e-mails e o que os gerenciadores de senha marcam.',
+      },
+      {
+        titulo: 'Responder no idioma da conversa',
+        texto: 'Você escreve em português, vê a prévia enquanto digita, e o Enter cola a tradução no app de onde veio.',
+      },
+      {
+        titulo: 'Ditado em qualquer app',
+        texto: 'Digita no campo em foco a cada pausa, com comandos como “nova linha” e “enviar” — ou já traduzido.',
+      },
+      {
+        titulo: 'Conversa ao vivo',
+        texto: 'Ouve o som do computador e o microfone e mostra a tradução fala por fala. Nada é gravado.',
+      },
+      {
+        titulo: 'Nunca para',
+        texto: 'Cinco tradutores e três motores de voz numa ordem ajustável; quando um cai, o próximo assume.',
+      },
+      {
+        titulo: 'Painel de uso',
+        texto: 'Quanto foi usado e quanto resta de cada API, com o número oficial onde o serviço informa.',
+      },
+    ],
+    adrs: 103,
+    decisoes: [
+      {
+        titulo: 'O motor fica no Rust; as janelas só exibem',
+        adr: 'Nº 010',
+        porque:
+          'As chaves de API e a área de transferência nunca chegam ao WebView, e o motor funciona com ' +
+          'todas as janelas fechadas. Cada janela recebe só os comandos que usa.',
+        descartado: 'Chamar os plugins de área de transferência e configuração direto do JavaScript das janelas.',
+      },
+      {
+        titulo: 'A área de transferência volta inteira',
+        adr: 'Nº 013',
+        porque:
+          'Para ler a seleção, o app precisa copiar. Antes, ele guarda todos os formatos pela API do ' +
+          'Windows e os devolve depois, fora do histórico. A mudança é detectada pelo número de ' +
+          'sequência, que muda mesmo quando o texto copiado é igual ao anterior.',
+        descartado: 'Guardar só o texto, e comparar o conteúdo para saber se mudou.',
+      },
+      {
+        titulo: 'O som do computador, sem driver',
+        adr: 'Nº 092',
+        porque:
+          'A saída de som é aberta como entrada, em modo loopback, sem instalar nada. Com caixas de ' +
+          'som, o trecho do microfone coberto pela fala do computador é descartado, para a mesma fala ' +
+          'não aparecer duas vezes.',
+        descartado: 'Driver virtual de áudio, “Mixagem estéreo” ou cancelamento de eco.',
+      },
+      {
+        titulo: 'GPU quando houver, sem depender dela',
+        adr: 'Nº 031',
+        porque:
+          'O Whisper usa a placa de vídeo pelo Vulkan, mas a biblioteca só é carregada na hora do uso. ' +
+          'Sem driver, ele cai para o processador ou para a nuvem — o app abre em qualquer Windows.',
+        descartado: 'Ligar o executável direto ao Vulkan, que impediria o app de abrir sem driver de vídeo.',
+      },
+    ],
+    arquitetura: {
+      legenda: 'Tudo passa pelo núcleo: as janelas só exibem, e as chaves nunca chegam a elas',
+      caixas: [
+        { id: 'janelas', titulo: 'Janelas React', nota: 'React · 5 WebViews', coluna: 1, linha: 0, forte: true },
+        { id: 'apps', titulo: 'Apps do Windows', nota: 'WhatsApp · chamadas', coluna: 0, linha: 1, forte: true },
+        { id: 'nucleo', titulo: 'Núcleo Rust', nota: 'Tauri 2 · Win32', coluna: 1, linha: 1, forte: true },
+        { id: 'traducao', titulo: 'Cadeia de tradução', nota: 'fila · pausa por cota', coluna: 2, linha: 1 },
+        { id: 'tradutores', titulo: '5 tradutores', nota: 'nuvem · LibreTranslate', coluna: 3, linha: 1 },
+        { id: 'voz', titulo: 'Cadeia de voz', nota: 'Silero VAD · fila', coluna: 2, linha: 2 },
+        { id: 'motores', titulo: 'Motores de voz', nota: 'Whisper local · nuvem', coluna: 3, linha: 2 },
+      ],
+      ligacoes: [
+        { de: 'apps', para: 'nucleo', rotulo: 'texto, áudio', dupla: true },
+        { de: 'janelas', para: 'nucleo', rotulo: 'comandos', dupla: true },
+        { de: 'nucleo', para: 'traducao', rotulo: 'texto' },
+        { de: 'traducao', para: 'tradutores', rotulo: 'HTTPS · 4 s' },
+        { de: 'nucleo', para: 'voz', rotulo: 'áudio' },
+        { de: 'voz', para: 'motores', rotulo: 'áudio 16 kHz' },
+      ],
+    },
+    stack: [
+      { camada: 'Núcleo', ferramenta: 'Rust · Tauri 2', papel: 'Bandeja, atalhos globais, 48 comandos e as filas de tradução e voz' },
+      { camada: 'Interface', ferramenta: 'React · TypeScript · Tailwind', papel: 'Cinco janelas, da tradução ao lado do cursor às configurações' },
+      { camada: 'Windows', ferramenta: 'API Win32 · Gerenciador de Credenciais', papel: 'Área de transferência, foco e teclas; as chaves ficam no cofre do sistema' },
+      { camada: 'Tradução', ferramenta: 'DeepL · Azure · Google · LibreTranslate · MyMemory', papel: 'Em fila, com pausa automática quando a cota acaba; idioma detectado localmente' },
+      { camada: 'Voz', ferramenta: 'Whisper · Silero VAD · Deepgram · Groq', papel: 'Reconhecimento no próprio PC, com a nuvem de reserva' },
+      { camada: 'Qualidade', ferramenta: 'cargo test · wiremock · clippy', papel: 'Um servidor falso por tradutor; unwrap proibido fora dos testes' },
+    ],
+    dificil: {
+      titulo: 'Cada fala aparecia duas vezes',
+      texto: [
+        'No primeiro teste de ponta a ponta da conversa ao vivo, cada fala da outra pessoa saía ' +
+          'duas vezes: o microfone ouvia as caixas de som. E um “Hello.” sozinho era detectado como ' +
+          'soto, enquanto o Whisper tinha ouvido inglês.',
+        'A correção: o trecho do microfone com pelo menos metade coberta por fala do computador é ' +
+          'descartado na hora, pelos intervalos do detector de fala, sem esperar a transcrição — ' +
+          'ao custo documentado de perder o que se fala por cima do outro. Nas frases curtas, quem ' +
+          'decide o idioma passou a ser o áudio; o texto só o desmente a partir de quatro palavras.',
+      ],
+    },
+    proximos:
+      'Ouvir só o app da chamada, em vez do som inteiro do computador, e testar com monitores de ' +
+      'escalas diferentes.',
+    imagens: [],
   },
 ];
 

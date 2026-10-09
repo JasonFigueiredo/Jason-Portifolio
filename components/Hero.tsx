@@ -4,7 +4,8 @@ import Icone from './Icone';
 import styles from './Hero.module.css';
 
 // Os números saem dos dados, não de texto fixo: mudou o array, mudou a vitrine.
-const emProducao = projetos.filter((p) => p.situacao !== 'concluido').length;
+// "No ar" é só o que está em produção; o que está em evolução ainda não chegou lá.
+const emProducao = projetos.filter((p) => p.situacao === 'producao').length;
 
 const numeros = [
   { valor: String(projetos.length), rotulo: 'projetos' },
