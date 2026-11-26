@@ -1,0 +1,359 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.vitrine {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* --- mídia --- */
+
+.midia {
+  /* O texto é mais alto que a tela: ela acompanha a rolagem enquanto o texto
+     passa ao lado, em vez de ficar parada no meio com vazio em volta. */
+  position: sticky;
+  top: calc(var(--altura-topo) + 4.5rem);
+  padding-top: 0.5rem;
+  /* o número e a luz ficam atrás da tela, mas não atrás da página */
+  isolation: isolate;
+}
+
+/* O número do produto, enorme e vazado, espiando por cima da tela. */
+.ordem {
+  position: absolute;
+  top: -4.6rem;
+  right: -1rem;
+  z-index: -1;
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 7.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--borda-forte);
+  opacity: 0.6;
+  user-select: none;
+}
+
+/* O brilho da marca embaixo da tela, como luz de estúdio. */
+.midia::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -14%;
+  height: 40%;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, var(--brilho), transparent 70%);
+  filter: blur(24px);
+}
+
+.atalho {
+  display: block;
+}
+
+.moldura {
+  overflow: hidden;
+  background: var(--superficie-2);
+}
+
+.moldura img {
+  width: 100%;
+  transition: transform 0.8s var(--suave);
+}
+
+.atalho:hover .moldura img {
+  transform: scale(1.025);
+}
+
+/* Captura de computador: 16:10, recortada do topo, que é onde a tela diz o que é. */
+.tela {
+  aspect-ratio: 16 / 10;
+}
+
+.tela img {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Celular aparece inteiro: cortar esconderia justamente o que ele mostra. */
+.celular {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.celular img {
+  max-height: 460px;
+  width: auto;
+}
+
+.cartaz {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px var(--sombra);
+}
+
+.cartaz img {
+  width: 100%;
+  transition: transform 0.8s var(--suave);
+}
+
+.atalho:hover .cartaz img {
+  transform: scale(1.02);
+}
+
+/* --- texto --- */
+
+.olho {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.situacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.situacao::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.producao {
+  color: var(--verde);
+}
+
+.ativo {
+  color: var(--ambar);
+}
+
+.concluido {
+  color: var(--texto-suave);
+}
+
+.titulo {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+}
+
+.titulo a {
+  background: linear-gradient(90deg, var(--marca), var(--marca-2)) left bottom / 0 2px no-repeat;
+  transition: background-size 0.4s var(--suave);
+}
+
+.titulo a:hover {
+  background-size: 100% 2px;
+}
+
+.resumo {
+  margin-top: 0.85rem;
+  font-size: 1.05rem;
+  color: var(--texto-suave);
+}
+
+.provas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+
+.provas dt {
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--destaque);
+}
+
+.provas dd {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--texto-suave);
+}
+
+.decisao {
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border-left: 2px solid var(--marca);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  background: linear-gradient(90deg, var(--brilho), transparent 85%);
+  font-size: 0.93rem;
+}
+
+.decisao span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--marca-texto);
+}
+
+.pilha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+}
+
+.pilha li {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: var(--texto-suave);
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  margin-top: 2rem;
+}
+
+/* --- índice --- */
+
+.indice {
+  margin-top: 7rem;
+}
+
+.rotuloIndice {
+  margin-bottom: 1rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.indice table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.indice th {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--borda);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.indice td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: top;
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+}
+
+.indice tbody tr {
+  transition: background-color var(--transicao);
+}
+
+.indice tbody tr:hover {
+  background: var(--hover);
+}
+
+.ano {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  white-space: nowrap;
+}
+
+.nome {
+  white-space: nowrap;
+}
+
+.nome a {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--destaque);
+}
+
+.nome a:hover {
+  color: var(--marca-texto);
+}
+
+.feito {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+  .vitrine {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .midia {
+    position: relative;
+    top: 0;
+  }
+
+  .lista {
+    gap: 5rem;
+  }
+
+  .ordem {
+    font-size: 5.5rem;
+    top: -3.6rem;
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .opcional {
+    display: none;
+  }
+
+  .provas {
+    gap: 0.75rem;
+  }
+
+  .provas dt {
+    font-size: 1.45rem;
+  }
+
+  .indice {
+    margin-top: 5rem;
+  }
+
+}

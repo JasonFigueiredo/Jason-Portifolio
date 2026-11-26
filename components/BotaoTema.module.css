@@ -1,15 +1,20 @@
 .botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  background: var(--superficie-2);
-  color: var(--destaque);
-  transition: background var(--transicao), transform var(--transicao);
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+  transition:
+    color var(--transicao),
+    border-color var(--transicao),
+    background-color var(--transicao);
 }
 
 .botao:hover {
+  color: var(--destaque);
+  border-color: var(--borda-forte);
   background: var(--hover);
-  transform: rotate(15deg);
 }

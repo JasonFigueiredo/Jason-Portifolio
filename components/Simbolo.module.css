@@ -1,0 +1,105 @@
+.simbolo {
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.chave {
+  fill: none;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+/* --- cor: as três faces do J dão o volume --- */
+
+.cor .chave {
+  stroke: var(--marca);
+}
+
+.cor .haste {
+  fill: var(--marca);
+}
+
+.cor .bracoEsquerdo {
+  fill: var(--marca-sombra);
+}
+
+.cor .bracoDireito {
+  fill: var(--marca-2);
+}
+
+/* --- mono: a cor do texto, com as faces em tons dela --- */
+
+.mono .chave {
+  stroke: currentColor;
+}
+
+.mono .haste {
+  fill: currentColor;
+}
+
+.mono .bracoEsquerdo {
+  fill: currentColor;
+  opacity: 0.55;
+}
+
+.mono .bracoDireito {
+  fill: currentColor;
+  opacity: 0.8;
+}
+
+/* --- entrada: as chaves se desenham, o J cai no lugar --- */
+
+.animado .chave {
+  /* o comprimento do traço da chave anda perto de 110 unidades */
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: desenhar 1.1s var(--suave) 0.15s forwards;
+}
+
+.animado .haste,
+.animado .bracoEsquerdo,
+.animado .bracoDireito {
+  opacity: 0;
+  animation: encaixar 0.7s var(--suave) forwards;
+}
+
+.animado .bracoEsquerdo {
+  animation-delay: 0.7s;
+  --origem: translate(-10px, 6px);
+}
+
+.animado .bracoDireito {
+  animation-delay: 0.85s;
+  --origem: translate(10px, 6px);
+}
+
+.animado .haste {
+  animation-delay: 1s;
+  --origem: translate(0, -14px);
+}
+
+.animado.mono .bracoEsquerdo {
+  --opacidade: 0.55;
+}
+
+.animado.mono .bracoDireito {
+  --opacidade: 0.8;
+}
+
+@keyframes desenhar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes encaixar {
+  from {
+    opacity: 0;
+    transform: var(--origem);
+  }
+  to {
+    opacity: var(--opacidade, 1);
+    transform: none;
+  }
+}

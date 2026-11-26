@@ -1,0 +1,253 @@
+.topo {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--altura-topo);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+.rolado {
+  background: var(--vidro);
+  border-bottom-color: var(--borda);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+.pular {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 2;
+  padding: 0.5rem 1rem;
+  border-radius: var(--raio);
+  background: var(--botao);
+  color: var(--botao-texto);
+  transform: translateY(-200%);
+}
+
+.pular:focus {
+  transform: none;
+}
+
+.faixa {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  height: 100%;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.marca {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.menu ul {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.link {
+  position: relative;
+  padding: 0.5rem 0;
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--texto-suave);
+  transition: color var(--transicao);
+}
+
+/* O traço que marca a seção ativa cresce do centro. */
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--marca), var(--marca-2));
+  transform: scaleX(0);
+  transition: transform 0.35s var(--suave);
+}
+
+.link:hover,
+.ativo {
+  color: var(--destaque);
+}
+
+.ativo::after {
+  transform: scaleX(1);
+}
+
+.chamada {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 1.1rem;
+  border-radius: var(--raio);
+  background: var(--botao);
+  color: var(--botao-texto);
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px -10px var(--brilho);
+  transition:
+    transform 0.25s var(--suave),
+    box-shadow 0.25s var(--suave);
+}
+
+.chamada:hover,
+.chamadaAtiva {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -10px var(--brilho);
+}
+
+.ferramentas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.botaoMenu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  color: var(--texto);
+}
+
+.progresso {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--marca), var(--marca-2));
+  transform-origin: left;
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  .progresso {
+    opacity: 1;
+    animation: ler linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes ler {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Abaixo de 900px os quatro links, o contato, o idioma e o tema não cabem
+   numa linha com a marca: os links viram um menu que cobre a tela. */
+@media (max-width: 900px) {
+  .faixa {
+    padding: 0 1.25rem;
+  }
+
+  .botaoMenu {
+    display: inline-flex;
+  }
+
+  .ferramentas {
+    margin-left: auto;
+  }
+
+  .menu {
+    position: fixed;
+    inset: var(--altura-topo) 0 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+    margin: 0;
+    padding: 2rem 1.5rem;
+    background: var(--fundo);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s var(--suave),
+      visibility 0.3s;
+  }
+
+  .aberto {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .menu li {
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .aberto li {
+    animation: entrar 0.45s var(--suave) both;
+    animation-delay: calc(var(--ordem) * 50ms + 60ms);
+  }
+
+  .link {
+    display: block;
+    padding: 1.1rem 0;
+    font-size: 1.35rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--texto);
+  }
+
+  .link::after {
+    display: none;
+  }
+
+  .ativo {
+    color: var(--marca-texto);
+  }
+
+  .chamada {
+    display: inline-flex;
+    justify-content: center;
+    height: 52px;
+    font-size: 0.9rem;
+  }
+}
+
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+}

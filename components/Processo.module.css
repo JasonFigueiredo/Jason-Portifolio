@@ -1,0 +1,152 @@
+.passos {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  list-style: none;
+  counter-reset: passo;
+}
+
+/* A linha que liga os marcos. Ela se preenche da esquerda para a direita
+   quando a lista entra na tela. */
+.passos::before,
+.passos::after {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 28px;
+  right: 28px;
+  height: 1px;
+  background: var(--borda);
+}
+
+.passos::after {
+  background: linear-gradient(90deg, var(--marca), var(--marca-2));
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.passos[data-revelar='oculto']::after {
+  transform: scaleX(0);
+}
+
+.passos[data-revelar='visivel']::after {
+  transition: transform 1.6s var(--suave) 0.3s;
+}
+
+.passo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.5rem;
+}
+
+.marco {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.75rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 50%;
+  background: var(--fundo);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--marca-texto);
+  box-shadow: 0 0 0 6px var(--fundo), 0 0 30px -6px var(--brilho);
+  transition: background-color var(--transicao);
+}
+
+.passo:hover .marco {
+  background: var(--botao);
+  color: var(--botao-texto);
+}
+
+.titulo {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.texto {
+  margin: 0.65rem 0 1.5rem;
+  font-size: 0.93rem;
+  color: var(--texto-suave);
+}
+
+.numero {
+  /* empurra o número para o pé: as quatro linhas tracejadas se alinham */
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--borda);
+}
+
+.numero strong {
+  display: block;
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--destaque);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Só o filho direto: o contador também é feito de spans, e herdaria o tamanho
+   do rótulo. */
+.numero > span {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 900px) {
+  .passos {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 3rem;
+  }
+
+  .passos::before,
+  .passos::after {
+    display: none;
+  }
+}
+
+/* No celular, a linha fica vertical, descendo pelos marcos. */
+@media (max-width: 768px) {
+  .passos {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+
+  .passos::before,
+  .passos::after {
+    display: block;
+    top: 28px;
+    bottom: 28px;
+    left: 27px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .passos::after {
+    transform-origin: top;
+    background: linear-gradient(180deg, var(--marca), var(--marca-2));
+  }
+
+  .passos[data-revelar='oculto']::after {
+    transform: scaleY(0);
+  }
+
+  .passo {
+    padding-left: 76px;
+  }
+
+  .marco {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

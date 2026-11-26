@@ -1,0 +1,89 @@
+.rodape {
+  border-top: 1px solid var(--borda);
+  background: linear-gradient(180deg, transparent, var(--hover));
+}
+
+.limite {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 3.5rem 2rem 2rem;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.marca {
+  font-size: 0.8rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+}
+
+.links a {
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  transition: color var(--transicao);
+}
+
+.links a:hover {
+  color: var(--destaque);
+}
+
+.redes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.redes a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  color: var(--texto-suave);
+  transition:
+    color var(--transicao),
+    border-color var(--transicao);
+}
+
+.redes a:hover {
+  color: var(--destaque);
+  border-color: var(--borda-forte);
+}
+
+.base {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 768px) {
+  .limite {
+    padding: 3rem 1.25rem 1.75rem;
+  }
+
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

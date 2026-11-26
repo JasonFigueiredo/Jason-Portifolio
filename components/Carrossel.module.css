@@ -1,0 +1,464 @@
+.carrossel {
+  position: relative;
+  /* Uma camada acima das seções que vêm depois. Sem isso, o detalhe da fileira
+     de baixo, que abre para baixo, ficava atrás da seção seguinte: ela é
+     posicionada e vem depois no documento, então o navegador a pinta por cima.
+     O cabeçalho fixo (z-index 50) continua acima de tudo. */
+  z-index: 5;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.dica {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--texto-suave);
+}
+
+.alternar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 36px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--texto-suave);
+  transition:
+    color var(--transicao),
+    border-color var(--transicao);
+}
+
+.alternar:hover {
+  color: var(--destaque);
+  border-color: var(--borda-forte);
+}
+
+/* --- a janela de cada fileira: a largura toda da tela --- */
+
+.janela {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 0.6rem 0;
+  /* Corta só nas laterais: em cima e embaixo o detalhe precisa sair da faixa.
+     `hidden` num eixo transformaria o outro em rolagem; `clip`, não. */
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* As bordas esmaecem para o fundo. Somem enquanto o mouse está no carrossel,
+   para não cobrir o detalhe de um item da beirada. */
+.janela::before,
+.janela::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: min(14vw, 180px);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.janela::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--fundo), transparent);
+}
+
+.janela::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--fundo), transparent);
+}
+
+.carrossel:focus-within .janela::before,
+.carrossel:focus-within .janela::after,
+.carrossel[data-pausado] .janela::before,
+.carrossel[data-pausado] .janela::after {
+  opacity: 0;
+}
+
+/* A fileira com o mouse passa para a frente da outra: o detalhe que abre na
+   direção dela fica por cima dos ícones vizinhos, não atrás. */
+.janela:focus-within,
+.janela:has([data-aberto]) {
+  z-index: 2;
+}
+
+/* --- o trilho que anda --- */
+
+.trilho {
+  --vao: 0.85rem;
+  display: flex;
+  gap: var(--vao);
+  width: max-content;
+  list-style: none;
+  animation: rolar var(--duracao, 40s) linear infinite;
+}
+
+.reverso {
+  animation-direction: reverse;
+}
+
+/* Mouse em cima, foco dentro ou um detalhe aberto pelo toque: as duas
+   fileiras param. */
+.carrossel:focus-within .trilho,
+.carrossel[data-pausado] .trilho {
+  animation-play-state: paused;
+}
+
+/* Três cópias seguidas; andar uma cópia é andar um terço do trilho. */
+@keyframes rolar {
+  to {
+    /* o trilho mede três cópias menos um vão; uma cópia mede um terço disso
+       mais um terço do vão */
+    transform: translateX(calc(-100% / 3 - var(--vao) / 3));
+  }
+}
+
+/* --- cada tecnologia --- */
+
+.item {
+  position: relative;
+  flex-shrink: 0;
+  outline: none;
+  transition: opacity 0.3s ease;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  height: 54px;
+  padding: 0 1.15rem 0 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  background: var(--superficie);
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--destaque);
+  white-space: nowrap;
+  cursor: default;
+  transition:
+    transform 0.35s var(--suave),
+    border-color 0.3s ease,
+    box-shadow 0.35s var(--suave);
+}
+
+.chip img {
+  border-radius: 7px;
+}
+
+.item:focus-within,
+.item[data-aberto] {
+  z-index: 10;
+}
+
+.item:focus-within .chip,
+.item[data-aberto] .chip {
+  transform: scale(1.14);
+  border-color: var(--marca);
+  box-shadow:
+    0 0 0 4px var(--brilho),
+    0 18px 40px -16px var(--brilho);
+}
+
+.item:focus-visible .chip {
+  outline: 2px solid var(--marca-texto);
+  outline-offset: 4px;
+}
+
+/* --- o detalhe que abre --- */
+
+.detalhe {
+  position: absolute;
+  left: 50%;
+  z-index: 10;
+  width: min(320px, calc(100vw - 2rem));
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 16px;
+  background: var(--superficie);
+  box-shadow: 0 30px 70px -20px var(--sombra);
+  text-align: left;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(calc(-50% + var(--desvio, 0px))) translateY(var(--de, 8px)) scale(0.96);
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s var(--suave),
+    visibility 0.25s;
+}
+
+.abreParaCima .detalhe,
+.item[data-abre='cima'] .detalhe {
+  top: auto;
+  bottom: calc(100% + 16px);
+  --de: 8px;
+  transform-origin: bottom center;
+}
+
+.abreParaBaixo .detalhe,
+.item[data-abre='baixo'] .detalhe {
+  top: calc(100% + 16px);
+  bottom: auto;
+  --de: -8px;
+  transform-origin: top center;
+}
+
+/* Uma ponte invisível sobre o vão entre o item e o detalhe: sem ela, o mouse
+   perderia o item no caminho e o detalhe fecharia antes de chegar nos links. */
+.detalhe::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+}
+
+.abreParaCima .detalhe::before,
+.item[data-abre='cima'] .detalhe::before {
+  top: 100%;
+  bottom: auto;
+}
+
+.abreParaBaixo .detalhe::before,
+.item[data-abre='baixo'] .detalhe::before {
+  top: auto;
+  bottom: 100%;
+}
+
+.item:focus-within .detalhe,
+.item[data-aberto] .detalhe {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(calc(-50% + var(--desvio, 0px))) translateY(0) scale(1);
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cabecalho img {
+  border-radius: 8px;
+}
+
+.cabecalho strong {
+  display: block;
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--destaque);
+}
+
+.cabecalho span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--marca-texto);
+}
+
+.fatos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+
+.fatos dt {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.fatos dd {
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--destaque);
+  font-variant-numeric: tabular-nums;
+}
+
+.subtitulo {
+  margin-top: 0.85rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.usos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.5rem;
+}
+
+.usos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 0.5rem;
+}
+
+.usos a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--destaque);
+  transition: color var(--transicao);
+}
+
+.usos a:hover {
+  color: var(--marca-texto);
+}
+
+.camada {
+  justify-self: end;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--marca-texto);
+}
+
+.usos p {
+  grid-column: 1 / -1;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--texto-suave);
+  /* Duas linhas bastam para dizer o papel; o resto está no estudo de caso. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tambem {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+/* --- só com mouse ---
+   No toque, o navegador deixa "em hover" o último ícone tocado: com estas
+   regras valendo, tocar de novo para fechar não fechava, e o carrossel ficava
+   parado. Lá, quem abre e fecha é o toque (data-aberto). */
+@media (hover: hover) {
+  .carrossel:hover .janela::before,
+  .carrossel:hover .janela::after {
+    opacity: 0;
+  }
+
+  .janela:hover {
+    z-index: 2;
+  }
+
+  .carrossel:hover .trilho {
+    animation-play-state: paused;
+  }
+
+  /* Um item em evidência, os outros recuam. */
+  .trilho:hover .item:not(:hover) {
+    opacity: 0.4;
+  }
+
+  .item:hover {
+    z-index: 10;
+  }
+
+  .item:hover .chip {
+    transform: scale(1.14);
+    border-color: var(--marca);
+    box-shadow:
+      0 0 0 4px var(--brilho),
+      0 18px 40px -16px var(--brilho);
+  }
+
+  .item:hover .detalhe {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(calc(-50% + var(--desvio, 0px))) translateY(0) scale(1);
+  }
+}
+
+/* --- grade parada: botão "Ver todas", teclado ou menos movimento ---
+   O teclado entra pelo :focus-visible, que só acende com Tab: um clique de
+   mouse num item não desmonta o carrossel. */
+
+.carrossel[data-grade] .trilho,
+.carrossel:has(.item:focus-visible) .trilho {
+  width: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: none;
+  padding: 0 2rem;
+}
+
+.carrossel[data-grade] .item:not([data-copia='0']),
+.carrossel:has(.item:focus-visible) .item:not([data-copia='0']) {
+  display: none;
+}
+
+.carrossel[data-grade] .janela::before,
+.carrossel[data-grade] .janela::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trilho {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: none;
+    padding: 0 2rem;
+  }
+
+  .item:not([data-copia='0']),
+  .janela::before,
+  .janela::after,
+  .alternar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .chip {
+    height: 46px;
+    font-size: 0.86rem;
+    padding: 0 0.95rem 0 0.6rem;
+  }
+
+  .chip img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .trilho {
+    --vao: 0.6rem;
+  }
+}

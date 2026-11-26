@@ -1,0 +1,88 @@
+.botao {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: var(--raio);
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  isolation: isolate;
+  transition:
+    transform 0.25s var(--suave),
+    box-shadow 0.25s var(--suave),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.seta {
+  transition: transform 0.25s var(--suave);
+}
+
+.botao:hover .seta {
+  transform: translateX(4px);
+}
+
+.primario {
+  background: var(--botao);
+  color: var(--botao-texto);
+  box-shadow:
+    0 0 0 1px var(--realce) inset,
+    0 10px 30px -10px var(--brilho);
+  overflow: hidden;
+}
+
+/* Um reflexo atravessa o botão ao passar o mouse. */
+.primario::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, var(--realce) 50%, transparent 70%);
+  transform: translateX(-110%);
+  transition: transform 0.7s var(--suave);
+}
+
+.primario:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px var(--realce) inset,
+    0 16px 40px -10px var(--brilho);
+}
+
+.primario:hover::after {
+  transform: translateX(110%);
+}
+
+.secundario {
+  border: 1px solid var(--borda);
+  background: var(--hover);
+  color: var(--texto);
+  backdrop-filter: blur(8px);
+}
+
+.secundario:hover {
+  border-color: var(--borda-forte);
+  color: var(--destaque);
+  transform: translateY(-2px);
+}
+
+.texto {
+  min-height: auto;
+  padding: 0;
+  color: var(--marca-texto);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+}
+
+.texto:hover {
+  color: var(--destaque);
+}

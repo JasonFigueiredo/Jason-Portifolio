@@ -1,0 +1,24 @@
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 40px;
+  padding: 0 0.75rem;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition:
+    color var(--transicao),
+    border-color var(--transicao),
+    background-color var(--transicao);
+}
+
+.botao:hover {
+  color: var(--destaque);
+  border-color: var(--borda-forte);
+  background: var(--hover);
+}

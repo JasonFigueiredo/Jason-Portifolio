@@ -5,6 +5,13 @@ const nextConfig = {
   // Worker rodando a cada visita e sem adaptador de Next no meio.
   output: 'export',
 
+  // Cada idioma tem o próprio layout raiz (app/(pt) e app/(en)), e aí não
+  // existe um layout comum para montar o 404. O global-not-found resolve: um
+  // 404 que monta o próprio documento, para o site inteiro.
+  experimental: {
+    globalNotFound: true,
+  },
+
   // Em desenvolvimento, o Next bloqueia os recursos internos (HMR, fontes)
   // quando o pedido vem de um host que não seja localhost. O padrão é bom
   // para quem desenvolve na própria máquina e ruim aqui: este projeto roda

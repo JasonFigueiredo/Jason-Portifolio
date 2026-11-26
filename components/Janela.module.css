@@ -1,40 +1,70 @@
 .janela {
-  background-color: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
-  box-shadow: 4px 4px 12px var(--sombra);
-  overflow: hidden;
-  transition: transform var(--transicao), box-shadow var(--transicao);
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.janela:hover {
-  transform: translateY(-4px);
-  box-shadow: 6px 8px 20px var(--sombra);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  background-color: var(--superficie);
+  box-shadow:
+    0 1px 0 var(--realce) inset,
+    0 30px 60px -30px var(--sombra);
+  overflow: hidden;
 }
 
 .barra {
+  position: relative;
   display: flex;
-  gap: 8px;
-  padding: 10px 12px;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px;
   border-bottom: 1px solid var(--borda);
+  background: var(--superficie-2);
 }
 
-.barra span {
+.barra > span:not(.endereco) {
   width: 10px;
   height: 10px;
   border-radius: 50%;
 }
 
-.vermelho { background-color: #ff605c; }
-.amarelo  { background-color: #ffbd44; }
-.verde    { background-color: #00ca4e; }
+/* As três cores do macOS: são o desenho da janela, não a paleta do site. */
+.vermelho {
+  background-color: #ff605c;
+}
+.amarelo {
+  background-color: #ffbd44;
+}
+.verde {
+  background-color: #00ca4e;
+}
+
+.endereco {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 55%;
+  padding: 0.15rem 0.8rem;
+  border-radius: 6px;
+  background: var(--fundo);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.66rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .conteudo {
-  padding: 1.25rem;
+  position: relative;
   flex: 1;
-  display: flex;
-  flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .endereco {
+    display: none;
+  }
 }

@@ -6,6 +6,12 @@
   "name": "jason-portifolio",
   "compatibility_date": "2026-09-21",
 
+  // O site responde só no domínio próprio (Custom Domain, ligado pelo painel).
+  // O endereço *.workers.dev era um segundo link para a mesma coisa: desligado.
+  // Sem preview_urls declarado, o Wrangler segue este valor e as versões de
+  // preview das outras branches também ficam sem link público.
+  "workers_dev": false,
+
   // O próprio Wrangler gera o site antes de enviar, tanto no deploy de produção
   // quanto no upload das branches de preview — não depende do comando de build
   // configurado no painel.

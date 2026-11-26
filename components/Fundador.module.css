@@ -1,0 +1,127 @@
+.grade {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* O símbolo no centro de duas órbitas, com um ponto de luz dando a volta. */
+.emblema {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brilho) 0%, transparent 62%);
+}
+
+.orbita {
+  position: absolute;
+  inset: 8%;
+  border: 1px dashed var(--borda-forte);
+  border-radius: 50%;
+  animation: girar 40s linear infinite;
+}
+
+.orbita2 {
+  inset: 22%;
+  border-style: solid;
+  border-color: var(--borda);
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+
+.satelite {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  animation: girar 9s linear infinite;
+}
+
+.satelite::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--marca-2);
+  box-shadow: 0 0 14px 3px var(--brilho-2);
+}
+
+.simbolo {
+  position: relative;
+  filter: drop-shadow(0 10px 30px var(--brilho));
+}
+
+.nome {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+}
+
+.papel {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--marca-texto);
+}
+
+.bio {
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+  color: var(--texto-suave);
+}
+
+.bio:first-of-type {
+  margin-top: 1.75rem;
+  color: var(--texto);
+}
+
+.fatos {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+}
+
+.fatos dt {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.fatos dd {
+  margin-top: 0.25rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .grade {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .emblema {
+    max-width: 280px;
+  }
+}

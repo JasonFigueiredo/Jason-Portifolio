@@ -1,0 +1,72 @@
+.marca {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  line-height: 1;
+  color: var(--destaque);
+}
+
+.linha {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.chave {
+  height: 1.55em;
+  width: auto;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.chave path {
+  fill: none;
+  stroke: var(--marca);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.nome {
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.nome b {
+  font-weight: 700;
+  color: var(--marca);
+  letter-spacing: 0.02em;
+}
+
+.slogan {
+  font-family: var(--font-titulo), system-ui, sans-serif;
+  font-size: 0.34em;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+.slogan em {
+  font-style: normal;
+  color: var(--marca-texto);
+}
+
+.compacta {
+  font-size: 1.05em;
+}
+
+.completa {
+  font-size: 2em;
+}
+
+/* No celular estreito, o topo divide a linha com idioma, tema e menu:
+   a compacta fica só com "{ JSON }". */
+@media (max-width: 480px) {
+  .compacta .resto {
+    display: none;
+  }
+}

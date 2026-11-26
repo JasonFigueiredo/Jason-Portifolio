@@ -1,0 +1,320 @@
+.abertura {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--altura-topo) + 2rem) 0 6rem;
+  overflow: hidden;
+}
+
+.limite {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- texto --- */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--hover);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--texto-suave);
+  backdrop-filter: blur(8px);
+  animation: aparecer 0.8s var(--suave) both;
+}
+
+.pulso {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 0 0 var(--verde);
+  animation: pulsar 2s ease-out infinite;
+}
+
+.titulo {
+  font-size: clamp(2.5rem, 5.6vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.palavra {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+  vertical-align: top;
+}
+
+.palavra > span,
+.palavra > em {
+  display: inline-block;
+  transform: translateY(108%);
+  animation: subir 1s var(--suave) forwards;
+  animation-delay: calc(0.2s + var(--i) * 0.09s);
+}
+
+.palavra em {
+  font-style: normal;
+  font-weight: 600;
+  background: linear-gradient(100deg, var(--marca) 20%, var(--marca-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.proposta {
+  max-width: 34rem;
+  margin-top: 1.75rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--texto-suave);
+  animation: aparecer 1s var(--suave) 0.7s both;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
+  animation: aparecer 1s var(--suave) 0.85s both;
+}
+
+.olho {
+  margin-top: 3rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  animation: aparecer 1s var(--suave) 1s both;
+}
+
+.olho span {
+  color: var(--marca-texto);
+}
+
+/* --- palco do cubo --- */
+
+.palco {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+  animation: aparecer 1.4s var(--suave) 0.3s both;
+}
+
+.halo {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brilho) 0%, var(--brilho-2) 35%, transparent 68%);
+  filter: blur(30px);
+  animation: respirar 7s ease-in-out infinite alternate;
+}
+
+.cubo {
+  position: absolute;
+  inset: 4% 13%;
+}
+
+.chave {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  height: 88%;
+  width: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 18px var(--brilho));
+}
+
+.direita {
+  left: auto;
+  right: 0;
+}
+
+.chave path {
+  fill: none;
+  stroke: var(--marca);
+  stroke-width: 3.2;
+  stroke-linejoin: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: desenhar 1.6s var(--suave) 0.5s forwards;
+}
+
+/* --- chão em perspectiva, andando devagar na direção de quem olha --- */
+
+.chao {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -2px;
+  height: 42%;
+  background-image:
+    linear-gradient(var(--borda-forte) 1px, transparent 1px),
+    linear-gradient(90deg, var(--borda-forte) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: perspective(520px) rotateX(68deg);
+  transform-origin: bottom;
+  opacity: 0.35;
+  mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+  animation: avancar 6s linear infinite;
+}
+
+.rolar {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  z-index: 1;
+  width: 24px;
+  height: 38px;
+  border: 1.5px solid var(--texto-suave);
+  border-radius: 12px;
+  transform: translateX(-50%);
+  opacity: 0.7;
+  transition: opacity var(--transicao), border-color var(--transicao);
+}
+
+.rolar:hover {
+  opacity: 1;
+  border-color: var(--marca-texto);
+}
+
+.rolar span {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--marca-texto);
+  animation: rodinha 1.8s ease-in-out infinite;
+}
+
+@keyframes subir {
+  to {
+    transform: none;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes desenhar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes respirar {
+  from {
+    transform: scale(0.92);
+    opacity: 0.75;
+  }
+  to {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes avancar {
+  to {
+    background-position: 0 64px;
+  }
+}
+
+@keyframes pulsar {
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes rodinha {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* Uma coluna: o cubo desce para baixo do texto, menor. */
+@media (max-width: 900px) {
+  .limite {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .palco {
+    justify-self: center;
+    max-width: 440px;
+    order: -1;
+    margin-bottom: -1rem;
+  }
+
+  .abertura {
+    padding-bottom: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .limite {
+    padding: 0 1.25rem;
+  }
+
+  .palco {
+    max-width: 340px;
+  }
+
+  .proposta {
+    font-size: 1.05rem;
+  }
+
+  .botoes {
+    margin-top: 2rem;
+  }
+
+  .rolar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .botoes > * {
+    flex: 1 1 100%;
+  }
+}

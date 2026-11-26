@@ -1,4 +1,6 @@
 import type { Arquitetura, Caixa, Ligacao } from '@/data/projetos';
+import { t, type Idioma } from '@/data/idioma';
+import { textos } from '@/data/textos';
 import styles from './Diagrama.module.css';
 
 // O diagrama é desenhado aqui, não importado como imagem: um SVG dentro de <img>
@@ -52,7 +54,15 @@ function tracar(de: Pontos, para: Pontos, ligacao: Ligacao): { d: string; rotulo
   };
 }
 
-export default function Diagrama({ id, arquitetura }: { id: string; arquitetura: Arquitetura }) {
+export default function Diagrama({
+  id,
+  arquitetura,
+  idioma,
+}: {
+  id: string;
+  arquitetura: Arquitetura;
+  idioma: Idioma;
+}) {
   const { caixas, ligacoes, legenda } = arquitetura;
   const porId = new Map(caixas.map((c) => [c.id, pontos(c)]));
   const colunas = Math.max(...caixas.map((c) => c.coluna)) + 1;
@@ -61,7 +71,7 @@ export default function Diagrama({ id, arquitetura }: { id: string; arquitetura:
   const altura = MARGEM * 2 + (linhas - 1) * LINHA + ALTURA;
   const seta = `seta-${id}`;
 
-  const descricao = caixas.map((c) => `${c.titulo} (${c.nota})`).join(', ');
+  const descricao = caixas.map((c) => `${t(c.titulo, idioma)} (${t(c.nota, idioma)})`).join(', ');
 
   return (
     <figure className={styles.figura}>
@@ -71,7 +81,7 @@ export default function Diagrama({ id, arquitetura }: { id: string; arquitetura:
           className={styles.svg}
           style={{ minWidth: Math.min(largura, 640) }}
           role="img"
-          aria-label={`Arquitetura: ${descricao}. ${legenda}.`}
+          aria-label={`${textos.caso.arquitetura[idioma]}: ${descricao}. ${legenda[idioma]}.`}
         >
           <defs>
             <marker
@@ -102,7 +112,7 @@ export default function Diagrama({ id, arquitetura }: { id: string; arquitetura:
                 />
                 {l.rotulo && (
                   <text x={rotulo.x} y={rotulo.y} textAnchor={rotulo.ancora} className={styles.rotulo}>
-                    {l.rotulo}
+                    {t(l.rotulo, idioma)}
                   </text>
                 )}
               </g>
@@ -122,10 +132,10 @@ export default function Diagrama({ id, arquitetura }: { id: string; arquitetura:
                   className={`${styles.caixa} ${c.forte ? styles.forte : ''}`}
                 />
                 <text x={p.x + 14} y={p.y + 25} className={styles.titulo}>
-                  {c.titulo}
+                  {t(c.titulo, idioma)}
                 </text>
                 <text x={p.x + 14} y={p.y + 43} className={styles.nota}>
-                  {c.nota}
+                  {t(c.nota, idioma)}
                 </text>
               </g>
             );
@@ -133,8 +143,8 @@ export default function Diagrama({ id, arquitetura }: { id: string; arquitetura:
         </svg>
       </div>
       <figcaption className={styles.legenda}>
-        {legenda}
-        <span className={styles.dica}> · Arraste para o lado para ver o diagrama inteiro.</span>
+        {legenda[idioma]}
+        <span className={styles.dica}> · {textos.caso.arraste[idioma]}</span>
       </figcaption>
     </figure>
   );

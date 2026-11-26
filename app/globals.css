@@ -1,38 +1,75 @@
 /* Tokens de tema e base da página.
    O tema vive num único lugar: o atributo data-theme no <html>.
-   Escuro é o padrão; o claro sobrescreve os tokens. */
+   Escuro é o padrão; o claro sobrescreve os tokens.
+   A paleta vem do manual da JSON Technologies: azul #2878F0, ciano #35C5D9,
+   fundo #101722, superfície #202B38, cinza #8794A3 e claro #F4F7FA. */
 
 :root {
-  --fundo: #111111;
-  --texto: #f5f5f5;
-  --texto-suave: #a3a3a3;
-  --destaque: #ffffff;
-  --superficie: #1a1a1a;
-  --superficie-2: #27272a;
-  --borda: rgba(255, 255, 255, 0.1);
-  --hover: rgba(255, 255, 255, 0.05);
-  --lateral: #2a2a2a;
-  --grade: rgba(255, 255, 255, 0.03);
-  --sombra: rgba(0, 0, 0, 0.35);
-  --verde: #00ca4e;
+  /* Marca: iguais nos dois temas. */
+  --marca: #2878f0;
+  --marca-2: #35c5d9;
+  /* a face escura do J; também a sombra do azul nos gradientes */
+  --marca-sombra: #1c56c4;
+  /* O azul do manual com texto branco dá 4,2:1 — abaixo do mínimo para texto
+     pequeno. Este, quase igual a olho, passa de 5:1. */
+  --botao: #1f6ae0;
+  --botao-texto: #ffffff;
+  /* reflexos claros sobre superfícies de cor, iguais nos dois temas */
+  --realce: rgba(255, 255, 255, 0.1);
+  /* selos e controles por cima de vídeo e captura: escuros nos dois temas,
+     porque o que está embaixo é a tela do sistema, não o fundo do site */
+  --sobre-imagem: rgba(11, 16, 25, 0.72);
+  --sobre-imagem-texto: #f4f7fa;
 
-  --raio: 8px;
-  --largura-lateral: 60px;
+  --fundo: #101722;
+  --fundo-fundo: #0b1019;
+  --superficie: #151e2b;
+  --superficie-2: #202b38;
+  --texto: #f4f7fa;
+  --texto-suave: #8794a3;
+  /* Azul para texto e links: o da marca não alcança 4,5:1 sobre o fundo. */
+  --marca-texto: #4c8df6;
+  --destaque: #ffffff;
+  --borda: rgba(135, 148, 163, 0.16);
+  --borda-forte: rgba(40, 120, 240, 0.5);
+  --brilho: rgba(40, 120, 240, 0.32);
+  --brilho-2: rgba(53, 197, 217, 0.22);
+  --grade: rgba(135, 148, 163, 0.07);
+  --sombra: rgba(0, 0, 0, 0.5);
+  --vidro: rgba(16, 23, 34, 0.72);
+  --hover: rgba(135, 148, 163, 0.08);
+  --verde: #22c55e;
+  --ambar: #f5a524;
+
+  --raio: 10px;
+  --raio-grande: 18px;
+  --altura-topo: 72px;
+  --largura: 1200px;
   --transicao: 0.3s ease;
+  --suave: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 :root[data-theme='light'] {
-  --fundo: #ffffff;
-  --texto: #1a1a1a;
-  --texto-suave: #6b7280;
-  --destaque: #1a1a1a;
-  --superficie: #f8f9fa;
-  --superficie-2: #e5e7eb;
-  --borda: rgba(0, 0, 0, 0.1);
-  --hover: rgba(0, 0, 0, 0.05);
-  --lateral: #f3f4f6;
-  --grade: rgba(0, 0, 0, 0.03);
-  --sombra: rgba(150, 150, 150, 0.25);
+  --fundo: #f4f7fa;
+  --fundo-fundo: #e9eef4;
+  --superficie: #ffffff;
+  --superficie-2: #e6ecf3;
+  --texto: #101722;
+  --texto-suave: #4f5d6e;
+  --marca-texto: #1d63d6;
+  --destaque: #0b1019;
+  --borda: rgba(16, 23, 34, 0.1);
+  --borda-forte: rgba(40, 120, 240, 0.45);
+  --brilho: rgba(40, 120, 240, 0.18);
+  --brilho-2: rgba(53, 197, 217, 0.16);
+  --grade: rgba(16, 23, 34, 0.05);
+  --sombra: rgba(16, 23, 34, 0.12);
+  --vidro: rgba(244, 247, 250, 0.8);
+  --hover: rgba(16, 23, 34, 0.05);
+  /* Os estados escurecem no claro: o verde e o âmbar do escuro ficam
+     abaixo de 3:1 sobre o fundo claro. */
+  --verde: #15803d;
+  --ambar: #a16207;
 }
 
 *,
@@ -45,37 +82,30 @@
 
 html {
   scroll-behavior: smooth;
-  /* compensa a barra fixa ao saltar para uma seção */
-  scroll-padding-top: 2rem;
+  /* compensa a barra fixa do topo ao saltar para uma seção */
+  scroll-padding-top: calc(var(--altura-topo) + 1rem);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--fundo);
   color: var(--texto);
   font-family: var(--font-corpo), system-ui, sans-serif;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
   transition: background-color var(--transicao), color var(--transicao);
 }
 
-/* Grade de fundo, sutil, atrás de tudo. */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--grade) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grade) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: -1;
-}
-
-h1, h2, h3, h4 {
-  font-family: var(--font-titulo), Georgia, serif;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-titulo), system-ui, sans-serif;
   font-weight: 600;
   color: var(--destaque);
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 a {
@@ -83,7 +113,8 @@ a {
   text-decoration: none;
 }
 
-img {
+img,
+video {
   max-width: 100%;
   display: block;
 }
@@ -100,11 +131,48 @@ ul {
   list-style: none;
 }
 
+/* A pedido do Jason: no site não se seleciona texto nem se arrasta imagem,
+   ícone ou link. Os cliques continuam valendo — links e botões funcionam —;
+   some só a seleção, o "fantasma" do arraste e, no celular, o menu de segurar
+   a imagem e o lampejo azul do toque. O arraste também é barrado no script de
+   components/Documento.tsx, porque o Firefox não conhece o -webkit-user-drag. */
+html {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg,
+video,
+canvas,
+a {
+  -webkit-user-drag: none;
+}
+
 /* Acessibilidade: foco visível para quem navega por teclado. */
 :focus-visible {
-  outline: 2px solid var(--destaque);
+  outline: 2px solid var(--marca-texto);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Entrada ao rolar. O estado "oculto" só é posto pelo componente Revelacoes,
+   depois que o JavaScript carrega e só no que ainda está abaixo da dobra: sem
+   JavaScript, ou para quem pediu menos movimento, tudo aparece de saída. */
+[data-revelar='oculto'] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+[data-revelar='visivel'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.9s var(--suave),
+    transform 0.9s var(--suave);
+  transition-delay: var(--atraso, 0ms);
 }
 
 /* Respeita quem pediu menos movimento no sistema. */

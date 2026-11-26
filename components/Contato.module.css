@@ -1,155 +1,112 @@
 .secao {
-  padding: 5rem 0 3rem;
+  padding: 8rem 0 6rem;
 }
 
-.tituloSecao {
-  margin-bottom: 3rem;
+.limite {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.tituloSecao h2 {
-  font-size: clamp(2rem, 5vw, 2.5rem);
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-
-.tituloSecao p {
-  color: var(--texto-suave);
-}
-
-.grade {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-.chamada {
-  text-align: center;
-  padding: 1rem 0;
-}
-
-.chamada > div:last-child {
+/* A borda em gradiente gira devagar em volta do painel. */
+.painel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 5rem 2rem;
+  border-radius: 28px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 0%, var(--brilho), transparent 70%),
+    var(--superficie);
+  isolation: isolate;
+  overflow: hidden;
 }
 
-.icone {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: var(--superficie-2);
-  color: var(--destaque);
-  display: grid;
-  place-items: center;
-  margin: 1rem auto 1.5rem;
+.painel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angulo, 0deg), var(--marca), transparent 30%, var(--marca-2) 55%, transparent 80%, var(--marca));
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: contornar 8s linear infinite;
 }
 
-.chamada h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.4rem;
+@property --angulo {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
 
-.chamada p {
+.olho {
+  margin-bottom: 1.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--marca-texto);
+}
+
+.numero {
   color: var(--texto-suave);
-  margin-bottom: 2rem;
+}
+
+.simbolo {
+  margin-bottom: 1.5rem;
+}
+
+.titulo {
+  max-width: 18ch;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 600;
+}
+
+.texto {
+  max-width: 34rem;
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--texto-suave);
 }
 
 .botoes {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: 260px;
-  margin: 0 auto;
-}
-
-.primario,
-.secundario {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.25rem;
-  border-radius: var(--raio);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: transform var(--transicao), background var(--transicao), color var(--transicao);
-}
-
-.primario {
-  background: var(--destaque);
-  color: var(--fundo);
-}
-
-.secundario {
-  border: 1px solid var(--borda);
-  color: var(--texto-suave);
-}
-
-.primario:hover,
-.secundario:hover {
-  transform: translateY(-2px);
-}
-
-.secundario:hover {
-  background: var(--hover);
-  color: var(--destaque);
-}
-
-.informacoes {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.informacoes h4 {
-  font-family: var(--font-corpo), system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--texto-suave);
-  margin-bottom: 0.85rem;
-}
-
-.informacoes li {
-  color: var(--texto-suave);
-  margin-bottom: 0.5rem;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.informacoes li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--destaque);
-}
-
-.link {
-  color: var(--destaque);
-  font-weight: 500;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.rodape {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 4rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--borda);
-  color: var(--texto-suave);
-  font-size: 0.85rem;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
 }
 
-@media (max-width: 900px) {
-  .grade {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+@keyframes contornar {
+  to {
+    --angulo: 360deg;
+  }
+}
+
+@media (max-width: 768px) {
+  .secao {
+    padding: 5rem 0 4rem;
+  }
+
+  .limite {
+    padding: 0 1.25rem;
+  }
+
+  .painel {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .botoes > * {
+    flex: 1 1 100%;
   }
 }

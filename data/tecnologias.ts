@@ -6,6 +6,11 @@
 // quem passa rápido lê uma barra de porcentagem como barra de habilidade.
 // Total apurado em setembro de 2026: 112.404 linhas. Em outubro entraram o QualiPT
 // e o Ponte Tradutor, contados do mesmo jeito (+43.106): 155.510.
+//
+// Nome de tecnologia não se traduz; o que muda com o idioma (`tambem` e o rótulo
+// das categorias) traz as duas línguas, { pt, en } — ver data/idioma.ts.
+
+import type { Texto } from './idioma';
 
 export type Categoria = 'linguagem' | 'framework' | 'mobile' | 'infra';
 
@@ -19,8 +24,8 @@ export type Tecnologia = {
   linhas?: number;
   /** ids de projetos em data/projetos.ts */
   projetos: string[];
-  /** uso fora dos projetos listados, ex.: 'este site' */
-  tambem?: string;
+  /** uso fora dos projetos listados, ex.: { pt: 'este site', en: 'this site' } */
+  tambem?: Texto;
   desde: string;
 };
 
@@ -50,7 +55,7 @@ export const tecnologias: Tecnologia[] = [
     categoria: 'linguagem',
     linhas: 18549,
     projetos: ['orion', 'qualipt', 'ponte'],
-    tambem: 'este site',
+    tambem: { pt: 'este site', en: 'this site' },
     desde: '2025',
   },
   {
@@ -109,8 +114,8 @@ export const tecnologias: Tecnologia[] = [
   },
   // Ferramentas e plataformas — sem contagem de linhas, mas parte do dia a dia.
   { id: 'laravel', nome: 'Laravel', icone: 'laravel', categoria: 'framework', projetos: ['inova-blocos', 'orion', 'qualipt'], desde: '2024' },
-  { id: 'react', nome: 'React', icone: 'react', categoria: 'framework', projetos: ['ponte'], tambem: 'este site', desde: '2025' },
-  { id: 'nextjs', nome: 'Next.js', icone: 'nextjs', categoria: 'framework', projetos: [], tambem: 'este site', desde: '2025' },
+  { id: 'react', nome: 'React', icone: 'react', categoria: 'framework', projetos: ['ponte'], tambem: { pt: 'este site', en: 'this site' }, desde: '2025' },
+  { id: 'nextjs', nome: 'Next.js', icone: 'nextjs', categoria: 'framework', projetos: [], tambem: { pt: 'este site', en: 'this site' }, desde: '2025' },
   { id: 'tauri', nome: 'Tauri', icone: 'tauri', categoria: 'framework', projetos: ['ponte'], desde: '2026' },
   { id: 'android', nome: 'Android', icone: 'androidstudio', categoria: 'mobile', projetos: ['minhas-senhas'], desde: '2025' },
   { id: 'docker', nome: 'Docker', icone: 'docker', categoria: 'infra', projetos: ['inova-blocos', 'orion', 'qualipt'], desde: '2024' },
@@ -126,9 +131,9 @@ export const tecnologias: Tecnologia[] = [
 /** Total de linhas autorais, somado a partir da própria lista. */
 export const totalLinhas = tecnologias.reduce((soma, t) => soma + (t.linhas ?? 0), 0);
 
-export const categorias: { id: Categoria; rotulo: string }[] = [
-  { id: 'linguagem', rotulo: 'Linguagens' },
-  { id: 'framework', rotulo: 'Frameworks' },
-  { id: 'mobile', rotulo: 'Mobile' },
-  { id: 'infra', rotulo: 'Infra' },
+export const categorias: { id: Categoria; rotulo: Texto }[] = [
+  { id: 'linguagem', rotulo: { pt: 'Linguagens', en: 'Languages' } },
+  { id: 'framework', rotulo: { pt: 'Frameworks', en: 'Frameworks' } },
+  { id: 'mobile', rotulo: { pt: 'Mobile', en: 'Mobile' } },
+  { id: 'infra', rotulo: { pt: 'Infra', en: 'Infra' } },
 ];

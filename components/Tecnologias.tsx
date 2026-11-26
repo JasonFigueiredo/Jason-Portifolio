@@ -1,98 +1,78 @@
-import Link from 'next/link';
-import { tecnologias, categorias, totalLinhas } from '@/data/tecnologias';
-import Icone from './Icone';
+import { tecnologias, categorias, totalLinhas, type Tecnologia } from '@/data/tecnologias';
 import { projetos } from '@/data/projetos';
-import Janela from './Janela';
-import styles from './Tecnologias.module.css';
+import { textos, preencher } from '@/data/textos';
+import { caminho, formatar, t, type Idioma } from '@/data/idioma';
+import Secao from './Secao';
+import Carrossel, { type ItemTecnologia } from './Carrossel';
 
-const tituloDoProjeto = new Map(projetos.map((p) => [p.id, p.titulo]));
+// As ferramentas num carrossel infinito, em duas fileiras que correm em
+// sentidos opostos. Aqui só se preparam os dados, já no idioma da página: o
+// carrossel é componente de cliente e recebe texto pronto, nada de dados crus.
+//
+// Sem barra de percentual: quem passa rápido a lê como nota de habilidade.
+// No lugar, as linhas contadas e, em cada projeto, o trabalho que a ferramenta
+// faz ali — tirado da stack do próprio estudo de caso.
 
-function formatar(n: number) {
-  return n.toLocaleString('pt-BR');
+/** "Vue" casa com "Vue 3"; "Java" não casa com "JavaScript". */
+function usaNaStack(ferramenta: string, nome: string) {
+  return ferramenta.split(' · ').some((parte) => parte === nome || parte.startsWith(`${nome} `));
 }
 
-export default function Tecnologias() {
+function preparar(tec: Tecnologia, idioma: Idioma): ItemTecnologia {
+  const categoria = categorias.find((c) => c.id === tec.categoria);
+
+  return {
+    id: tec.id,
+    nome: tec.nome,
+    icone: `https://skillicons.dev/icons?i=${tec.icone}`,
+    categoria: categoria ? categoria.rotulo[idioma] : '',
+    linhas: tec.linhas !== undefined ? formatar(tec.linhas, idioma) : undefined,
+    desde: tec.desde,
+    usos: tec.projetos.flatMap((pid) => {
+      const projeto = projetos.find((p) => p.id === pid);
+      if (!projeto) return [];
+      const camada = projeto.stack.find((c) => usaNaStack(t(c.ferramenta, 'pt'), tec.nome));
+      return [
+        {
+          href: caminho(idioma, `/projetos/${pid}`),
+          titulo: projeto.titulo,
+          camada: camada ? t(camada.camada, idioma) : undefined,
+          papel: camada ? camada.papel[idioma] : undefined,
+        },
+      ];
+    }),
+    tambem: tec.tambem?.[idioma],
+  };
+}
+
+export default function Tecnologias({ idioma }: { idioma: Idioma }) {
+  const tx = textos.tecnologias;
+  const itens = tecnologias.map((tec) => preparar(tec, idioma));
+  // Alternando, as duas fileiras ficam do mesmo tamanho e cada uma mistura
+  // linguagens, frameworks e infraestrutura.
+  const fileiras = [itens.filter((_, i) => i % 2 === 0), itens.filter((_, i) => i % 2 === 1)];
+
   return (
-    <section id="tecnologias" className={styles.secao}>
-      <header className={styles.tituloSecao}>
-        <h2>Tecnologias</h2>
-        <p>
-          Com o que eu trabalho — e o quanto. São {formatar(totalLinhas)} linhas de código
-          autoral nos meus repositórios, já descontadas dependências e bibliotecas de terceiros.
-        </p>
-      </header>
-
-      {categorias.map(({ id, rotulo }) => {
-        const doGrupo = tecnologias.filter((t) => t.categoria === id);
-        if (doGrupo.length === 0) return null;
-
-        return (
-          <div key={id} className={styles.grupo}>
-            <h3 className={styles.rotuloGrupo}>{rotulo}</h3>
-
-            <ul className={styles.grade}>
-              {doGrupo.map((tec) => (
-                <li key={tec.id}>
-                  <Janela className={styles.cartao}>
-                    <div className={styles.frente}>
-                      {/* Ícone servido por CDN; dimensões fixas evitam salto de layout. */}
-                      <img
-                        src={`https://skillicons.dev/icons?i=${tec.icone}`}
-                        alt=""
-                        width={52}
-                        height={52}
-                        loading="lazy"
-                        className={styles.icone}
-                      />
-                      <span className={styles.nome}>{tec.nome}</span>
-                      <span className={styles.contagem}>
-                        {tec.projetos.length > 0
-                          ? `${tec.projetos.length} projeto${tec.projetos.length > 1 ? 's' : ''}`
-                          : `desde ${tec.desde}`}
-                      </span>
-                    </div>
-
-                    {/* Sobe ao passar o mouse ou ao receber foco; no toque, fica sempre visível.
-                        Sem barra de porcentagem: quem passa rápido a lê como nota de habilidade. */}
-                    <div className={styles.detalhe}>
-                      <span className={styles.nomeDetalhe}>{tec.nome}</span>
-                      <p className={styles.linhas}>
-                        {tec.linhas !== undefined
-                          ? `${formatar(tec.linhas)} linhas · desde ${tec.desde}`
-                          : `Desde ${tec.desde}`}
-                      </p>
-
-                      {/* Cada tecnologia leva ao estudo de caso onde ela resolveu algo. */}
-                      <p className={styles.usadoEm}>
-                        {tec.projetos.map((id, i) => (
-                          <span key={id}>
-                            {i > 0 && ' · '}
-                            <Link href={`/projetos/${id}`}>{tituloDoProjeto.get(id) ?? id}</Link>
-                          </span>
-                        ))}
-                        {tec.tambem && `${tec.projetos.length > 0 ? ' · ' : ''}${tec.tambem}`}
-                      </p>
-                    </div>
-                  </Janela>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-
-      <div className={styles.chamada}>
-        <p>Cada tecnologia aponta para o projeto onde foi usada.</p>
-        <div className={styles.acoes}>
-          <a href="#projetos" className={styles.primario}>
-            <span>Ver meus projetos</span>
-            <Icone nome="setaDireita" tamanho={16} />
-          </a>
-          <a href="#inicio" className={styles.secundario}>
-            <span>Voltar ao início</span>
-          </a>
-        </div>
-      </div>
-    </section>
+    <Secao
+      id="tecnologias"
+      numero="04"
+      olho={textos.navegacao.tecnologias[idioma]}
+      titulo={tx.titulo[idioma]}
+      chamada={preencher(tx.chamada[idioma], { n: formatar(totalLinhas, idioma) })}
+    >
+      <Carrossel
+        fileiras={fileiras}
+        rotulos={{
+          linhas: tx.linhasDeCodigo[idioma],
+          desde: tx.desdeRotulo[idioma],
+          projetos: tx.projetosRotulo[idioma],
+          ondeFoiUsada: tx.ondeFoiUsada[idioma],
+          tambem: tx.tambem[idioma],
+          dica: tx.dica[idioma],
+          verTodas: tx.verTodas[idioma],
+          emMovimento: tx.emMovimento[idioma],
+        }}
+      />
+    </Secao>
   );
 }

@@ -1,14 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Idioma } from '@/data/idioma';
+import { textos } from '@/data/textos';
 import Icone from './Icone';
 import styles from './BotaoTema.module.css';
 
 type Tema = 'dark' | 'light';
 
-/* O contrato do tema, o mesmo que o script de layout.tsx usa antes da primeira
-   pintura: a escolha mora em localStorage['tema'] e vale pelo atributo
-   data-theme no <html>. Se um dos dois mudar, o outro tem que mudar junto. */
+/* O contrato do tema, o mesmo que o script de components/Documento.tsx usa
+   antes da primeira pintura: a escolha mora em localStorage['tema'] e vale
+   pelo atributo data-theme no <html>. Se um dos dois mudar, o outro tem que
+   mudar junto. */
 const CHAVE = 'tema';
 
 /** A verdade é o documento — nunca o estado de um componente. */
@@ -44,9 +47,11 @@ function aplicar(tema: Tema, guardar: boolean) {
   }
 }
 
-// Um único botão para os dois layouts — mas ele é montado duas vezes: no
-// trilho do desktop e na barra do topo do celular.
-export default function BotaoTema({ className }: { className?: string }) {
+// Hoje o botão aparece uma vez só, no topo, que serve aos dois layouts. Mesmo
+// assim ele observa o atributo em vez de guardar estado próprio: no site
+// antigo eram duas cópias, e a que não foi clicada ficava com o ícone velho e
+// travava no primeiro clique. Observando o documento, isso não volta.
+export default function BotaoTema({ idioma, className }: { idioma: Idioma; className?: string }) {
   const [tema, setTema] = useState<Tema>('dark');
 
   useEffect(() => {
@@ -57,11 +62,6 @@ export default function BotaoTema({ className }: { className?: string }) {
     aplicar(temaPreferido(), false);
     setTema(temaDoDocumento());
 
-    // As duas instâncias precisam concordar. Antes, cada uma guardava o tema
-    // no próprio estado: ao trocar por uma, a outra ficava com o valor velho,
-    // mostrava o ícone errado e, no primeiro clique, calculava o oposto do
-    // que já estava na tela — o clique não fazia nada. Observar o atributo
-    // mantém qualquer número de botões em dia, sem estado compartilhado.
     const observador = new MutationObserver(() => setTema(temaDoDocumento()));
     observador.observe(document.documentElement, {
       attributes: true,
@@ -72,16 +72,18 @@ export default function BotaoTema({ className }: { className?: string }) {
 
   function alternar() {
     aplicar(temaDoDocumento() === 'dark' ? 'light' : 'dark', true);
-    // O ícone não é atualizado aqui: quem faz isso é o observador, para os
-    // dois botões mudarem pelo mesmo caminho.
+    // O ícone não é atualizado aqui: quem faz isso é o observador.
   }
+
+  const rotulo = tema === 'dark' ? textos.tema.paraClaro[idioma] : textos.tema.paraEscuro[idioma];
 
   return (
     <button
       type="button"
       onClick={alternar}
       className={`${styles.botao} ${className ?? ''}`}
-      aria-label={tema === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+      aria-label={rotulo}
+      title={rotulo}
       aria-pressed={tema === 'light'}
     >
       <Icone nome={tema === 'dark' ? 'lua' : 'sol'} tamanho={18} />

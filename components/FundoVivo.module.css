@@ -1,0 +1,104 @@
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--fundo);
+  transition: background-color var(--transicao);
+}
+
+/* A grade some nas bordas: inteira, ela vira papel quadriculado. */
+.grade {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grade) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grade) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 85%);
+}
+
+.aurora {
+  position: absolute;
+  width: 55vmax;
+  height: 55vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: derivar 38s ease-in-out infinite alternate;
+}
+
+.azul {
+  top: -25vmax;
+  left: -12vmax;
+  background: radial-gradient(circle, var(--brilho), transparent 65%);
+}
+
+.ciano {
+  bottom: -30vmax;
+  right: -18vmax;
+  background: radial-gradient(circle, var(--brilho-2), transparent 65%);
+  animation-duration: 46s;
+  animation-direction: alternate-reverse;
+}
+
+.sinais span {
+  position: absolute;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--marca);
+  opacity: 0.075;
+  white-space: nowrap;
+  animation: flutuar 22s ease-in-out infinite alternate;
+}
+
+/* Rolar a página leva os sinais devagar para cima: a distância entre a
+   camada do fundo e a do conteúdo dá profundidade. Só onde o navegador liga
+   animação à rolagem. */
+@supports (animation-timeline: scroll()) {
+  .sinais {
+    position: absolute;
+    inset: 0;
+    animation: subir linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+.luz {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(560px circle at var(--px, 50%) var(--py, 50%), var(--brilho), transparent 60%);
+  transition: opacity 0.8s ease;
+}
+
+.luz[data-ativa] {
+  opacity: 0.5;
+}
+
+@keyframes flutuar {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(14px, -26px, 0) rotate(8deg);
+  }
+}
+
+@keyframes derivar {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(12vmax, 8vmax, 0) scale(1.15);
+  }
+}
+
+@keyframes subir {
+  to {
+    transform: translateY(-35vh);
+  }
+}
