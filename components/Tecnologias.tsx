@@ -1,7 +1,6 @@
 import { tecnologias, categorias, totalLinhas, type Tecnologia } from '@/data/tecnologias';
-import { projetos } from '@/data/projetos';
 import { textos, preencher } from '@/data/textos';
-import { caminho, formatar, t, type Idioma } from '@/data/idioma';
+import { formatar, type Idioma } from '@/data/idioma';
 import Secao from './Secao';
 import Carrossel, { type ItemTecnologia } from './Carrossel';
 
@@ -9,13 +8,15 @@ import Carrossel, { type ItemTecnologia } from './Carrossel';
 // sentidos opostos. Aqui só se preparam os dados, já no idioma da página: o
 // carrossel é componente de cliente e recebe texto pronto, nada de dados crus.
 //
-// Sem barra de percentual: quem passa rápido a lê como nota de habilidade.
-// No lugar, as linhas contadas e, em cada projeto, o trabalho que a ferramenta
-// faz ali — tirado da stack do próprio estudo de caso.
+// O detalhe de cada uma explica a ferramenta — para que serve e por que está
+// nos meus sistemas —, com quantos projetos e desde quando. Sem barra de
+// percentual: quem passa rápido a lê como nota de habilidade.
 
-/** "Vue" casa com "Vue 3"; "Java" não casa com "JavaScript". */
-function usaNaStack(ferramenta: string, nome: string) {
-  return ferramenta.split(' · ').some((parte) => parte === nome || parte.startsWith(`${nome} `));
+/** "3", "1 + este site" ou só "este site". */
+function emQuantos(tec: Tecnologia, idioma: Idioma): string {
+  const n = tec.projetos.length;
+  if (!tec.tambem) return String(n);
+  return n > 0 ? `${n} + ${tec.tambem[idioma]}` : tec.tambem[idioma];
 }
 
 function preparar(tec: Tecnologia, idioma: Idioma): ItemTecnologia {
@@ -28,20 +29,9 @@ function preparar(tec: Tecnologia, idioma: Idioma): ItemTecnologia {
     categoria: categoria ? categoria.rotulo[idioma] : '',
     linhas: tec.linhas !== undefined ? formatar(tec.linhas, idioma) : undefined,
     desde: tec.desde,
-    usos: tec.projetos.flatMap((pid) => {
-      const projeto = projetos.find((p) => p.id === pid);
-      if (!projeto) return [];
-      const camada = projeto.stack.find((c) => usaNaStack(t(c.ferramenta, 'pt'), tec.nome));
-      return [
-        {
-          href: caminho(idioma, `/projetos/${pid}`),
-          titulo: projeto.titulo,
-          camada: camada ? t(camada.camada, idioma) : undefined,
-          papel: camada ? camada.papel[idioma] : undefined,
-        },
-      ];
-    }),
-    tambem: tec.tambem?.[idioma],
+    projetos: emQuantos(tec, idioma),
+    funcao: tec.funcao[idioma],
+    beneficio: tec.beneficio[idioma],
   };
 }
 
@@ -66,8 +56,8 @@ export default function Tecnologias({ idioma }: { idioma: Idioma }) {
           linhas: tx.linhasDeCodigo[idioma],
           desde: tx.desdeRotulo[idioma],
           projetos: tx.projetosRotulo[idioma],
-          ondeFoiUsada: tx.ondeFoiUsada[idioma],
-          tambem: tx.tambem[idioma],
+          paraQueServe: tx.paraQueServe[idioma],
+          porQueUso: tx.porQueUso[idioma],
           dica: tx.dica[idioma],
           verTodas: tx.verTodas[idioma],
           emMovimento: tx.emMovimento[idioma],

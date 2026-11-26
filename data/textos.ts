@@ -134,8 +134,8 @@ export const textos = {
     linhasDeCodigo: { pt: 'Linhas', en: 'Lines' },
     desdeRotulo: { pt: 'Desde', en: 'Since' },
     projetosRotulo: { pt: 'Projetos', en: 'Projects' },
-    ondeFoiUsada: { pt: 'Onde foi usada', en: 'Where it was used' },
-    tambem: { pt: 'Também em', en: 'Also in' },
+    paraQueServe: { pt: 'Para que serve', en: 'What it does' },
+    porQueUso: { pt: 'Por que uso', en: 'Why I use it' },
     dica: {
       pt: 'Passe o mouse sobre uma tecnologia para parar e ver os detalhes.',
       en: 'Hover over a technology to pause and see the details.',

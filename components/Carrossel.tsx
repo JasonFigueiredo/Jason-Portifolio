@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import Icone from './Icone';
 import styles from './Carrossel.module.css';
 
@@ -11,8 +10,8 @@ import styles from './Carrossel.module.css';
 // quando a animação recomeça, a segunda cópia está onde a primeira estava, e o
 // salto não se vê. Três, e não duas, para não sobrar buraco em tela larga.
 //
-// As cópias extras ficam fora do teclado (tabIndex -1, inclusive nos links) e
-// dos leitores de tela (aria-hidden), mas continuam respondendo ao mouse: na
+// As cópias extras ficam fora do teclado (tabIndex -1) e dos leitores de tela
+// (aria-hidden), mas continuam respondendo ao mouse: na
 // tela, dois terços dos ícones visíveis são cópias. Elas já foram `inert`, e o
 // navegador ignora o mouse em elemento inerte — o detalhe não abria nelas.
 //
@@ -29,23 +28,25 @@ export type ItemTecnologia = {
   /** já formatado no idioma da página */
   linhas?: string;
   desde: string;
-  usos: { href: string; titulo: string; camada?: string; papel?: string }[];
-  tambem?: string;
+  /** em quantos projetos: "3", "1 + este site"… */
+  projetos: string;
+  funcao: string;
+  beneficio: string;
 };
 
 type Rotulos = {
   linhas: string;
   desde: string;
   projetos: string;
-  ondeFoiUsada: string;
-  tambem: string;
+  paraQueServe: string;
+  porQueUso: string;
   dica: string;
   verTodas: string;
   emMovimento: string;
 };
 
 const COPIAS = [0, 1, 2];
-const LARGURA_DO_DETALHE = 320;
+const LARGURA_DO_DETALHE = 340;
 const MARGEM = 16;
 /** abaixo disto, do lado de costume, o detalhe ficaria praticamente escondido */
 const ESPACO_MINIMO = 160;
@@ -82,7 +83,7 @@ function posicionar(e: React.SyntheticEvent<HTMLElement>) {
   item.dataset.abre = lado;
 }
 
-function Detalhe({ item, rotulos, copia }: { item: ItemTecnologia; rotulos: Rotulos; copia: boolean }) {
+function Detalhe({ item, rotulos }: { item: ItemTecnologia; rotulos: Rotulos }) {
   return (
     <div className={styles.detalhe} data-detalhe="">
       <header className={styles.cabecalho}>
@@ -94,45 +95,32 @@ function Detalhe({ item, rotulos, copia }: { item: ItemTecnologia; rotulos: Rotu
       </header>
 
       <dl className={styles.fatos}>
+        <div>
+          <dt>{rotulos.projetos}</dt>
+          <dd>{item.projetos}</dd>
+        </div>
+        <div>
+          <dt>{rotulos.desde}</dt>
+          <dd>{item.desde}</dd>
+        </div>
         {item.linhas && (
           <div>
             <dt>{rotulos.linhas}</dt>
             <dd>{item.linhas}</dd>
           </div>
         )}
-        <div>
-          <dt>{rotulos.desde}</dt>
-          <dd>{item.desde}</dd>
-        </div>
-        <div>
-          <dt>{rotulos.projetos}</dt>
-          <dd>{item.usos.length}</dd>
-        </div>
       </dl>
 
-      {item.usos.length > 0 && (
-        <>
-          <p className={styles.subtitulo}>{rotulos.ondeFoiUsada}</p>
-          <ul className={styles.usos}>
-            {item.usos.map((uso) => (
-              <li key={uso.href}>
-                <Link href={uso.href} tabIndex={copia ? -1 : undefined}>
-                  {uso.titulo}
-                  <Icone nome="setaCanto" tamanho={12} />
-                </Link>
-                {uso.camada && <span className={styles.camada}>{uso.camada}</span>}
-                {uso.papel && <p>{uso.papel}</p>}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
-      {item.tambem && (
-        <p className={styles.tambem}>
-          {rotulos.tambem}: {item.tambem}
-        </p>
-      )}
+      <dl className={styles.explicacao}>
+        <div>
+          <dt>{rotulos.paraQueServe}</dt>
+          <dd>{item.funcao}</dd>
+        </div>
+        <div>
+          <dt>{rotulos.porQueUso}</dt>
+          <dd>{item.beneficio}</dd>
+        </div>
+      </dl>
     </div>
   );
 }
@@ -169,8 +157,8 @@ export default function Carrossel({ fileiras, rotulos }: { fileiras: ItemTecnolo
     // (CSS). Num aparelho que se declara sem hover — tablet com mouse, por
     // exemplo —, o clique do mouse faz o papel do toque.
     if (ponteiro.current === 'mouse' && window.matchMedia('(hover: hover)').matches) return;
-    // Só o ícone abre e fecha. Toque dentro do detalhe é para ler ou seguir um
-    // link, não para fechar.
+    // Só o ícone abre e fecha. Toque dentro do detalhe é para ler, não para
+    // fechar.
     if ((e.target as Element).closest('[data-detalhe]')) return;
     const item = e.currentTarget;
     if (aberto === chave) {
@@ -220,7 +208,7 @@ export default function Carrossel({ fileiras, rotulos }: { fileiras: ItemTecnolo
                       <img src={item.icone} alt="" width={28} height={28} loading="lazy" />
                       <span>{item.nome}</span>
                     </span>
-                    <Detalhe item={item} rotulos={rotulos} copia={copia > 0} />
+                    <Detalhe item={item} rotulos={rotulos} />
                   </li>
                 );
               }),
