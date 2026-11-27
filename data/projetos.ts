@@ -175,7 +175,7 @@ export const projetos: Projeto[] = [
     situacao: 'producao',
     privado: true,
     site: {
-      url: 'https://inovablocos.duckdns.org/conheca',
+      url: 'https://inovablocos.jasonfigueiredo.com.br/conheca',
       rotulo: { pt: 'Conhecer a plataforma', en: 'Explore the platform' },
     },
     periodo: '2026',
@@ -500,7 +500,7 @@ export const projetos: Projeto[] = [
     tecnologias: ['php', 'laravel', 'vue', 'typescript', 'tailwind', 'docker', 'mysql', 'redis', 'nginx'],
     situacao: 'producao',
     privado: true,
-    site: { url: 'https://orionlive.duckdns.org', rotulo: { pt: 'Acessar plataforma', en: 'Open the platform' } },
+    site: { url: 'https://orion.jasonfigueiredo.com.br', rotulo: { pt: 'Acessar plataforma', en: 'Open the platform' } },
     periodo: '2026',
     destaque: true,
     testes: 333,
@@ -981,7 +981,7 @@ export const projetos: Projeto[] = [
     situacao: 'producao',
     privado: true,
     site: {
-      url: 'https://minhasenha.duckdns.org/#demonstracao',
+      url: 'https://minhassenhas.jasonfigueiredo.com.br/#demonstracao',
       rotulo: { pt: 'Experimentar o cofre', en: 'Try the vault' },
     },
     periodo: '2026',
